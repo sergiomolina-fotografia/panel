@@ -1,559 +1,619 @@
 <!DOCTYPE html>
 <html lang="es" class="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tarifas y Precios | SERGIO RICARDO MOLINA</title>
-  <link rel="icon" type="image/png" href="https://lh3.googleusercontent.com/d/1A6PFi2lpp_VNhnmtTYGkYXyjMZ1p8LhA">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Raleway:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+  <title>Tarifas y Precios Oficiales | SERGIO RICARDO MOLINA</title>
+  <link href="https://lh3.googleusercontent.com/d/1A6PFi2lpp_VNhnmtTYGkYXyjMZ1p8LhA" rel="icon" type="image/png"/>
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Raleway:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          colors: {
-            surface: '#111111',
-            'surface-container': '#161616',
-            'surface-card': '#181818',
-            primary: '#005580',
-            'primary-light': '#38bdf8',
-            gold: '#facc15'
-          },
-          fontFamily: {
-            sans: ['Manrope', 'sans-serif'],
-            headline: ['Raleway', 'sans-serif'],
-            mono: ['JetBrains Mono', 'monospace']
-          }
-        }
-      }
-    }
-  </script>
   <style>
-    body { background-color: #111111; color: #e5e2e1; font-family: 'Manrope', sans-serif; -webkit-tap-highlight-color: transparent; }
-    .custom-scrollbar::-webkit-scrollbar { width: 5px; height: 5px; }
-    .custom-scrollbar::-webkit-scrollbar-track { background: #111111; }
-    .custom-scrollbar::-webkit-scrollbar-thumb { background: #262626; border-radius: 4px; }
-    .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #005580; }
+    body {
+      background-color: #111111;
+      color: #e5e2e1;
+      font-family: 'Manrope', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #141414;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #2b2b2b;
+      border-radius: 4px;
+    }
   </style>
 </head>
-<body class="bg-[#111111] text-[#e5e2e1] min-h-screen flex flex-col antialiased selection:bg-[#005580] selection:text-white">
+<body class="bg-[#111111] text-[#e5e2e1] min-h-screen flex flex-col antialiased selection:bg-[#005580] selection:text-white pb-16 md:pb-0">
 
-  <!-- Header Superior Global -->
-  <header class="w-full bg-[#131313] border-b border-[#222222] sticky top-0 z-50">
-    <div class="flex justify-between items-center w-full px-4 md:px-6 max-w-7xl mx-auto h-16">
-      <div class="flex items-center gap-3">
-        <button id="btnMobileMenu" onclick="toggleMenuMobile()" class="md:hidden flex items-center justify-center w-10 h-10 rounded-lg bg-[#181818] border border-[#262626] text-[#e5e2e1] hover:text-[#38bdf8] transition-all" aria-label="Menú">
-          <span class="material-symbols-outlined text-[24px]" id="iconMobileMenu">menu</span>
+  <!-- ========================================================================= -->
+  <!-- Header Superior Global Unificado con Portafolio sergiomolina-fotografia y Métricas -->
+  <!-- ========================================================================= -->
+  <header class="w-full bg-[#141414] border-b border-[#242424] sticky top-0 z-50">
+    <div class="flex justify-between items-center w-full px-3 sm:px-6 max-w-7xl mx-auto h-16 gap-2">
+      <!-- Marca & Botón Menú Móvil -->
+      <div class="flex items-center gap-2.5 sm:gap-3">
+        <button id="btnMobileMenu" type="button" aria-label="Abrir menú" class="md:hidden flex items-center justify-center w-9 h-9 rounded-lg bg-[#181818] border border-[#262626] text-[#e5e2e1] hover:text-[#38bdf8] transition-all active:scale-95">
+          <span class="material-symbols-outlined text-[22px]" id="menuIcon">menu</span>
         </button>
-        <span class="material-symbols-outlined text-[#38bdf8] text-[24px]">payments</span>
-        <div class="flex flex-col">
-          <span class="font-headline font-bold text-white text-base sm:text-lg tracking-wide">Tarifas y Precios</span>
-          <span class="text-[10px] text-[#888888] font-mono tracking-wider uppercase">SERGIO RICARDO MOLINA</span>
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-[#38bdf8] text-[24px] sm:text-[26px]">payments</span>
+          <span class="text-white font-headline font-bold text-sm sm:text-lg tracking-tight">Tarifas y Precios</span>
         </div>
       </div>
 
-      <div class="flex items-center gap-2 sm:gap-3">
-        <div id="badge-cloud" class="inline-flex items-center gap-1.5 px-3 py-1 bg-[#181818] border border-emerald-800/60 rounded-full text-xs font-mono text-emerald-400">
+      <!-- Accesos Superiores: Portafolio Oficial + Métricas + Estado + Salir -->
+      <div class="flex items-center gap-1.5 sm:gap-2.5">
+        <!-- 1. Enlace Oficial Portafolio GitHub sergiomolina-fotografia -->
+        <a href="https://sergiomolina-fotografia.github.io/Portafolio/index.html" 
+           class="inline-flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3.5 py-1.5 rounded-lg border border-[#005580] hover:border-[#38bdf8] bg-[#102433] hover:bg-[#143247] text-[11px] sm:text-xs font-semibold text-[#38bdf8] hover:text-white transition-all shadow-sm active:scale-95 whitespace-nowrap"
+           title="Ir a mi Portafolio Oficial">
+          <span class="material-symbols-outlined text-[16px]">visibility</span>
+          <span class="hidden xs:inline">Ver Portafolio</span>
+          <span class="xs:hidden">Portafolio</span>
+          <span class="material-symbols-outlined text-[12px] opacity-70 hidden sm:inline">open_in_new</span>
+        </a>
+
+        <!-- 2. Enlace a Métricas en la parte superior -->
+        <a href="metricas.html" 
+           class="inline-flex items-center gap-1 px-2.5 sm:px-3 py-1.5 rounded-lg border border-[#2e2e2e] hover:border-[#38bdf8] bg-[#181818] hover:bg-[#202020] text-[11px] sm:text-xs font-medium text-[#c0c7cf] hover:text-white transition-all active:scale-95 whitespace-nowrap"
+           title="Ver Analítica y Registro de Visitas">
+          <span class="material-symbols-outlined text-[16px] text-amber-400">insights</span>
+          <span class="hidden sm:inline">Métricas</span>
+        </a>
+
+        <!-- 3. Indicador de Conexión Supabase -->
+        <div class="hidden lg:inline-flex items-center gap-1.5 px-2.5 py-1 bg-[#181818] border border-emerald-800/60 text-emerald-400 text-xs font-semibold rounded-full uppercase tracking-wider">
           <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-          <span class="hidden xs:inline">SUPABASE CONECTADO</span>
-          <span class="xs:hidden">SYNC OK</span>
+          <span class="text-[10px] font-mono">Supabase Conectado</span>
         </div>
-        <button onclick="cerrarSesion()" class="px-3 py-1.5 rounded-lg border border-[#333333] hover:border-red-500/60 bg-[#181818] hover:bg-red-950/20 text-xs font-semibold text-[#c0c7cf] hover:text-red-400 transition-all flex items-center gap-1.5">
-          <span class="material-symbols-outlined text-[16px]">logout</span>
-          <span class="hidden sm:inline">Cerrar Sesión</span>
+
+        <!-- 4. Botón Salir / Logout -->
+        <button onclick="cerrarSesionAdmin()" class="flex items-center gap-1 px-2.5 sm:px-3 py-1.5 rounded-lg border border-[#333333] hover:border-red-500/60 bg-[#181818] hover:bg-red-950/30 text-[11px] sm:text-xs font-medium text-[#c0c7cf] hover:text-red-400 transition-all active:scale-95" title="Cerrar sesión">
+          <span class="material-symbols-outlined text-[15px]">logout</span>
+          <span class="hidden sm:inline">Salir</span>
         </button>
       </div>
     </div>
 
     <!-- Menú Desplegable Móvil -->
-    <div id="mobileDrawer" class="hidden md:hidden border-b border-[#222222] bg-[#141414] px-4 py-4 space-y-3">
+    <div id="mobileDrawer" class="hidden md:hidden border-b border-[#242424] bg-[#141414] px-4 py-4 space-y-4 shadow-2xl">
+      <div class="px-2 pb-2 border-b border-[#222222]">
+        <h2 class="text-base font-headline font-bold text-white tracking-tight">SERGIO RICARDO MOLINA</h2>
+        <p class="text-[11px] text-[#8b9199] tracking-wider uppercase mt-0.5">Fotografía Profesional</p>
+      </div>
       <nav class="space-y-1">
-        <a href="panel.html" class="flex items-center justify-between text-[#c0c7cf] hover:text-white px-3 py-2.5 text-xs font-medium rounded-lg hover:bg-[#1a1a1a]">
-          <div class="flex items-center gap-2.5">
-            <span class="material-symbols-outlined text-[18px]">photo_library</span>
-            <span>Galerías</span>
-          </div>
-          <span class="material-symbols-outlined text-[14px] text-[#555555]">chevron_right</span>
+        <a href="panel.html" class="flex items-center gap-3 text-[#c0c7cf] px-3 py-2.5 text-sm font-medium rounded-lg hover:bg-[#1f1e1e] hover:text-white transition-all">
+          <span class="material-symbols-outlined text-[20px]">photo_library</span>
+          <span>Galerías</span>
         </a>
-        <a href="cargas.html" class="flex items-center justify-between text-[#c0c7cf] hover:text-white px-3 py-2.5 text-xs font-medium rounded-lg hover:bg-[#1a1a1a]">
-          <div class="flex items-center gap-2.5">
-            <span class="material-symbols-outlined text-[18px]">cloud_upload</span>
-            <span>Cargas y Enlaces</span>
-          </div>
-          <span class="material-symbols-outlined text-[14px] text-[#555555]">chevron_right</span>
+        <a href="cargas.html" class="flex items-center gap-3 text-[#c0c7cf] px-3 py-2.5 text-sm font-medium rounded-lg hover:bg-[#1f1e1e] hover:text-white transition-all">
+          <span class="material-symbols-outlined text-[20px]">cloud_upload</span>
+          <span>Cargas y Enlaces</span>
         </a>
-        <a href="precios.html" class="flex items-center justify-between text-white px-3 py-2.5 text-xs font-semibold rounded-lg bg-[#004466] border border-[#0088cc]">
-          <div class="flex items-center gap-2.5">
-            <span class="material-symbols-outlined text-[18px] text-[#38bdf8]">payments</span>
-            <span>Tarifas y Precios</span>
-          </div>
+        <a href="precios.html" class="flex items-center gap-3 text-white px-3 py-2.5 text-sm font-semibold rounded-lg bg-[#004466] border border-[#0088cc]">
+          <span class="material-symbols-outlined text-[20px] text-[#38bdf8]">payments</span>
+          <span>Tarifas y Precios</span>
         </a>
-        <a href="metricas.html" class="flex items-center justify-between text-[#c0c7cf] hover:text-white px-3 py-2.5 text-xs font-medium rounded-lg hover:bg-[#1a1a1a]">
-          <div class="flex items-center gap-2.5">
-            <span class="material-symbols-outlined text-[18px]">insights</span>
-            <span>Métricas y Visitas</span>
-          </div>
-          <span class="material-symbols-outlined text-[14px] text-[#555555]">chevron_right</span>
+        <a href="metricas.html" class="flex items-center gap-3 text-[#c0c7cf] px-3 py-2.5 text-sm font-medium rounded-lg hover:bg-[#1f1e1e] hover:text-white transition-all">
+          <span class="material-symbols-outlined text-[20px] text-amber-400">insights</span>
+          <span>Métricas y Visitas</span>
         </a>
       </nav>
       <div class="pt-3 border-t border-[#222222] space-y-1">
-        <a href="https://gersiotalrevez.github.io/Eventos-Escolares/eventos.html" target="_blank" class="flex items-center gap-2 text-xs text-[#888888] hover:text-[#38bdf8] px-2 py-1.5 rounded">
-          <span class="material-symbols-outlined text-[16px]">calendar_month</span>
-          <span>Volver a Eventos</span>
-        </a>
-        <a href="https://sergiomolina-fotografia.netlify.app/" target="_blank" class="flex items-center gap-2 text-xs text-[#888888] hover:text-[#38bdf8] px-2 py-1.5 rounded">
-          <span class="material-symbols-outlined text-[16px]">visibility</span>
-          <span>Ver Portafolio</span>
+        <p class="text-[10px] font-bold text-[#8b9199] uppercase tracking-wider px-3 mb-1">Accesos Directos</p>
+        <a href="https://sergiomolina-fotografia.github.io/Portafolio/index.html" class="flex items-center justify-between text-[#38bdf8] hover:text-white px-3 py-2 text-sm rounded-lg hover:bg-[#1b1b1b] transition-all">
+          <div class="flex items-center gap-2.5">
+            <span class="material-symbols-outlined text-[18px]">visibility</span>
+            <span>Ver Portafolio</span>
+          </div>
+          <span class="material-symbols-outlined text-[14px]">open_in_new</span>
         </a>
       </div>
     </div>
   </header>
 
-  <!-- Layout Principal con Sidebar -->
-  <div class="flex-1 flex overflow-hidden max-w-7xl w-full mx-auto">
+  <!-- Layout Principal -->
+  <div class="flex-1 flex w-full max-w-7xl mx-auto overflow-hidden">
     <!-- Sidebar Desktop -->
-    <aside class="w-60 bg-[#131313] border-r border-[#222222] p-4 flex flex-col justify-between shrink-0 hidden md:flex">
-      <div class="space-y-4">
-        <div class="text-[10px] font-mono text-[#777777] uppercase tracking-wider px-2">MÓDULO DE GESTIÓN</div>
-        <nav class="space-y-1">
-          <a href="panel.html" class="flex items-center justify-between text-[#c0c7cf] hover:text-white px-3 py-2 text-xs font-medium rounded-lg hover:bg-[#1a1a1a] transition-colors">
-            <div class="flex items-center gap-2.5">
-              <span class="material-symbols-outlined text-[18px]">photo_library</span>
-              <span>Galerías</span>
-            </div>
-            <span class="material-symbols-outlined text-[14px] text-[#555555]">chevron_right</span>
+    <aside class="w-64 bg-[#141414] border-r border-[#242424] flex-col justify-between shrink-0 hidden md:flex">
+      <div class="p-5">
+        <div class="mb-6 px-1">
+          <h2 class="text-base font-headline font-bold text-white tracking-tight">SERGIO RICARDO MOLINA</h2>
+          <p class="text-[10px] font-semibold text-[#8b9199] tracking-wider uppercase mt-0.5">Fotografía Profesional</p>
+        </div>
+        <nav class="space-y-1.5">
+          <a href="panel.html" class="flex items-center gap-3 text-[#c0c7cf] px-3 py-2.5 text-sm font-medium rounded-lg hover:bg-[#1e1e1e] hover:text-white transition-all">
+            <span class="material-symbols-outlined text-[20px]">photo_library</span>
+            <span>Galerías</span>
           </a>
-          <a href="cargas.html" class="flex items-center justify-between text-[#c0c7cf] hover:text-white px-3 py-2 text-xs font-medium rounded-lg hover:bg-[#1a1a1a] transition-colors">
-            <div class="flex items-center gap-2.5">
-              <span class="material-symbols-outlined text-[18px]">cloud_upload</span>
-              <span>Cargas y Enlaces</span>
-            </div>
-            <span class="material-symbols-outlined text-[14px] text-[#555555]">chevron_right</span>
+          <a href="cargas.html" class="flex items-center gap-3 text-[#c0c7cf] px-3 py-2.5 text-sm font-medium rounded-lg hover:bg-[#1e1e1e] hover:text-white transition-all">
+            <span class="material-symbols-outlined text-[20px]">cloud_upload</span>
+            <span>Cargas y Enlaces</span>
           </a>
-          <a href="precios.html" class="flex items-center justify-between text-white px-3 py-2 text-xs font-semibold rounded-lg bg-[#004466] border border-[#0088cc] shadow-sm">
-            <div class="flex items-center gap-2.5">
-              <span class="material-symbols-outlined text-[18px] text-[#38bdf8]">payments</span>
-              <span>Tarifas y Precios</span>
-            </div>
+          <a href="precios.html" class="flex items-center gap-3 bg-[#004466] border border-[#0088cc] text-white rounded-lg px-3 py-2.5 text-sm font-semibold shadow-sm">
+            <span class="material-symbols-outlined text-[20px] text-[#38bdf8]">payments</span>
+            <span>Tarifas y Precios</span>
           </a>
-          <a href="metricas.html" class="flex items-center justify-between text-[#c0c7cf] hover:text-white px-3 py-2 text-xs font-medium rounded-lg hover:bg-[#1a1a1a] transition-colors">
-            <div class="flex items-center gap-2.5">
-              <span class="material-symbols-outlined text-[18px]">insights</span>
-              <span>Métricas y Visitas</span>
-            </div>
-            <span class="material-symbols-outlined text-[14px] text-[#555555]">chevron_right</span>
+          <a href="metricas.html" class="flex items-center gap-3 text-[#c0c7cf] px-3 py-2.5 text-sm font-medium rounded-lg hover:bg-[#1e1e1e] hover:text-white transition-all">
+            <span class="material-symbols-outlined text-[20px] text-amber-400">insights</span>
+            <span>Métricas y Visitas</span>
           </a>
         </nav>
       </div>
 
-      <div class="pt-4 border-t border-[#222222] space-y-1">
-        <div class="text-[10px] font-mono text-[#777777] uppercase tracking-wider px-2 mb-1">Portales Públicos</div>
-        <a href="https://gersiotalrevez.github.io/Eventos-Escolares/eventos.html" target="_blank" class="flex items-center gap-2 text-xs text-[#888888] hover:text-[#38bdf8] px-2 py-1.5 rounded transition-colors">
-          <span class="material-symbols-outlined text-[16px]">calendar_month</span>
-          <span>Volver a Eventos</span>
-        </a>
-        <a href="https://sergiomolina-fotografia.netlify.app/" target="_blank" class="flex items-center gap-2 text-xs text-[#888888] hover:text-[#38bdf8] px-2 py-1.5 rounded transition-colors">
-          <span class="material-symbols-outlined text-[16px]">visibility</span>
-          <span>Ver Portafolio</span>
+      <div class="p-4 border-t border-[#242424] bg-[#111111] space-y-1">
+        <p class="text-[10px] font-bold text-[#8b9199] uppercase tracking-wider px-2 mb-2">Accesos Directos</p>
+        <a href="https://sergiomolina-fotografia.github.io/Portafolio/index.html" class="flex items-center justify-between text-[#c0c7cf] hover:text-[#38bdf8] px-2 py-2 rounded-lg text-sm transition-all hover:bg-[#181818] group">
+          <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-[18px] text-[#8b9199] group-hover:text-[#38bdf8] transition-colors">visibility</span>
+            <span>Ver Portafolio</span>
+          </div>
+          <span class="material-symbols-outlined text-[14px] text-[#8b9199]">open_in_new</span>
         </a>
       </div>
     </aside>
 
-    <!-- Contenido Principal -->
-    <main class="flex-1 overflow-y-auto custom-scrollbar p-4 sm:p-6 md:p-8 max-w-5xl pb-20 md:pb-8">
-      
-      <!-- Título & Acciones -->
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+    <!-- Área de Contenido Principal -->
+    <main class="flex-1 overflow-y-auto custom-scrollbar p-3.5 sm:p-6 md:p-8">
+      <!-- Encabezado de la Sección -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 pb-4 sm:pb-6 border-b border-[#242424] mb-4 sm:mb-6">
         <div>
-          <span class="text-[11px] font-mono text-[#38bdf8] uppercase tracking-wider">CONTROL COMERCIAL</span>
-          <h1 class="text-2xl sm:text-3xl font-headline font-bold text-white tracking-tight mt-1">Tarifas y Precios Oficiales</h1>
-          <p class="text-xs sm:text-sm text-[#888888] mt-1.5 leading-relaxed">Configurá las tarifas para copias impresas de laboratorio y descargas digitales en alta resolución. Se sincronizan en tiempo real con Supabase y las galerías activas.</p>
+          <div class="flex items-center gap-2 mb-1">
+            <span class="px-2.5 py-0.5 bg-[#005580]/40 border border-[#005580] text-[#38bdf8] text-[10px] sm:text-[11px] font-semibold rounded uppercase tracking-wider">Control Comercial Centralizado</span>
+            <span class="text-[11px] text-[#888888] font-mono hidden sm:inline">Tabla Supabase: configuracion</span>
+          </div>
+          <h1 class="text-xl sm:text-3xl font-headline font-bold text-white tracking-tight mt-1 sm:mt-1.5">Tarifas y Precios Oficiales</h1>
+          <p class="text-[11px] sm:text-xs text-[#888888] mt-0.5 sm:mt-1">Define el valor de venta para copias impresas y descargas digitales. Se sincronizan en vivo con todas las galerías de los clientes.</p>
         </div>
 
-        <div class="flex items-center gap-2 sm:gap-3">
-          <button type="button" id="btn-revertir" onclick="revertirTarifas()" class="px-3.5 py-2.5 rounded-xl border border-[#333333] hover:border-[#555555] bg-[#181818] text-[#e5e2e1] hover:text-white text-xs sm:text-sm font-semibold transition-all flex items-center gap-1.5 active:scale-95">
-            <span class="material-symbols-outlined text-[17px]">restart_alt</span>
-            <span>Revertir</span>
+        <div class="flex items-center gap-2 sm:gap-3 self-start sm:self-auto">
+          <button type="button" id="btnResetValues" class="px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-xl border border-[#333333] hover:border-[#555555] bg-[#181818] text-[#c0c7cf] hover:text-white text-xs sm:text-sm font-semibold flex items-center gap-1.5 transition-all active:scale-95 cursor-pointer">
+            <span class="material-symbols-outlined text-[16px] sm:text-[18px]">restart_alt</span>
+            <span class="hidden xs:inline">Revertir</span>
           </button>
-          <button type="button" id="btn-guardar-tarifas" onclick="guardarTarifas()" class="px-5 py-2.5 rounded-xl bg-[#005580] hover:bg-[#0077b3] border border-[#0088cc] text-white text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 shadow-lg shadow-black/50 active:scale-95">
-            <span class="material-symbols-outlined text-[18px]">save</span>
-            <span id="btn-guardar-texto">Guardar Nuevas Tarifas</span>
+          <button type="button" id="btnSavePrices" class="px-4 sm:px-5 py-2 sm:py-2.5 rounded-xl bg-[#005580] hover:bg-[#0077b3] border border-[#0088cc] text-white text-xs sm:text-sm font-bold flex items-center gap-2 transition-all shadow-lg active:scale-95 cursor-pointer">
+            <span class="material-symbols-outlined text-[16px] sm:text-[18px]">save</span>
+            <span id="btnSaveText">Guardar Nuevas Tarifas</span>
           </button>
         </div>
       </div>
 
-      <!-- Alerta Toast -->
-      <div id="toast-precios" class="hidden mb-6 p-4 rounded-xl border text-xs sm:text-sm flex items-center justify-between transition-all">
-        <div class="flex items-center gap-2.5">
-          <span class="material-symbols-outlined text-[20px]" id="toast-ico">check_circle</span>
-          <span id="toast-txt"></span>
+      <!-- Feedback Toast Dinámico -->
+      <div id="saveToast" class="hidden mb-6 p-4 rounded-xl border text-xs sm:text-sm font-mono flex items-start justify-between gap-2.5 transition-all shadow-lg">
+        <div class="flex items-start gap-2.5">
+          <span class="material-symbols-outlined text-[20px] shrink-0" id="toastIcon">check_circle</span>
+          <span id="toastMessage" class="leading-relaxed">¡Tarifas actualizadas con éxito en Supabase y respaldo local!</span>
         </div>
-        <span class="text-[11px] font-mono text-[#888888]" id="toast-hora">Recién</span>
+        <span id="timestampSaved" class="text-[10px] text-[#888888] shrink-0 mt-0.5">Recién</span>
       </div>
 
-      <!-- Bento Grid de Tarifas: Impresa + Digital -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mb-8">
+      <!-- Tarjetas de Precios en Fila / Grid Responsivo -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mb-6">
         
-        <!-- Tarjeta 1: Copia Impresa -->
-        <div class="bg-[#181818] border border-[#242424] hover:border-[#38bdf8]/40 rounded-2xl p-5 sm:p-6 shadow-xl flex flex-col justify-between transition-all">
+        <!-- Tarjeta 1: Copia Impresa 15x21 cm -->
+        <div class="bg-[#181818] border border-[#242424] hover:border-[#facc15]/50 rounded-2xl p-4 sm:p-6 shadow-xl transition-all flex flex-col justify-between group">
           <div>
-            <div class="flex items-start justify-between pb-4 border-b border-[#242424]">
+            <div class="flex items-start justify-between pb-3.5 border-b border-[#242424]">
               <div class="flex items-center gap-3">
-                <div class="w-11 h-11 rounded-xl bg-[#121212] border border-[#2c2c2c] flex items-center justify-center text-[#38bdf8]">
-                  <span class="material-symbols-outlined text-[24px]">photo_size_select_actual</span>
+                <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-[#141414] border border-[#2a2a2a] group-hover:border-[#facc15]/60 flex items-center justify-center text-[#facc15] transition-colors shrink-0">
+                  <span class="material-symbols-outlined text-[22px] sm:text-[24px]">photo_size_select_actual</span>
                 </div>
                 <div>
-                  <h3 class="text-base sm:text-lg font-headline font-bold text-white">Copia Impresa 15x21 cm</h3>
-                  <p class="text-[11px] text-[#888888] font-mono uppercase tracking-wider">Papel químico de laboratorio</p>
+                  <h3 class="text-sm sm:text-base font-headline font-bold text-white">Copia Impresa 15x21 cm</h3>
+                  <p class="text-[10px] sm:text-[11px] text-[#888888] uppercase tracking-wider font-semibold">Papel de laboratorio químico profesional</p>
                 </div>
               </div>
-              <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-[#121212] text-[#38bdf8] border border-[#2a2a2a]">FÍSICO</span>
+              <span class="inline-flex px-2 py-0.5 rounded text-[10px] font-mono font-semibold bg-[#111111] text-[#facc15] border border-amber-500/40">Físico</span>
             </div>
 
-            <div class="mt-5">
-              <label for="input-precio-impresa" class="block text-xs font-mono uppercase tracking-wider text-[#aaaaaa] mb-2">Precio de Venta al Público (ARS)</label>
+            <!-- Input Numérico -->
+            <div class="mt-4 sm:mt-5">
+              <label for="inputPrintPrice" class="block text-xs font-semibold text-[#c0c7cf] uppercase tracking-wider mb-2">
+                Precio de Venta al Público (ARS) *
+              </label>
               <div class="relative">
-                <span class="absolute left-4 top-1/2 -translate-y-1/2 text-[#888888] font-bold text-lg font-mono pointer-events-none">$</span>
-                <input type="text" id="input-precio-impresa" inputmode="numeric" value="7.500" class="w-full bg-[#111111] border border-[#2e2e2e] focus:border-[#38bdf8] focus:ring-1 focus:ring-[#38bdf8] rounded-xl pl-9 pr-4 py-3 text-white font-headline text-lg sm:text-xl font-bold outline-none transition-all">
+                <span class="absolute left-4 top-1/2 -translate-y-1/2 text-[#facc15] font-bold text-lg pointer-events-none">$</span>
+                <input type="text" id="inputPrintPrice" inputmode="numeric" value="7.500" placeholder="7.500" class="w-full bg-[#111111] border border-[#333333] focus:border-[#facc15] focus:ring-1 focus:ring-[#facc15] rounded-xl pl-9 pr-4 py-3 text-white font-headline text-lg sm:text-xl font-bold outline-none transition-all">
               </div>
               <p class="text-[11px] text-[#888888] mt-2 flex items-center gap-1.5">
                 <span class="material-symbols-outlined text-[15px] text-[#facc15]">info</span>
-                <span>Rango estándar escolar: $7.000 a $8.000</span>
+                <span>Tarifa comercial oficial para copias de eventos escolares.</span>
               </p>
             </div>
           </div>
 
-          <div class="mt-6 pt-4 border-t border-[#222222] flex items-center justify-between text-xs text-[#888888]">
-            <span>Entrega en institución escolar</span>
-            <span class="text-[#38bdf8] font-mono font-semibold">Catálogo Escolar</span>
+          <div class="mt-4 pt-3 border-t border-[#222222] flex items-center justify-between text-xs">
+            <span class="text-[#888888] text-[11px]">Modalidad: Entrega en Colegio</span>
+            <span class="text-[#facc15] font-semibold text-[11px]">Catálogo Físico</span>
           </div>
         </div>
 
         <!-- Tarjeta 2: Archivo Digital HD -->
-        <div class="bg-[#181818] border border-[#242424] hover:border-[#38bdf8]/40 rounded-2xl p-5 sm:p-6 shadow-xl flex flex-col justify-between transition-all">
+        <div class="bg-[#181818] border border-[#242424] hover:border-[#38bdf8]/50 rounded-2xl p-4 sm:p-6 shadow-xl transition-all flex flex-col justify-between group">
           <div>
-            <div class="flex items-start justify-between pb-4 border-b border-[#242424]">
+            <div class="flex items-start justify-between pb-3.5 border-b border-[#242424]">
               <div class="flex items-center gap-3">
-                <div class="w-11 h-11 rounded-xl bg-[#121212] border border-[#2c2c2c] flex items-center justify-center text-[#38bdf8]">
-                  <span class="material-symbols-outlined text-[24px]">cloud_download</span>
+                <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-[#141414] border border-[#2a2a2a] group-hover:border-[#38bdf8]/60 flex items-center justify-center text-[#38bdf8] transition-colors shrink-0">
+                  <span class="material-symbols-outlined text-[22px] sm:text-[24px]">cloud_download</span>
                 </div>
                 <div>
-                  <h3 class="text-base sm:text-lg font-headline font-bold text-white">Archivo Digital HD</h3>
-                  <p class="text-[11px] text-[#888888] font-mono uppercase tracking-wider">Máxima resolución sin marca</p>
+                  <h3 class="text-sm sm:text-base font-headline font-bold text-white">Archivo Digital HD</h3>
+                  <p class="text-[10px] sm:text-[11px] text-[#888888] uppercase tracking-wider font-semibold">Máxima resolución sin marca de agua</p>
                 </div>
               </div>
-              <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-[#121212] text-[#38bdf8] border border-[#2a2a2a]">ONLINE</span>
+              <span class="inline-flex px-2 py-0.5 rounded text-[10px] font-mono font-semibold bg-[#111111] text-[#38bdf8] border border-[#0088cc]/60">Online</span>
             </div>
 
-            <div class="mt-5">
-              <label for="input-precio-digital" class="block text-xs font-mono uppercase tracking-wider text-[#aaaaaa] mb-2">Precio por Fotografía Digital (ARS)</label>
+            <!-- Input Numérico -->
+            <div class="mt-4 sm:mt-5">
+              <label for="inputDigitalPrice" class="block text-xs font-semibold text-[#c0c7cf] uppercase tracking-wider mb-2">
+                Precio por Fotografía Digital (ARS) *
+              </label>
               <div class="relative">
-                <span class="absolute left-4 top-1/2 -translate-y-1/2 text-[#888888] font-bold text-lg font-mono pointer-events-none">$</span>
-                <input type="text" id="input-precio-digital" inputmode="numeric" value="2.500" class="w-full bg-[#111111] border border-[#2e2e2e] focus:border-[#38bdf8] focus:ring-1 focus:ring-[#38bdf8] rounded-xl pl-9 pr-4 py-3 text-white font-headline text-lg sm:text-xl font-bold outline-none transition-all">
+                <span class="absolute left-4 top-1/2 -translate-y-1/2 text-[#38bdf8] font-bold text-lg pointer-events-none">$</span>
+                <input type="text" id="inputDigitalPrice" inputmode="numeric" value="2.500" placeholder="2.500" class="w-full bg-[#111111] border border-[#333333] focus:border-[#38bdf8] focus:ring-1 focus:ring-[#38bdf8] rounded-xl pl-9 pr-4 py-3 text-white font-headline text-lg sm:text-xl font-bold outline-none transition-all">
               </div>
               <p class="text-[11px] text-[#888888] mt-2 flex items-center gap-1.5">
                 <span class="material-symbols-outlined text-[15px] text-[#38bdf8]">bolt</span>
-                <span>Habilita descarga o envío tras confirmación</span>
+                <span>Habilita descarga o envío directo sin marcas de agua.</span>
               </p>
             </div>
           </div>
 
-          <div class="mt-6 pt-4 border-t border-[#222222] flex items-center justify-between text-xs text-[#888888]">
-            <span>JPG 300 DPI Original</span>
-            <span class="text-[#38bdf8] font-mono font-semibold">Envío Directo</span>
+          <div class="mt-4 pt-3 border-t border-[#222222] flex items-center justify-between text-xs">
+            <span class="text-[#888888] text-[11px]">Formato: JPG 300 DPI Original</span>
+            <span class="text-[#38bdf8] font-semibold text-[11px]">Descarga Online</span>
           </div>
         </div>
 
       </div>
 
-      <!-- Historial de Actualizaciones (Solo Registros Reales) -->
-      <section class="bg-[#181818] border border-[#242424] rounded-2xl p-5 sm:p-6 shadow-xl">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4 border-b border-[#242424]">
+      <!-- Resumen de Sincronización y Registro Oficial -->
+      <section class="bg-[#181818] border border-[#242424] rounded-2xl p-4 sm:p-6 shadow-xl mb-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 pb-3 border-b border-[#242424]">
           <div>
-            <h3 class="text-base sm:text-lg font-headline font-bold text-white">Vigencia y Registro de Tarifas</h3>
-            <p class="text-xs text-[#888888] mt-0.5">Sincronización centralizada con Supabase (tabla <code class="font-mono text-[#38bdf8]">configuracion</code>)</p>
+            <h3 class="text-sm sm:text-base font-headline font-bold text-white">Sincronización en Vivo de Tarifas</h3>
+            <p class="text-[11px] text-[#888888] mt-0.5">Sincronización universal mediante la fila id = 1 de la tabla configuracion en Supabase.</p>
           </div>
-          <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-mono bg-[#121212] border border-[#2a2a2a] text-[#38bdf8]">
-            Auditado en Vivo
+          <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-mono font-semibold bg-[#111111] border border-[#2d2d2d] text-[#38bdf8] self-start sm:self-auto">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#38bdf8] animate-pulse"></span>
+            <span>Enlace Activo</span>
           </span>
         </div>
 
-        <div class="overflow-x-auto custom-scrollbar mt-4">
-          <table class="w-full text-left border-collapse min-w-[540px]">
-            <thead>
-              <tr class="border-b border-[#242424] text-[11px] font-mono text-[#888888] uppercase tracking-wider">
-                <th class="py-2.5 px-3">Estado</th>
-                <th class="py-2.5 px-3">Copia 15x21 cm</th>
-                <th class="py-2.5 px-3">Archivo HD</th>
-                <th class="py-2.5 px-3">WhatsApp Oficial</th>
-                <th class="py-2.5 px-3 text-right">Última Modificación</th>
-              </tr>
-            </thead>
-            <tbody class="text-xs sm:text-sm divide-y divide-[#222222]">
-              <tr class="hover:bg-[#1a1a1a] transition-colors">
-                <td class="py-3 px-3">
-                  <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-emerald-950/80 text-emerald-400 border border-emerald-700/50">
-                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                    ACTIVA
-                  </span>
-                </td>
-                <td class="py-3 px-3 font-headline font-bold text-[#38bdf8]" id="table-val-impresa">$7.500</td>
-                <td class="py-3 px-3 font-headline font-bold text-[#38bdf8]" id="table-val-digital">$2.500</td>
-                <td class="py-3 px-3 font-mono text-xs text-[#c0c7cf]">+54 9 261 317-5222</td>
-                <td class="py-3 px-3 text-right font-mono text-xs text-[#888888]" id="table-val-fecha">Sincronizando...</td>
-              </tr>
-            </tbody>
-          </table>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-4 text-xs font-mono">
+          <div class="p-3 rounded-xl bg-[#141414] border border-[#222222]">
+            <span class="text-[#777777] block text-[10px] uppercase">Copia Impresa</span>
+            <span class="text-white font-bold text-sm sm:text-base text-[#facc15]" id="summaryPrint">$7.500</span>
+          </div>
+          <div class="p-3 rounded-xl bg-[#141414] border border-[#222222]">
+            <span class="text-[#777777] block text-[10px] uppercase">Archivo Digital</span>
+            <span class="text-white font-bold text-sm sm:text-base text-[#38bdf8]" id="summaryDigital">$2.500</span>
+          </div>
+          <div class="p-3 rounded-xl bg-[#141414] border border-[#222222]">
+            <span class="text-[#777777] block text-[10px] uppercase">WhatsApp Oficial</span>
+            <span class="text-white font-semibold text-xs sm:text-sm truncate block">+54 9 261 317-5222</span>
+          </div>
         </div>
       </section>
-
     </main>
   </div>
 
-  <!-- Barra de Navegación Inferior Móvil -->
-  <nav class="md:hidden bg-[#131313]/95 backdrop-blur-md border-t border-[#222222] fixed bottom-0 left-0 right-0 z-40 px-2 py-1 flex justify-around items-center">
-    <a href="panel.html" class="flex flex-col items-center py-1 px-2 text-[#8b9199] hover:text-white">
+  <!-- Barra Móvil Fija Inferior (< 768px) -->
+  <nav class="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#141414] border-t border-[#262626] px-2 py-1.5 flex justify-around items-center">
+    <a href="panel.html" class="flex flex-col items-center text-[#888888] hover:text-white py-1 px-2">
       <span class="material-symbols-outlined text-[20px]">photo_library</span>
-      <span class="text-[10px] mt-0.5 font-medium">Galerías</span>
+      <span class="text-[10px] font-medium mt-0.5">Galerías</span>
     </a>
-    <a href="cargas.html" class="flex flex-col items-center py-1 px-2 text-[#8b9199] hover:text-white">
+    <a href="cargas.html" class="flex flex-col items-center text-[#888888] hover:text-white py-1 px-2">
       <span class="material-symbols-outlined text-[20px]">cloud_upload</span>
-      <span class="text-[10px] mt-0.5 font-medium">Cargas</span>
+      <span class="text-[10px] font-medium mt-0.5">Cargas</span>
     </a>
-    <a href="precios.html" class="flex flex-col items-center py-1 px-2 text-[#38bdf8] font-bold">
+    <a href="precios.html" class="flex flex-col items-center text-[#38bdf8] py-1 px-2">
       <span class="material-symbols-outlined text-[20px]">payments</span>
-      <span class="text-[10px] mt-0.5">Tarifas</span>
+      <span class="text-[10px] font-semibold mt-0.5">Tarifas</span>
     </a>
-    <a href="metricas.html" class="flex flex-col items-center py-1 px-2 text-[#8b9199] hover:text-white">
+    <a href="metricas.html" class="flex flex-col items-center text-[#888888] hover:text-white py-1 px-2">
       <span class="material-symbols-outlined text-[20px]">insights</span>
-      <span class="text-[10px] mt-0.5 font-medium">Métricas</span>
+      <span class="text-[10px] font-medium mt-0.5">Métricas</span>
     </a>
   </nav>
-
-  <!-- Pie de Página Desktop -->
-  <footer class="w-full py-4 px-6 border-t border-[#1a1a1a] text-center text-xs text-[#666666] hidden md:block">
-    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
-      <p>© 2026 · Sergio Ricardo Molina</p>
-      <div class="flex items-center gap-4 text-[11px] font-mono">
-        <span>ESTUDIO FOTOGRÁFICO PROFESIONAL</span>
-        <span class="text-[#38bdf8]">SUPABASE CLOUD SYNC</span>
-      </div>
-    </div>
-  </footer>
 
   <script>
     const CORREO_AUTORIZADO = 'molinaoksergio@gmail.com';
     const SUPABASE_URL = 'https://zbixojacwvanucxlrdcd.supabase.co';
     const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpiaXhvamFjd3ZhbnVjeGxyZGNkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg1MzgxMzQsImV4cCI6MjEwNDExNDEzNH0.Wz35IGTGzdHuHOm2EbTsGSLBZfhw67Wt7UXBbMXek68';
-
+    const WHATSAPP_OFICIAL = '5492613175222';
     const DEFAULT_PRINT = 7500;
     const DEFAULT_DIGITAL = 2500;
-    const WHATSAPP_OFICIAL = '5492613175222';
-
-    // 1. Guardián de Acceso Resiliente
-    (function verificarAccesoSeguro() {
-      const authSession = sessionStorage.getItem('admin_auth') === 'true';
-      const authBackup = localStorage.getItem('admin_auth_backup') === 'true';
-      const cookieAuth = document.cookie.includes('admin_session=true');
-
-      if (!authSession && !authBackup && !cookieAuth) {
-        window.location.href = 'index.html';
-        return;
-      }
-
-      sessionStorage.setItem('admin_auth', 'true');
-      sessionStorage.setItem('admin_email', CORREO_AUTORIZADO);
-
-      try {
-        fetch('/api/session', { credentials: 'include' }).catch(() => {});
-      } catch(_) {}
-    })();
-
-    function toggleMenuMobile() {
-      const drawer = document.getElementById('mobileDrawer');
-      const icon = document.getElementById('iconMobileMenu');
-      if (!drawer) return;
-      const isHidden = drawer.classList.contains('hidden');
-      if (isHidden) {
-        drawer.classList.remove('hidden');
-        if (icon) icon.textContent = 'close';
-      } else {
-        drawer.classList.add('hidden');
-        if (icon) icon.textContent = 'menu';
-      }
-    }
 
     let supabaseClient = null;
-    try {
-      if (window.supabase) {
-        supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    // 1. Guardián Resiliente: NO expulsa a ciegas
+    async function verificarGuardiánAcceso() {
+      const authLocal = sessionStorage.getItem('admin_auth') === 'true';
+      const emailLocal = (sessionStorage.getItem('admin_email') || '').toLowerCase().trim();
+      if (authLocal && emailLocal === CORREO_AUTORIZADO) {
+        return true;
       }
-    } catch(err) {
-      console.warn('Supabase init:', err);
+
+      if (window.supabase) {
+        try {
+          supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+          const { data: { session } } = await supabaseClient.auth.getSession();
+          if (session && session.user && (session.user.email || '').toLowerCase().trim() === CORREO_AUTORIZADO) {
+            sessionStorage.setItem('admin_auth', 'true');
+            sessionStorage.setItem('admin_email', CORREO_AUTORIZADO);
+            return true;
+          }
+        } catch (_) {}
+      }
+
+      try {
+        const res = await fetch('/api/session', { method: 'GET', credentials: 'include' });
+        if (res.ok) {
+          const data = await res.json();
+          if (data && data.authorized && String(data.email || '').toLowerCase() === CORREO_AUTORIZADO) {
+            sessionStorage.setItem('admin_auth', 'true');
+            sessionStorage.setItem('admin_email', CORREO_AUTORIZADO);
+            return true;
+          }
+        }
+      } catch (_) {}
+
+      window.location.href = 'index.html?unauthorized=1';
+      return false;
     }
 
-    const inputImp = document.getElementById('input-precio-impresa');
-    const inputDig = document.getElementById('input-precio-digital');
-    const btnGuardar = document.getElementById('btn-guardar-tarifas');
-    const btnGuardarTxt = document.getElementById('btn-guardar-texto');
-    const tableImp = document.getElementById('table-val-impresa');
-    const tableDig = document.getElementById('table-val-digital');
-    const tableFecha = document.getElementById('table-val-fecha');
-
-    function formatearNumero(val) {
+    // 2. Formateo y parseo de valores de moneda ARS
+    function formatNumber(val) {
       const num = parseInt(String(val).replace(/\D/g, ''), 10);
       if (isNaN(num)) return String(val);
       return num.toLocaleString('es-AR');
     }
 
-    function parsearNumero(val) {
+    function parseNumeric(val) {
       const clean = String(val).replace(/\D/g, '');
       return clean ? parseInt(clean, 10) : 0;
     }
 
-    [inputImp, inputDig].forEach(inp => {
-      if (!inp) return;
-      inp.addEventListener('input', (e) => {
-        const num = parsearNumero(e.target.value);
-        if (num > 0) e.target.value = formatearNumero(num);
+    const inputPrint = document.getElementById('inputPrintPrice');
+    const inputDigital = document.getElementById('inputDigitalPrice');
+
+    [inputPrint, inputDigital].forEach(input => {
+      if (!input) return;
+      input.addEventListener('input', (e) => {
+        const cursorPos = e.target.selectionStart;
+        const prevLen = e.target.value.length;
+        const rawNum = parseNumeric(e.target.value);
+        if (rawNum > 0) {
+          e.target.value = formatNumber(rawNum);
+          const newLen = e.target.value.length;
+          const newPos = Math.max(cursorPos + (newLen - prevLen), 1);
+          try { e.target.setSelectionRange(newPos, newPos); } catch (_) {}
+        }
+        actualizarResumen();
       });
     });
 
-    function actualizarUI(pImp, pDig, fechaStr) {
-      const sImp = formatearNumero(pImp);
-      const sDig = formatearNumero(pDig);
-      if (inputImp) inputImp.value = sImp;
-      if (inputDig) inputDig.value = sDig;
-      if (tableImp) tableImp.textContent = '$' + sImp;
-      if (tableDig) tableDig.textContent = '$' + sDig;
-      if (tableFecha) {
-        tableFecha.textContent = fechaStr || ('Hoy, ' + new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
-      }
+    function actualizarResumen() {
+      const pPrint = parseNumeric(inputPrint.value) || DEFAULT_PRINT;
+      const pDigital = parseNumeric(inputDigital.value) || DEFAULT_DIGITAL;
+
+      const sumP = document.getElementById('summaryPrint');
+      const sumD = document.getElementById('summaryDigital');
+      if (sumP) sumP.textContent = `$${formatNumber(pPrint)}`;
+      if (sumD) sumD.textContent = `$${formatNumber(pDigital)}`;
     }
 
+    function updateUI(pPrint, pDigital) {
+      const strP = formatNumber(pPrint);
+      const strD = formatNumber(pDigital);
+
+      if (inputPrint) inputPrint.value = strP;
+      if (inputDigital) inputDigital.value = strD;
+      actualizarResumen();
+    }
+
+    // 3. Cargar tarifas de Supabase y Respaldo Local
     async function cargarTarifas() {
-      const locImp = localStorage.getItem('tarifa_impresa');
-      const locDig = localStorage.getItem('tarifa_digital');
-      const iniP = locImp ? parsearNumero(locImp) : DEFAULT_PRINT;
-      const iniD = locDig ? parsearNumero(locDig) : DEFAULT_DIGITAL;
+      const savedPrint = localStorage.getItem('tarifa_impresa');
+      const savedDigital = localStorage.getItem('tarifa_digital');
+      const initialP = savedPrint ? parseNumeric(savedPrint) : DEFAULT_PRINT;
+      const initialD = savedDigital ? parseNumeric(savedDigital) : DEFAULT_DIGITAL;
 
-      actualizarUI(iniP, iniD);
+      updateUI(initialP, initialD);
 
-      if (!supabaseClient) return;
+      if (!supabaseClient && window.supabase) {
+        supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+      }
 
-      try {
-        const { data, error } = await supabaseClient
-          .from('configuracion')
-          .select('*')
-          .limit(1);
+      if (supabaseClient) {
+        try {
+          const { data, error } = await supabaseClient
+            .from('configuracion')
+            .select('*')
+            .eq('id', 1)
+            .maybeSingle();
 
-        if (!error && data && data.length > 0) {
-          const cfg = data[0];
-          const valP = cfg.tarifa_impresa !== undefined ? parsearNumero(cfg.tarifa_impresa) : DEFAULT_PRINT;
-          const valD = cfg.tarifa_digital !== undefined ? parsearNumero(cfg.tarifa_digital) : DEFAULT_DIGITAL;
-          const fechaFormat = cfg.updated_at ? new Date(cfg.updated_at).toLocaleString('es-AR', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' }) : null;
+          if (!error && data) {
+            const pVal = data.tarifa_impresa !== undefined ? parseNumeric(data.tarifa_impresa) : DEFAULT_PRINT;
+            const dVal = data.tarifa_digital !== undefined ? parseNumeric(data.tarifa_digital) : DEFAULT_DIGITAL;
 
-          actualizarUI(valP, valD, fechaFormat);
-          localStorage.setItem('tarifa_impresa', String(valP));
-          localStorage.setItem('tarifa_digital', String(valD));
+            updateUI(pVal, dVal);
+            localStorage.setItem('tarifa_impresa', String(pVal));
+            localStorage.setItem('tarifa_digital', String(dVal));
+          }
+        } catch (err) {
+          console.warn('Lectura tarifas Supabase:', err);
         }
-      } catch(err) {
-        console.warn('Lectura tarifas Supabase:', err);
       }
     }
 
+    // 4. Guardar Tarifas en Supabase (id: 1) y LocalStorage
     async function guardarTarifas() {
-      const vImp = parsearNumero(inputImp.value) || DEFAULT_PRINT;
-      const vDig = parsearNumero(inputDig.value) || DEFAULT_DIGITAL;
-      const ahora = new Date().toISOString();
+      const btnSave = document.getElementById('btnSavePrices');
+      const btnSaveText = document.getElementById('btnSaveText');
 
-      if (btnGuardarTxt) btnGuardarTxt.textContent = 'Guardando...';
-      btnGuardar.disabled = true;
+      const printVal = parseNumeric(inputPrint.value) || DEFAULT_PRINT;
+      const digitalVal = parseNumeric(inputDigital.value) || DEFAULT_DIGITAL;
+      const updatedAt = new Date().toISOString();
 
-      // 1. Persistencia local inmediata
-      localStorage.setItem('tarifa_impresa', String(vImp));
-      localStorage.setItem('tarifa_digital', String(vDig));
+      if (btnSaveText) btnSaveText.textContent = 'Guardando...';
+      if (btnSave) btnSave.disabled = true;
+
+      // Respaldo Local
+      localStorage.setItem('tarifa_impresa', String(printVal));
+      localStorage.setItem('tarifa_digital', String(digitalVal));
       localStorage.setItem('numero_whatsapp', WHATSAPP_OFICIAL);
 
-      // Transmisión inter-pestañas
+      // Broadcast a otras pestañas
       try {
         if ('BroadcastChannel' in window) {
-          const bc = new BroadcastChannel('tarifas_escolar_channel');
-          bc.postMessage({ type: 'TARIFAS_UPDATED', tarifa_impresa: vImp, tarifa_digital: vDig });
+          const channel = new BroadcastChannel('tarifas_escolar_channel');
+          channel.postMessage({
+            type: 'TARIFAS_UPDATED',
+            tarifa_impresa: printVal,
+            tarifa_digital: digitalVal,
+            whatsapp: WHATSAPP_OFICIAL,
+            timestamp: updatedAt
+          });
         }
-      } catch(_) {}
+      } catch (_) {}
 
-      // 2. Sincronización en Supabase
-      let exitoRemoto = false;
+      let remoteOk = false;
+
+      if (!supabaseClient && window.supabase) {
+        supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+      }
+
       if (supabaseClient) {
         try {
           const payload = {
             id: 1,
             clave: 'tarifas_oficiales',
-            tarifa_impresa: vImp,
-            tarifa_digital: vDig,
+            tarifa_impresa: printVal,
+            tarifa_digital: digitalVal,
             whatsapp: WHATSAPP_OFICIAL,
-            updated_at: ahora
+            updated_at: updatedAt
           };
-          const { error } = await supabaseClient.from('configuracion').upsert(payload, { onConflict: 'id' });
-          if (!error) exitoRemoto = true;
-        } catch(e) {
-          console.warn('Upsert Supabase:', e);
+
+          const { error } = await supabaseClient
+            .from('configuracion')
+            .upsert(payload, { onConflict: 'id' });
+
+          if (!error) {
+            remoteOk = true;
+          } else {
+            console.warn('Error upsert configuracion:', error.message);
+          }
+        } catch (supaErr) {
+          console.warn('Excepción Supabase al guardar precios:', supaErr);
         }
       }
 
-      btnGuardar.disabled = false;
-      if (btnGuardarTxt) btnGuardarTxt.textContent = 'Guardar Nuevas Tarifas';
+      if (btnSave) btnSave.disabled = false;
+      if (btnSaveText) btnSaveText.textContent = 'Guardar Nuevas Tarifas';
 
-      actualizarUI(vImp, vDig);
-      mostrarToast(exitoRemoto ? '¡Tarifas guardadas y sincronizadas en Supabase y galerías!' : 'Tarifas guardadas en almacenamiento local.', false);
-    }
+      updateUI(printVal, digitalVal);
 
-    function revertirTarifas() {
-      actualizarUI(DEFAULT_PRINT, DEFAULT_DIGITAL);
-      localStorage.setItem('tarifa_impresa', String(DEFAULT_PRINT));
-      localStorage.setItem('tarifa_digital', String(DEFAULT_DIGITAL));
-      mostrarToast('Tarifas restablecidas a valores base ($7.500 / $2.500). Presioná Guardar para sincronizar.', false);
-    }
-
-    function mostrarToast(msg, esError) {
-      const t = document.getElementById('toast-precios');
-      const txt = document.getElementById('toast-txt');
-      const ico = document.getElementById('toast-ico');
-      const hora = document.getElementById('toast-hora');
-      if (!t || !txt) return;
-
-      txt.textContent = msg;
-      if (hora) hora.textContent = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-
-      if (esError) {
-        t.className = 'mb-6 p-4 rounded-xl border border-red-500/50 bg-red-950/40 text-red-400 text-xs sm:text-sm flex items-center justify-between';
-        if (ico) ico.textContent = 'error';
+      if (remoteOk) {
+        notify('¡Tarifas guardadas y sincronizadas en Supabase y respaldo local!', 'ok');
       } else {
-        t.className = 'mb-6 p-4 rounded-xl border border-emerald-500/50 bg-emerald-950/40 text-emerald-400 text-xs sm:text-sm flex items-center justify-between';
-        if (ico) ico.textContent = 'check_circle';
+        notify('Tarifas guardadas exitosamente en almacenamiento local.', 'info');
       }
-      t.classList.remove('hidden');
-      setTimeout(() => { t.classList.add('hidden'); }, 5000);
     }
 
-    function cerrarSesion() {
-      sessionStorage.clear();
-      localStorage.removeItem('admin_auth_backup');
+    function notify(msg, tipo) {
+      const toast = document.getElementById('saveToast');
+      const toastMessage = document.getElementById('toastMessage');
+      const toastIcon = document.getElementById('toastIcon');
+      const timestampSaved = document.getElementById('timestampSaved');
+
+      if (!toast || !toastMessage) return;
+
+      toastMessage.textContent = msg;
+      toast.classList.remove('hidden');
+
+      if (tipo === 'error') {
+        toast.className = 'mb-6 p-4 rounded-xl border border-red-500/50 bg-red-950/40 text-red-400 text-xs sm:text-sm font-mono flex items-start justify-between gap-2.5 transition-all shadow-lg';
+        if (toastIcon) toastIcon.textContent = 'error';
+      } else if (tipo === 'ok') {
+        toast.className = 'mb-6 p-4 rounded-xl border border-emerald-500/50 bg-emerald-950/40 text-emerald-400 text-xs sm:text-sm font-mono flex items-start justify-between gap-2.5 transition-all shadow-lg';
+        if (toastIcon) toastIcon.textContent = 'check_circle';
+      } else {
+        toast.className = 'mb-6 p-4 rounded-xl border border-[#005580] bg-[#141414] text-[#38bdf8] text-xs sm:text-sm font-mono flex items-start justify-between gap-2.5 transition-all shadow-lg';
+        if (toastIcon) toastIcon.textContent = 'sync';
+      }
+
+      const now = new Date();
+      if (timestampSaved) {
+        timestampSaved.textContent = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+      }
+
+      setTimeout(() => {
+        toast.classList.add('hidden');
+      }, 5000);
+    }
+
+    const btnSave = document.getElementById('btnSavePrices');
+    if (btnSave) btnSave.addEventListener('click', guardarTarifas);
+
+    const btnReset = document.getElementById('btnResetValues');
+    if (btnReset) {
+      btnReset.addEventListener('click', () => {
+        updateUI(DEFAULT_PRINT, DEFAULT_DIGITAL);
+        localStorage.setItem('tarifa_impresa', String(DEFAULT_PRINT));
+        localStorage.setItem('tarifa_digital', String(DEFAULT_DIGITAL));
+        notify('Valores restablecidos a $7.500 y $2.500. Presiona Guardar para sincronizar en Supabase.', 'info');
+      });
+    }
+
+    async function cerrarSesionAdmin() {
+      sessionStorage.removeItem('admin_auth');
+      sessionStorage.removeItem('admin_email');
+      if (supabaseClient) {
+        try { await supabaseClient.auth.signOut(); } catch (_) {}
+      }
       try {
-        document.cookie = 'admin_session=; Path=/; Max-Age=0;';
-        document.cookie = 'admin_email=; Path=/; Max-Age=0;';
-        fetch('/api/logout', { method: 'POST', credentials: 'include' }).catch(() => {});
-      } catch(_) {}
+        await fetch('/api/logout', { method: 'POST', credentials: 'include' });
+      } catch (_) {}
       window.location.href = 'index.html';
     }
 
-    document.addEventListener('DOMContentLoaded', cargarTarifas);
+    // Toggle Mobile Drawer
+    const btnMobile = document.getElementById('btnMobileMenu');
+    const drawer = document.getElementById('mobileDrawer');
+    const menuIcon = document.getElementById('menuIcon');
+    if (btnMobile && drawer) {
+      btnMobile.addEventListener('click', () => {
+        const isHidden = drawer.classList.contains('hidden');
+        if (isHidden) {
+          drawer.classList.remove('hidden');
+          if (menuIcon) menuIcon.textContent = 'close';
+        } else {
+          drawer.classList.add('hidden');
+          if (menuIcon) menuIcon.textContent = 'menu';
+        }
+      });
+    }
+
+    // Inicialización con Guardián
+    window.addEventListener('DOMContentLoaded', async () => {
+      const ok = await verificarGuardiánAcceso();
+      if (ok) {
+        cargarTarifas();
+      }
+    });
   </script>
 </body>
 </html>

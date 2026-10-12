@@ -1,22 +1,23 @@
 <!DOCTYPE html>
-
-<html class="dark" lang="es"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
-<title>Métricas y Visitas en Vivo | SERGIO RICARDO MOLINA</title>
-<link href="https://lh3.googleusercontent.com/d/1A6PFi2lpp_VNhnmtTYGkYXyjMZ1p8LhA" rel="icon" type="image/png"/>
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&amp;family=Raleway:wght@500;600;700;800&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<style>
+<html lang="es" class="dark">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+  <title>Métricas y Visitas | SERGIO RICARDO MOLINA</title>
+  <link href="https://lh3.googleusercontent.com/d/1A6PFi2lpp_VNhnmtTYGkYXyjMZ1p8LhA" rel="icon" type="image/png"/>
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Raleway:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
     body {
       background-color: #111111;
       color: #e5e2e1;
       font-family: 'Manrope', sans-serif;
       min-height: 100vh;
+      overflow-x: hidden;
     }
     .custom-scrollbar::-webkit-scrollbar {
       width: 6px;
@@ -31,854 +32,642 @@
     }
   </style>
 </head>
-<body class="bg-[#111111] text-[#e5e2e1] min-h-screen flex flex-col antialiased selection:bg-[#005580] selection:text-white">
-<!-- Header Superior con Accesos Arriba -->
-<header class="w-full bg-[#141414] border-b border-[#242424] sticky top-0 z-50">
-<div class="flex justify-between items-center w-full px-4 md:px-6 max-w-7xl mx-auto h-16 gap-2">
-<div class="flex items-center gap-3">
-<button aria-label="Abrir menú" class="md:hidden flex items-center justify-center w-10 h-10 rounded-lg bg-[#181818] border border-[#262626] text-[#e5e2e1] hover:text-[#38bdf8] transition-all" id="btnMobileMenu" type="button">
-<span class="material-symbols-outlined text-[24px]" id="menuIcon">menu</span>
-</button>
-<div class="flex items-center gap-2.5">
-<span class="material-symbols-outlined text-[#38bdf8] text-[26px]">insights</span>
-<span class="text-white font-headline font-bold text-base sm:text-lg tracking-tight">Métricas y Visitas en Vivo</span>
-</div>
-</div>
-<!-- Accesos Directos Arriba -->
-<div class="flex items-center gap-2 sm:gap-3">
-<a class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#2a2a2a] hover:border-[#0088cc] bg-[#181818] hover:bg-[#1e1e1e] text-xs font-semibold text-[#c0c7cf] hover:text-white transition-all shadow-sm active:scale-95" href="https://sergiomolina-fotografia.github.io/Portafolio/index.html">
-<span class="material-symbols-outlined text-[16px] text-[#38bdf8]">arrow_back</span>
-<span>Portafolio</span>
-</a>
-<a class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#2a2a2a] hover:border-[#38bdf8] bg-[#181818] hover:bg-[#1e1e1e] text-xs font-semibold text-[#c0c7cf] hover:text-white transition-all shadow-sm active:scale-95" href="https://gersiotalrevez.github.io/Eventos-Escolares/eventos.html">
-<span class="material-symbols-outlined text-[16px] text-sky-400">school</span>
-<span>Eventos</span>
-</a>
-<div class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-[#181818] border border-emerald-800/60 text-emerald-400 text-xs font-semibold rounded-full uppercase tracking-wider" id="syncBadge">
-<span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-<span class="text-[11px] font-mono hidden md:inline" id="lblSyncText">EN VIVO</span>
-</div>
-<button class="p-2 rounded-lg bg-[#181818] border border-[#2e2e2e] text-[#888888] hover:text-[#38bdf8] transition-colors active:scale-95" onclick="cargarMetricasReales()" title="Refrescar métricas ahora">
-<span class="material-symbols-outlined text-[18px]">refresh</span>
-</button>
-</div>
-</div>
-<!-- Menú Desplegable Móvil -->
-<div class="hidden md:hidden border-b border-[#242424] bg-[#141414] px-4 py-4 space-y-4 shadow-2xl" id="mobileDrawer">
-<nav class="space-y-1">
-<a class="flex items-center gap-3 text-[#c0c7cf] px-3 py-2.5 text-sm font-medium rounded-lg hover:bg-[#1e1e1e] hover:text-white transition-all" href="panel.html">
-<span class="material-symbols-outlined text-[20px]">photo_library</span>
-<span>Galerías</span>
-</a>
-<a class="flex items-center gap-3 text-[#c0c7cf] px-3 py-2.5 text-sm font-medium rounded-lg hover:bg-[#1e1e1e] hover:text-white transition-all" href="cargas.html">
-<span class="material-symbols-outlined text-[20px]">cloud_upload</span>
-<span>Cargas y Enlaces</span>
-</a>
-<a class="flex items-center gap-3 text-[#c0c7cf] px-3 py-2.5 text-sm font-medium rounded-lg hover:bg-[#1e1e1e] hover:text-white transition-all" href="precios.html">
-<span class="material-symbols-outlined text-[20px]">payments</span>
-<span>Tarifas y Precios</span>
-</a>
-<a class="flex items-center gap-3 text-white px-3 py-2.5 text-sm font-semibold rounded-lg bg-[#004466] border border-[#0088cc]" href="metricas.html">
-<span class="material-symbols-outlined text-[20px] text-[#38bdf8]">insights</span>
-<span>Métricas y Visitas</span>
-</a>
-</nav>
-</div>
-</header>
-<!-- Layout Principal con Aside Desktop -->
-<div class="flex-1 flex w-full max-w-7xl mx-auto overflow-hidden">
-<aside class="w-64 bg-[#141414] border-r border-[#242424] flex-col justify-between shrink-0 hidden md:flex">
-<div class="p-5">
-<div class="mb-6 px-1">
-<h2 class="text-base font-headline font-bold text-white tracking-tight">SERGIO RICARDO MOLINA</h2>
-<p class="text-[10px] font-semibold text-[#8b9199] tracking-wider uppercase mt-0.5">Fotografía Profesional</p>
-</div>
-<nav class="space-y-1.5">
-<a class="flex items-center gap-3 text-[#c0c7cf] px-3 py-2.5 text-sm font-medium rounded-lg hover:bg-[#1e1e1e] hover:text-white transition-all" href="panel.html">
-<span class="material-symbols-outlined text-[20px]">photo_library</span>
-<span>Galerías</span>
-</a>
-<a class="flex items-center gap-3 text-[#c0c7cf] px-3 py-2.5 text-sm font-medium rounded-lg hover:bg-[#1e1e1e] hover:text-white transition-all" href="cargas.html">
-<span class="material-symbols-outlined text-[20px]">cloud_upload</span>
-<span>Cargas y Enlaces</span>
-</a>
-<a class="flex items-center gap-3 text-[#c0c7cf] px-3 py-2.5 text-sm font-medium rounded-lg hover:bg-[#1e1e1e] hover:text-white transition-all" href="precios.html">
-<span class="material-symbols-outlined text-[20px]">payments</span>
-<span>Tarifas y Precios</span>
-</a>
-<a class="flex items-center gap-3 bg-[#004466] border border-[#0088cc] text-white rounded-lg px-3 py-2.5 text-sm font-semibold shadow-sm" href="metricas.html">
-<span class="material-symbols-outlined text-[20px] text-[#38bdf8]">insights</span>
-<span>Métricas y Visitas</span>
-</a>
-</nav>
-</div>
-<div class="p-4 border-t border-[#242424] bg-[#111111] space-y-1">
-<p class="text-[10px] font-bold text-[#8b9199] uppercase tracking-wider px-2 mb-2">Accesos Directos</p>
-<a class="flex items-center justify-between text-[#c0c7cf] hover:text-[#38bdf8] px-2 py-2 rounded-lg text-sm transition-all hover:bg-[#181818] group" href="https://sergiomolina-fotografia.github.io/Portafolio/index.html" target="_blank">
-<div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-[18px] text-[#38bdf8]">arrow_back</span>
-<span>Ver Portafolio</span>
-</div>
-<span class="material-symbols-outlined text-[14px] text-[#8b9199]">open_in_new</span>
-</a>
-<a class="flex items-center justify-between text-[#c0c7cf] hover:text-[#38bdf8] px-2 py-2 rounded-lg text-sm transition-all hover:bg-[#181818] group" href="https://gersiotalrevez.github.io/Eventos-Escolares/eventos.html" target="_blank">
-<div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-[18px] text-sky-400">school</span>
-<span>Galerías Escolares</span>
-</div>
-<span class="material-symbols-outlined text-[14px] text-[#8b9199]">open_in_new</span>
-</a>
-</div>
-</aside>
-<!-- Contenido Principal -->
-<main class="flex-1 overflow-y-auto custom-scrollbar p-4 sm:p-6 md:p-8 space-y-6">
-<!-- Título de Sección -->
-<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#242424]">
-<div>
-<h1 class="text-2xl sm:text-3xl font-headline font-bold text-white tracking-tight">Rendimiento de Álbumes y Visitas</h1>
-<p class="text-xs sm:text-sm text-[#888888] mt-1" id="lblSubtituloAuditado">Detalle en vivo de galerías y fotos específicas visitadas por los clientes.</p>
-</div>
-<div class="flex items-center gap-2">
-<button class="inline-flex items-center gap-1.5 px-3 py-2 bg-[#181818] hover:bg-[#222222] border border-[#2e2e2e] text-[#c0c7cf] hover:text-white rounded-xl text-xs font-semibold transition-all active:scale-95 shadow-sm" onclick="exportarCSV()">
-<span class="material-symbols-outlined text-[16px]">download</span>
-<span>Exportar CSV</span>
-</button>
-</div>
-</div>
-<!-- Panel de Control, Filtros y Limpieza de Registros -->
-<div class="hidden bg-red-950/40 border border-red-600/70 rounded-xl p-4 text-xs font-mono space-y-2" id="avisoRLSDelete"><div class="flex items-center justify-between"><div class="flex items-center gap-2 text-red-300 font-bold text-sm"><span class="material-symbols-outlined text-[18px]">shield_lock</span><span>Atención: Supabase bloqueó la eliminación por RLS (Row Level Security)</span></div><button class="text-[#888888] hover:text-white p-1" onclick="document.getElementById('avisoRLSDelete').classList.add('hidden')"><span class="material-symbols-outlined text-[16px]">close</span></button></div><p class="text-[#c0c7cf]">Para permitir que este panel de control elimine registros directamente con la clave anónima pública, ejecuta esta política en el Editor SQL de tu proyecto Supabase:</p><div class="flex items-center gap-2 bg-[#141414] border border-[#2e2e2e] rounded-lg p-2.5 overflow-x-auto"><code class="text-emerald-400 font-mono text-[11px] flex-1 whitespace-nowrap" id="codigoSQLRLS">CREATE POLICY "Permitir borrado anónimo de visitas" ON public.visitas FOR DELETE USING (true);</code><button class="px-2.5 py-1 bg-[#201f1f] hover:bg-[#2a2a2a] border border-[#303030] text-white rounded text-[11px] font-semibold transition-all shrink-0 flex items-center gap-1 active:scale-95" id="btnCopiarSQL" onclick="copiarScriptSQL()"><span class="material-symbols-outlined text-[14px]">content_copy</span><span>Copiar SQL</span></button></div></div><div class="bg-[#181818] border border-[#282828] rounded-xl p-4 sm:p-5 shadow-sm space-y-4">
-<div class="flex flex-col md:flex-row md:items-center justify-between gap-3 pb-3 border-b border-[#222222]">
-<div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-amber-400 text-[20px]">tune</span>
-<span class="text-xs sm:text-sm font-semibold text-white tracking-wide uppercase">Filtros de Origen y Depuración</span>
-<span class="text-[11px] font-mono px-2 py-0.5 rounded bg-[#201f1f] text-[#8b9199] border border-[#303030]" id="lblFiltroContador">0 en vista</span>
-</div>
-<!-- Acciones de Borrado Masivo -->
-<div class="flex flex-wrap items-center gap-2">
-<button class="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border border-red-900/60 bg-red-950/20 hover:bg-red-900/40 text-red-300 hover:text-red-100 text-xs font-semibold transition-all active:scale-95" onclick="borrarRegistrosPorOrigen('portafolio')" title="Borrar visitas que provienen del portafolio oficial">
-<span class="material-symbols-outlined text-[15px]">delete_sweep</span>
-<span>Borrar solo Portafolio</span>
-</button>
-<button class="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border border-red-900/60 bg-red-950/20 hover:bg-red-900/40 text-red-300 hover:text-red-100 text-xs font-semibold transition-all active:scale-95" onclick="borrarRegistrosPorOrigen('eventos')" title="Borrar visitas que provienen de galerías escolares y eventos">
-<span class="material-symbols-outlined text-[15px]">delete_sweep</span>
-<span>Borrar solo Galerías/Eventos</span>
-</button>
-<button class="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border border-red-600/80 bg-red-900/40 hover:bg-red-700/60 text-white text-xs font-bold transition-all active:scale-95 shadow-sm" onclick="borrarTodosLosRegistros()" title="Elimina absolutamente todos los registros de la base de datos Supabase">
-<span class="material-symbols-outlined text-[15px]">delete_forever</span>
-<span>Borrar Todos</span>
-</button>
-</div>
-</div>
-<!-- Botones de Segmentación Rápida -->
-<div class="flex flex-wrap items-center gap-2 pt-1">
-<span class="text-xs text-[#888888] mr-1 hidden sm:inline">Filtrar por origen:</span>
-<button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-[#004466] border border-[#0088cc] text-white shadow-sm transition-all active:scale-95" id="btnFiltroTodos" onclick="aplicarFiltroOrigen('todos')">
-<span class="material-symbols-outlined text-[15px]">hub</span>
-<span>Todos los orígenes</span>
-</button>
-<button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-[#141414] border border-[#2a2a2a] text-[#c0c7cf] hover:text-white hover:border-[#38bdf8] transition-all active:scale-95" id="btnFiltroPortafolio" onclick="aplicarFiltroOrigen('portafolio')">
-<span class="material-symbols-outlined text-[15px] text-[#38bdf8]">badge</span>
-<span>Portafolio Oficial (index, sobre-mí, etc.)</span>
-</button>
-<button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-[#141414] border border-[#2a2a2a] text-[#c0c7cf] hover:text-white hover:border-amber-400 transition-all active:scale-95" id="btnFiltroEventos" onclick="aplicarFiltroOrigen('eventos')">
-<span class="material-symbols-outlined text-[15px] text-amber-400">school</span>
-<span>Galerías Públicas y Eventos (galeria, eventos, privadas)</span>
-</button>
-</div>
-</div>
-<!-- 4 Tarjetas de Métricas -->
-<div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-<!-- Total Visitas Web -->
-<div class="bg-[#181818] border border-[#242424] rounded-xl p-4 flex flex-col justify-between shadow-sm">
-<div class="flex items-center justify-between text-[#888888]">
-<span class="text-[10px] font-mono uppercase tracking-wider">Total Visitas Web</span>
-<span class="material-symbols-outlined text-[18px] text-[#38bdf8]">visibility</span>
-</div>
-<div class="mt-2">
-<p class="text-2xl sm:text-3xl font-mono font-bold text-white" id="valTotalVisitas">0</p>
-<span class="text-[11px] text-[#666666]">Cargas de página</span>
-</div>
-</div>
-<!-- Álbumes Explorados -->
-<div class="bg-[#181818] border border-[#242424] rounded-xl p-4 flex flex-col justify-between shadow-sm">
-<div class="flex items-center justify-between text-[#888888]">
-<span class="text-[10px] font-mono uppercase tracking-wider">Álbumes Explorados</span>
-<span class="material-symbols-outlined text-[18px] text-[#38bdf8]">folder_open</span>
-</div>
-<div class="mt-2">
-<p class="text-2xl sm:text-3xl font-mono font-bold text-white" id="valAlbumesVistos">0</p>
-<span class="text-[11px] text-[#666666]">Galerías abiertas</span>
-</div>
-</div>
-<!-- Fotos en Visor HD -->
-<div class="bg-[#181818] border border-[#242424] rounded-xl p-4 flex flex-col justify-between shadow-sm">
-<div class="flex items-center justify-between text-[#888888]">
-<span class="text-[10px] font-mono uppercase tracking-wider">Fotos en Visor HD</span>
-<span class="material-symbols-outlined text-[18px] text-amber-400">photo_camera</span>
-</div>
-<div class="mt-2">
-<p class="text-2xl sm:text-3xl font-mono font-bold text-amber-400" id="valFotosVisor">0</p>
-<span class="text-[11px] text-[#666666]">Ampliadas en pantalla</span>
-</div>
-</div>
-<!-- Clics en WhatsApp -->
-<div class="bg-[#181818] border border-[#242424] rounded-xl p-4 flex flex-col justify-between shadow-sm">
-<div class="flex items-center justify-between text-[#888888]">
-<span class="text-[10px] font-mono uppercase tracking-wider">Clics en WhatsApp</span>
-<span class="material-symbols-outlined text-[18px] text-emerald-400">chat</span>
-</div>
-<div class="mt-2">
-<p class="text-2xl sm:text-3xl font-mono font-bold text-emerald-400" id="valWhatsappClicks">0</p>
-<span class="text-[11px] text-[#666666]">Encargos y pedidos</span>
-</div>
-</div>
-</div>
-<!-- Desglose por Página y Fotos Más Visitadas -->
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
-<!-- Visitas por Página -->
-<div class="bg-[#181818] border border-[#242424] rounded-xl p-5 shadow-sm space-y-3">
-<div class="flex items-center justify-between border-b border-[#222222] pb-2">
-<h3 class="text-sm font-semibold text-white flex items-center gap-2">
-<span class="material-symbols-outlined text-[18px] text-[#38bdf8]">trending_up</span>
-<span>Visitas por Página y Sección</span>
-</h3>
-<span class="text-[10px] font-mono text-[#777777] uppercase">Páginas</span>
-</div>
-<div class="space-y-2.5 text-xs font-mono" id="listaPaginasTráfico">
-<div class="text-[#666666] text-center py-4">Consultando datos en tiempo real...</div>
-</div>
-</div>
-<!-- Álbumes y Colecciones Destacadas -->
-<div class="bg-[#181818] border border-[#242424] rounded-xl p-5 shadow-sm space-y-3">
-<div class="flex items-center justify-between border-b border-[#222222] pb-2">
-<h3 class="text-sm font-semibold text-white flex items-center gap-2">
-<span class="material-symbols-outlined text-[18px] text-amber-400">photo_library</span>
-<span>Álbumes y Galerías Más Visitadas</span>
-</h3>
-<span class="text-[10px] font-mono text-[#777777] uppercase" id="lblCantDestacados">0 Álbumes</span>
-</div>
-<div class="space-y-2 text-xs font-mono" id="listaAlbumesDestacados">
-<div class="text-[#666666] text-center py-4">Esperando registros de clientes...</div>
-</div>
-</div>
-</div>
-<!-- Tabla: Registro de Actividad Detallada en Vivo (20 por Página) -->
-<div class="bg-[#181818] border border-[#242424] rounded-xl overflow-hidden shadow-sm">
-<div class="p-4 sm:p-5 border-b border-[#222222] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-<div class="flex items-center gap-2.5">
-<span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
-<h3 class="text-sm font-semibold text-white">Registro de Actividad Detallada en Vivo</h3>
-<span class="text-[11px] font-mono text-[#888888]" id="lblTotalRegistrosAuditados">(0 eventos registrados)</span>
-</div>
-<div class="flex items-center gap-2 text-xs font-mono text-[#777777]">
-<span>Paginación: 20 por página</span>
-</div>
-</div>
-<!-- Tabla Responsiva con Identificación de Galería, Foto Exacta y Acción de Borrado -->
-<div class="overflow-x-auto custom-scrollbar">
-<table class="w-full text-left border-collapse min-w-[820px]">
-<thead>
-<tr class="border-b border-[#262626] bg-[#141414] text-[10px] font-mono text-[#888888] uppercase tracking-wider">
-<th class="py-3 px-4">Fecha y Hora</th>
-<th class="py-3 px-4">Tipo de Evento</th>
-<th class="py-3 px-4">Página / Origen</th>
-<th class="py-3 px-4">Galería / Álbum</th>
-<th class="py-3 px-4">Foto / Detalle Exacto</th>
-<th class="py-3 px-4 text-center">Dispositivo</th>
-<th class="py-3 px-3 text-right">Acción</th>
-</tr>
-</thead>
-<tbody class="text-xs divide-y divide-[#222222] font-mono" id="tablaActividadCuerpo">
-<tr>
-<td class="py-8 text-center text-[#666666]" colspan="7">
-<div class="w-6 h-6 border-2 border-[#38bdf8] border-t-transparent rounded-full animate-spin mx-auto mb-2"></div>
-                  Cargando eventos de métricas detalladas...
-                </td>
-</tr>
-</tbody>
-</table>
-</div>
-<!-- Controles de Paginación Estricta de a 20 Registros -->
-<div class="p-3 sm:p-4 bg-[#141414] border-t border-[#242424] flex flex-col sm:flex-row items-center justify-between gap-3 text-xs font-mono">
-<div class="text-[#888888] text-center sm:text-left" id="lblInfoPaginacion">
-            Mostrando 0 - 0 de 0 registros
+<body class="bg-[#111111] text-[#e5e2e1] min-h-screen flex flex-col antialiased selection:bg-[#005580] selection:text-white pb-16 md:pb-0">
+
+  <!-- ========================================================================= -->
+  <!-- Header Superior Global Unificado con Portafolio sergiomolina-fotografia -->
+  <!-- ========================================================================= -->
+  <header class="w-full bg-[#141414] border-b border-[#242424] sticky top-0 z-50">
+    <div class="flex justify-between items-center w-full px-3 sm:px-6 max-w-7xl mx-auto h-16 gap-2">
+      <!-- Marca & Botón Menú Móvil -->
+      <div class="flex items-center gap-2.5 sm:gap-3">
+        <button id="btnMobileMenu" type="button" aria-label="Abrir menú" class="md:hidden flex items-center justify-center w-9 h-9 rounded-lg bg-[#181818] border border-[#262626] text-[#e5e2e1] hover:text-[#38bdf8] transition-all active:scale-95">
+          <span class="material-symbols-outlined text-[22px]" id="menuIcon">menu</span>
+        </button>
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-amber-400 text-[24px] sm:text-[26px]">insights</span>
+          <span class="text-white font-headline font-bold text-sm sm:text-lg tracking-tight">Métricas y Visitas</span>
+        </div>
+      </div>
+
+      <!-- Accesos Superiores: Portafolio Oficial + Estado + Salir -->
+      <div class="flex items-center gap-1.5 sm:gap-2.5">
+        <!-- 1. Enlace Oficial Portafolio GitHub sergiomolina-fotografia -->
+        <a href="https://sergiomolina-fotografia.github.io/Portafolio/index.html" 
+           class="inline-flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3.5 py-1.5 rounded-lg border border-[#005580] hover:border-[#38bdf8] bg-[#102433] hover:bg-[#143247] text-[11px] sm:text-xs font-semibold text-[#38bdf8] hover:text-white transition-all shadow-sm active:scale-95 whitespace-nowrap"
+           title="Ir a mi Portafolio Oficial">
+          <span class="material-symbols-outlined text-[16px]">visibility</span>
+          <span class="hidden xs:inline">Ver Portafolio</span>
+          <span class="xs:hidden">Portafolio</span>
+          <span class="material-symbols-outlined text-[12px] opacity-70 hidden sm:inline">open_in_new</span>
+        </a>
+
+        <!-- 2. Indicador Supabase Conectado -->
+        <div class="hidden lg:inline-flex items-center gap-1.5 px-2.5 py-1 bg-[#181818] border border-emerald-800/60 text-emerald-400 text-xs font-semibold rounded-full uppercase tracking-wider">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span class="text-[10px] font-mono">Supabase Conectado</span>
+        </div>
+
+        <!-- 3. Botón Salir / Logout -->
+        <button onclick="cerrarSesionAdmin()" class="flex items-center gap-1 px-2.5 sm:px-3 py-1.5 rounded-lg border border-[#333333] hover:border-red-500/60 bg-[#181818] hover:bg-red-950/30 text-[11px] sm:text-xs font-medium text-[#c0c7cf] hover:text-red-400 transition-all active:scale-95" title="Cerrar sesión">
+          <span class="material-symbols-outlined text-[15px]">logout</span>
+          <span class="hidden sm:inline">Salir</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Menú Desplegable Móvil -->
+    <div id="mobileDrawer" class="hidden md:hidden border-b border-[#242424] bg-[#141414] px-4 py-4 space-y-4 shadow-2xl">
+      <div class="px-2 pb-2 border-b border-[#222222]">
+        <h2 class="text-base font-headline font-bold text-white tracking-tight">SERGIO RICARDO MOLINA</h2>
+        <p class="text-[11px] text-[#8b9199] tracking-wider uppercase mt-0.5">Fotografía Profesional</p>
+      </div>
+      <nav class="space-y-1">
+        <a href="panel.html" class="flex items-center gap-3 text-[#c0c7cf] px-3 py-2.5 text-sm font-medium rounded-lg hover:bg-[#1f1e1e] hover:text-white transition-all">
+          <span class="material-symbols-outlined text-[20px]">photo_library</span>
+          <span>Galerías</span>
+        </a>
+        <a href="cargas.html" class="flex items-center gap-3 text-[#c0c7cf] px-3 py-2.5 text-sm font-medium rounded-lg hover:bg-[#1f1e1e] hover:text-white transition-all">
+          <span class="material-symbols-outlined text-[20px]">cloud_upload</span>
+          <span>Cargas y Enlaces</span>
+        </a>
+        <a href="precios.html" class="flex items-center gap-3 text-[#c0c7cf] px-3 py-2.5 text-sm font-medium rounded-lg hover:bg-[#1f1e1e] hover:text-white transition-all">
+          <span class="material-symbols-outlined text-[20px]">payments</span>
+          <span>Tarifas y Precios</span>
+        </a>
+        <a href="metricas.html" class="flex items-center gap-3 text-white px-3 py-2.5 text-sm font-semibold rounded-lg bg-[#004466] border border-[#0088cc]">
+          <span class="material-symbols-outlined text-[20px] text-amber-400">insights</span>
+          <span>Métricas y Visitas</span>
+        </a>
+      </nav>
+      <div class="pt-3 border-t border-[#222222] space-y-1">
+        <p class="text-[10px] font-bold text-[#8b9199] uppercase tracking-wider px-3 mb-1">Accesos Directos</p>
+        <a href="https://sergiomolina-fotografia.github.io/Portafolio/index.html" class="flex items-center justify-between text-[#38bdf8] hover:text-white px-3 py-2 text-sm rounded-lg hover:bg-[#1b1b1b] transition-all">
+          <div class="flex items-center gap-2.5">
+            <span class="material-symbols-outlined text-[18px]">visibility</span>
+            <span>Ver Portafolio</span>
           </div>
-<!-- Botones de Navegación -->
-<div class="flex items-center gap-1.5" id="controlesPaginacion">
-<button class="px-3 py-1.5 rounded-lg border border-[#2e2e2e] bg-[#181818] text-[#c0c7cf] hover:text-white hover:border-[#0088cc] disabled:opacity-40 disabled:pointer-events-none transition-all flex items-center gap-1" id="btnPaginaAnt" onclick="cambiarPagina(-1)">
-<span class="material-symbols-outlined text-[16px]">chevron_left</span>
-<span>Anterior</span>
-</button>
-<!-- Números de página interactivos -->
-<div class="flex items-center gap-1" id="numerosPagina"></div>
-<button class="px-3 py-1.5 rounded-lg border border-[#2e2e2e] bg-[#181818] text-[#c0c7cf] hover:text-white hover:border-[#0088cc] disabled:opacity-40 disabled:pointer-events-none transition-all flex items-center gap-1" id="btnPaginaSig" onclick="cambiarPagina(1)">
-<span>Siguiente</span>
-<span class="material-symbols-outlined text-[16px]">chevron_right</span>
-</button>
-</div>
-</div>
-</div>
-</main>
-</div>
-<script>
+          <span class="material-symbols-outlined text-[14px]">open_in_new</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Layout Principal -->
+  <div class="flex-1 flex w-full max-w-7xl mx-auto overflow-hidden">
+    <!-- Sidebar Desktop -->
+    <aside class="w-64 bg-[#141414] border-r border-[#242424] flex-col justify-between shrink-0 hidden md:flex">
+      <div class="p-5">
+        <div class="mb-6 px-1">
+          <h2 class="text-base font-headline font-bold text-white tracking-tight">SERGIO RICARDO MOLINA</h2>
+          <p class="text-[10px] font-semibold text-[#8b9199] tracking-wider uppercase mt-0.5">Fotografía Profesional</p>
+        </div>
+        <nav class="space-y-1.5">
+          <a href="panel.html" class="flex items-center gap-3 text-[#c0c7cf] px-3 py-2.5 text-sm font-medium rounded-lg hover:bg-[#1e1e1e] hover:text-white transition-all">
+            <span class="material-symbols-outlined text-[20px]">photo_library</span>
+            <span>Galerías</span>
+          </a>
+          <a href="cargas.html" class="flex items-center gap-3 text-[#c0c7cf] px-3 py-2.5 text-sm font-medium rounded-lg hover:bg-[#1e1e1e] hover:text-white transition-all">
+            <span class="material-symbols-outlined text-[20px]">cloud_upload</span>
+            <span>Cargas y Enlaces</span>
+          </a>
+          <a href="precios.html" class="flex items-center gap-3 text-[#c0c7cf] px-3 py-2.5 text-sm font-medium rounded-lg hover:bg-[#1e1e1e] hover:text-white transition-all">
+            <span class="material-symbols-outlined text-[20px]">payments</span>
+            <span>Tarifas y Precios</span>
+          </a>
+          <a href="metricas.html" class="flex items-center gap-3 bg-[#004466] border border-[#0088cc] text-white rounded-lg px-3 py-2.5 text-sm font-semibold shadow-sm">
+            <span class="material-symbols-outlined text-[20px] text-amber-400">insights</span>
+            <span>Métricas y Visitas</span>
+          </a>
+        </nav>
+      </div>
+
+      <div class="p-4 border-t border-[#242424] bg-[#111111] space-y-1">
+        <p class="text-[10px] font-bold text-[#8b9199] uppercase tracking-wider px-2 mb-2">Accesos Directos</p>
+        <a href="https://sergiomolina-fotografia.github.io/Portafolio/index.html" class="flex items-center justify-between text-[#c0c7cf] hover:text-[#38bdf8] px-2 py-2 rounded-lg text-sm transition-all hover:bg-[#181818] group">
+          <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-[18px] text-[#8b9199] group-hover:text-[#38bdf8] transition-colors">visibility</span>
+            <span>Ver Portafolio</span>
+          </div>
+          <span class="material-symbols-outlined text-[14px] text-[#8b9199]">open_in_new</span>
+        </a>
+      </div>
+    </aside>
+
+    <!-- Área de Contenido Principal -->
+    <main class="flex-1 overflow-y-auto custom-scrollbar p-3.5 sm:p-6 md:p-8">
+      <!-- Encabezado de la Sección -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 pb-4 sm:pb-6 border-b border-[#242424] mb-4 sm:mb-6">
+        <div>
+          <div class="flex items-center gap-2 mb-1">
+            <span class="px-2.5 py-0.5 bg-amber-950/40 border border-amber-500/50 text-amber-400 text-[10px] sm:text-[11px] font-semibold rounded uppercase tracking-wider">Auditoría en Tiempo Real</span>
+            <span class="text-[11px] text-[#888888] font-mono hidden sm:inline">Tabla Supabase: visitas</span>
+          </div>
+          <h1 class="text-xl sm:text-3xl font-headline font-bold text-white tracking-tight mt-1 sm:mt-1.5">Estadísticas y Analítica de Visitas</h1>
+          <p class="text-[11px] sm:text-xs text-[#888888] mt-0.5 sm:mt-1">Monitoreo de visitas a páginas, aperturas de fotos HD y pedidos iniciados por WhatsApp. Excluye visitas del administrador.</p>
+        </div>
+
+        <div class="flex items-center gap-2 self-start sm:self-auto">
+          <button type="button" onclick="cargarMetricas()" class="px-3.5 py-2 rounded-xl bg-[#181818] hover:bg-[#222222] border border-[#2e2e2e] text-[#c0c7cf] hover:text-white text-xs font-semibold flex items-center gap-1.5 transition-all active:scale-95 cursor-pointer">
+            <span class="material-symbols-outlined text-[16px]" id="refreshIcon">refresh</span>
+            <span>Actualizar</span>
+          </button>
+          <button type="button" onclick="confirmarBorradoFiltrado()" class="px-3.5 py-2 rounded-xl bg-red-950/30 hover:bg-red-950/60 border border-red-500/40 text-red-400 hover:text-red-300 text-xs font-semibold flex items-center gap-1.5 transition-all active:scale-95 cursor-pointer" title="Borrar registros de Supabase">
+            <span class="material-symbols-outlined text-[16px]">delete_sweep</span>
+            <span>Limpiar Historial</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Feedback Dinámico -->
+      <div id="toastBox" class="hidden mb-6 p-4 rounded-xl border text-xs sm:text-sm font-mono flex items-start justify-between gap-2.5 transition-all shadow-lg">
+        <div class="flex items-start gap-2.5">
+          <span class="material-symbols-outlined text-[20px] shrink-0" id="toastIcon">info</span>
+          <span id="toastText" class="leading-relaxed"></span>
+        </div>
+      </div>
+
+      <!-- 4 Métricas Clave (Móvil 2 Cols, Desktop 4 Cols) -->
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-6">
+        <!-- Card 1: Visitas Web -->
+        <div class="bg-[#181818] border border-[#242424] rounded-2xl p-3.5 sm:p-5 flex flex-col justify-between shadow-sm">
+          <div class="flex items-center justify-between pb-2">
+            <span class="text-[10px] sm:text-[11px] font-mono text-[#888888] uppercase tracking-wider">Visitas Web</span>
+            <span class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-[#141414] border border-[#262626] flex items-center justify-center text-[#38bdf8]">
+              <span class="material-symbols-outlined text-[18px] sm:text-[20px]">public</span>
+            </span>
+          </div>
+          <div>
+            <p class="text-xl sm:text-3xl font-bold font-mono text-white" id="lblTotalVisitas">0</p>
+            <span class="text-[10px] sm:text-[11px] text-[#777777] font-mono">Páginas consultadas</span>
+          </div>
+        </div>
+
+        <!-- Card 2: Álbumes Explorados -->
+        <div class="bg-[#181818] border border-[#242424] rounded-2xl p-3.5 sm:p-5 flex flex-col justify-between shadow-sm">
+          <div class="flex items-center justify-between pb-2">
+            <span class="text-[10px] sm:text-[11px] font-mono text-[#888888] uppercase tracking-wider">Álbumes Vistos</span>
+            <span class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-[#141414] border border-[#262626] flex items-center justify-center text-indigo-400">
+              <span class="material-symbols-outlined text-[18px] sm:text-[20px]">photo_library</span>
+            </span>
+          </div>
+          <div>
+            <p class="text-xl sm:text-3xl font-bold font-mono text-indigo-400" id="lblTotalAlbumes">0</p>
+            <span class="text-[10px] sm:text-[11px] text-[#777777] font-mono">Públicos y Privados</span>
+          </div>
+        </div>
+
+        <!-- Card 3: Fotos en HD -->
+        <div class="bg-[#181818] border border-[#242424] rounded-2xl p-3.5 sm:p-5 flex flex-col justify-between shadow-sm">
+          <div class="flex items-center justify-between pb-2">
+            <span class="text-[10px] sm:text-[11px] font-mono text-[#888888] uppercase tracking-wider">Fotos en HD</span>
+            <span class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-[#141414] border border-[#262626] flex items-center justify-center text-amber-400">
+              <span class="material-symbols-outlined text-[18px] sm:text-[20px]">fullscreen</span>
+            </span>
+          </div>
+          <div>
+            <p class="text-xl sm:text-3xl font-bold font-mono text-amber-400" id="lblTotalFotos">0</p>
+            <span class="text-[10px] sm:text-[11px] text-[#777777] font-mono">Aperturas en visor</span>
+          </div>
+        </div>
+
+        <!-- Card 4: WhatsApp Pedidos -->
+        <div class="bg-[#181818] border border-[#242424] rounded-2xl p-3.5 sm:p-5 flex flex-col justify-between shadow-sm">
+          <div class="flex items-center justify-between pb-2">
+            <span class="text-[10px] sm:text-[11px] font-mono text-[#888888] uppercase tracking-wider">Pedidos WhatsApp</span>
+            <span class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-[#141414] border border-[#262626] flex items-center justify-center text-emerald-400">
+              <span class="material-symbols-outlined text-[18px] sm:text-[20px]">chat</span>
+            </span>
+          </div>
+          <div>
+            <p class="text-xl sm:text-3xl font-bold font-mono text-emerald-400" id="lblTotalWhatsapp">0</p>
+            <span class="text-[10px] sm:text-[11px] text-[#777777] font-mono">Clics para encargar</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Filtros por Origen y Buscador de Registros -->
+      <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 bg-[#181818] p-3 rounded-2xl border border-[#242424] mb-6">
+        <div class="relative flex-1 max-w-md">
+          <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-[#777777] text-[18px]">search</span>
+          <input type="text" id="inputBusqueda" onkeyup="filtrarTabla()" placeholder="Buscar por página, álbum, dispositivo..." class="w-full bg-[#111111] border border-[#2e2e2e] focus:border-[#38bdf8] rounded-xl pl-9 pr-3 py-2 text-xs sm:text-sm text-white outline-none transition-colors">
+        </div>
+
+        <!-- Pestañas de Filtro por Origen -->
+        <div class="flex items-center gap-1 overflow-x-auto no-scrollbar py-0.5">
+          <button onclick="cambiarFiltro('todos', this)" class="btn-filtro px-3 py-1.5 rounded-lg text-xs font-semibold bg-[#004466] border border-[#0088cc] text-white whitespace-nowrap">Todos</button>
+          <button onclick="cambiarFiltro('visitas', this)" class="btn-filtro px-3 py-1.5 rounded-lg text-xs font-medium bg-[#141414] border border-[#262626] text-[#888888] hover:text-white whitespace-nowrap">Páginas</button>
+          <button onclick="cambiarFiltro('albumes', this)" class="btn-filtro px-3 py-1.5 rounded-lg text-xs font-medium bg-[#141414] border border-[#262626] text-[#888888] hover:text-white whitespace-nowrap">Álbumes</button>
+          <button onclick="cambiarFiltro('fotos', this)" class="btn-filtro px-3 py-1.5 rounded-lg text-xs font-medium bg-[#141414] border border-[#262626] text-[#888888] hover:text-white whitespace-nowrap">Fotos HD</button>
+          <button onclick="cambiarFiltro('whatsapp', this)" class="btn-filtro px-3 py-1.5 rounded-lg text-xs font-medium bg-[#141414] border border-[#262626] text-[#888888] hover:text-white whitespace-nowrap">WhatsApp</button>
+        </div>
+      </div>
+
+      <!-- Tabla de Registro en Vivo con Fecha y Hora Fijas (Hasta 500 registros, 20 por página) -->
+      <section class="bg-[#181818] border border-[#242424] rounded-2xl overflow-hidden shadow-xl mb-6">
+        <div class="p-4 sm:p-5 border-b border-[#242424] flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            <h3 class="text-sm sm:text-base font-headline font-bold text-white">Registro de Actividad en Vivo</h3>
+            <span class="text-[10px] font-mono text-[#888888] bg-[#141414] px-2 py-0.5 rounded border border-[#262626]" id="lblBadgeConteo">0 auditados</span>
+          </div>
+          <span class="text-[11px] font-mono text-[#777777]">Página de 20</span>
+        </div>
+
+        <div class="overflow-x-auto custom-scrollbar">
+          <table class="w-full text-left border-collapse text-xs sm:text-sm font-mono min-w-[680px]">
+            <thead>
+              <tr class="border-b border-[#262626] bg-[#141414]/80 text-[10px] sm:text-[11px] font-semibold text-[#888888] uppercase tracking-wider">
+                <th class="py-3 px-3.5">Fecha y Hora</th>
+                <th class="py-3 px-3">Tipo / Origen</th>
+                <th class="py-3 px-3">Página / Sección</th>
+                <th class="py-3 px-3">Detalle / Álbum</th>
+                <th class="py-3 px-3 text-right">Dispositivo</th>
+              </tr>
+            </thead>
+            <tbody id="tbodyRegistros" class="divide-y divide-[#222222]">
+              <tr>
+                <td colspan="5" class="py-12 text-center text-[#777777]">
+                  <div class="w-6 h-6 border-2 border-[#38bdf8] border-t-transparent rounded-full animate-spin mx-auto mb-2"></div>
+                  Consultando registros en Supabase...
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Controles de Paginación de a 20 -->
+        <div class="p-3.5 sm:p-4 border-t border-[#242424] bg-[#141414] flex flex-col sm:flex-row items-center justify-between gap-3 text-xs font-mono">
+          <div class="text-[#888888]" id="lblInfoPaginacion">Mostrando 0 - 0 de 0 registros</div>
+          <div class="flex items-center gap-1.5">
+            <button onclick="cambiarPagina(-1)" id="btnPrevPage" class="px-3 py-1.5 rounded-lg bg-[#181818] border border-[#2e2e2e] text-[#c0c7cf] hover:text-white disabled:opacity-30 disabled:pointer-events-none transition-all cursor-pointer">
+              ← Anterior
+            </button>
+            <span id="lblPaginaActual" class="px-3 py-1 text-white font-semibold">1 / 1</span>
+            <button onclick="cambiarPagina(1)" id="btnNextPage" class="px-3 py-1.5 rounded-lg bg-[#181818] border border-[#2e2e2e] text-[#c0c7cf] hover:text-white disabled:opacity-30 disabled:pointer-events-none transition-all cursor-pointer">
+              Siguiente →
+            </button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Barra Móvil Fija Inferior (< 768px) -->
+  <nav class="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#141414] border-t border-[#262626] px-2 py-1.5 flex justify-around items-center">
+    <a href="panel.html" class="flex flex-col items-center text-[#888888] hover:text-white py-1 px-2">
+      <span class="material-symbols-outlined text-[20px]">photo_library</span>
+      <span class="text-[10px] font-medium mt-0.5">Galerías</span>
+    </a>
+    <a href="cargas.html" class="flex flex-col items-center text-[#888888] hover:text-white py-1 px-2">
+      <span class="material-symbols-outlined text-[20px]">cloud_upload</span>
+      <span class="text-[10px] font-medium mt-0.5">Cargas</span>
+    </a>
+    <a href="precios.html" class="flex flex-col items-center text-[#888888] hover:text-white py-1 px-2">
+      <span class="material-symbols-outlined text-[20px]">payments</span>
+      <span class="text-[10px] font-medium mt-0.5">Tarifas</span>
+    </a>
+    <a href="metricas.html" class="flex flex-col items-center text-[#38bdf8] py-1 px-2">
+      <span class="material-symbols-outlined text-[20px]">insights</span>
+      <span class="text-[10px] font-semibold mt-0.5">Métricas</span>
+    </a>
+  </nav>
+
+  <script>
+    const CORREO_AUTORIZADO = 'molinaoksergio@gmail.com';
     const SUPABASE_URL = 'https://zbixojacwvanucxlrdcd.supabase.co';
     const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpiaXhvamFjd3ZhbnVjeGxyZGNkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg1MzgxMzQsImV4cCI6MjEwNDExNDEzNH0.Wz35IGTGzdHuHOm2EbTsGSLBZfhw67Wt7UXBbMXek68';
 
     let supabaseClient = null;
-    let todosLosEventos = [];
-    let eventosFiltrados = [];
-    let filtroOrigenActual = 'todos'; // 'todos' | 'portafolio' | 'eventos'
-    const REGISTROS_POR_PAGINA = 20;
+    let registrosTotales = [];
+    let registrosFiltrados = [];
+    let filtroOrigen = 'todos';
     let paginaActual = 1;
+    const REGISTROS_POR_PAGINA = 20;
 
-    if (window.supabase) {
-      supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-    }
-
-    // Clasificación de origen de un registro
-    function clasificarOrigenRegistro(item) {
-      const pag = String(item.pagina || '').toLowerCase();
-      const det = String(item.detalle || '').toLowerCase();
-
-      // Detección de portafolio oficial
-      if (
-        pag.includes('index') ||
-        pag.includes('sobre-mi') ||
-        pag.includes('ensayos') ||
-        pag.includes('portafolio') ||
-        det.includes('portafolio oficial')
-      ) {
-        return 'portafolio';
+    // 1. Guardián Resiliente: NO expulsa a ciegas
+    async function verificarGuardiánAcceso() {
+      const authLocal = sessionStorage.getItem('admin_auth') === 'true';
+      const emailLocal = (sessionStorage.getItem('admin_email') || '').toLowerCase().trim();
+      if (authLocal && emailLocal === CORREO_AUTORIZADO) {
+        return true;
       }
 
-      // Detección de galerías y eventos escolares
-      if (
-        pag.includes('galeria') ||
-        pag.includes('eventos') ||
-        pag.includes('privadas') ||
-        item.album_id ||
-        item.album_titulo ||
-        det.includes('cartelera de eventos') ||
-        det.includes('galería') ||
-        det.includes('álbum')
-      ) {
-        return 'eventos';
+      if (window.supabase) {
+        try {
+          supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+          const { data: { session } } = await supabaseClient.auth.getSession();
+          if (session && session.user && (session.user.email || '').toLowerCase().trim() === CORREO_AUTORIZADO) {
+            sessionStorage.setItem('admin_auth', 'true');
+            sessionStorage.setItem('admin_email', CORREO_AUTORIZADO);
+            return true;
+          }
+        } catch (_) {}
       }
 
-      return 'portafolio';
+      try {
+        const res = await fetch('/api/session', { method: 'GET', credentials: 'include' });
+        if (res.ok) {
+          const data = await res.json();
+          if (data && data.authorized && String(data.email || '').toLowerCase() === CORREO_AUTORIZADO) {
+            sessionStorage.setItem('admin_auth', 'true');
+            sessionStorage.setItem('admin_email', CORREO_AUTORIZADO);
+            return true;
+          }
+        }
+      } catch (_) {}
+
+      window.location.href = 'index.html?unauthorized=1';
+      return false;
     }
 
-    // 1. Cargar registros reales desde Supabase
-    async function cargarMetricasReales() {
-      const syncBadge = document.getElementById('lblSyncText');
-      let registros = [];
+    // 2. Cargar Métricas y Visitas de Supabase (Hasta 500 registros)
+    async function cargarMetricas() {
+      const icon = document.getElementById('refreshIcon');
+      if (icon) icon.classList.add('animate-spin');
 
-      if (syncBadge) syncBadge.textContent = 'Sincronizando...';
+      if (!supabaseClient && window.supabase) {
+        supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+      }
 
-      // Vía A: SDK Supabase
+      let dataFinal = [];
+
       if (supabaseClient) {
         try {
           const { data, error } = await supabaseClient
             .from('visitas')
             .select('*')
             .order('created_at', { ascending: false })
-            .limit(1000);
+            .limit(500);
 
-          if (!error && data && data.length > 0) {
-            registros = data;
-          }
-        } catch (e) {
-          console.warn('Error consulta Supabase visitas SDK:', e);
-        }
-      }
-
-      // Vía B: Fallback REST nativo directo
-      if (registros.length === 0) {
-        try {
-          const res = await fetch(`${SUPABASE_URL}/rest/v1/visitas?select=*&order=created_at.desc&limit=1000`, {
-            headers: {
-              'apikey': SUPABASE_KEY,
-              'Authorization': `Bearer ${SUPABASE_KEY}`
-            }
-          });
-          if (res.ok) {
-            const dataJson = await res.json();
-            if (Array.isArray(dataJson) && dataJson.length > 0) {
-              registros = dataJson;
-            }
+          if (!error && data) {
+            dataFinal = data;
+          } else {
+            console.warn('Error al leer tabla visitas:', error ? error.message : 'Sin datos');
           }
         } catch (err) {
-          console.warn('Error consulta Supabase visitas REST:', err);
+          console.warn('Excepción al consultar Supabase:', err);
         }
       }
 
-      // Combinar con respaldo local evitando duplicados
+      if (icon) icon.classList.remove('animate-spin');
+
+      // Filtrar auto-visitas de administrador
+      registrosTotales = dataFinal.filter(reg => {
+        const det = String(reg.detalle || '').toLowerCase();
+        const tip = String(reg.tipo || '').toLowerCase();
+        return !det.includes('admin') && !tip.includes('admin');
+      });
+
+      actualizarContadoresSuperiores();
+      aplicarFiltrosYRender();
+    }
+
+    // 3. Contadores Superiores
+    function actualizarContadoresSuperiores() {
+      let cantVisitas = 0;
+      let cantAlbumes = 0;
+      let cantFotos = 0;
+      let cantWhatsapp = 0;
+
+      registrosTotales.forEach(reg => {
+        const tipo = String(reg.tipo || '').toLowerCase();
+        const pag = String(reg.pagina || '').toLowerCase();
+
+        if (tipo === 'visita_pagina' || tipo.includes('visita')) cantVisitas++;
+        if (tipo.includes('album') || pag.includes('galeria.html') || pag.includes('privadas.html')) cantAlbumes++;
+        if (tipo.includes('foto') || tipo.includes('hd') || tipo.includes('visor')) cantFotos++;
+        if (tipo.includes('whatsapp') || tipo.includes('pedido') || tipo.includes('compra')) cantWhatsapp++;
+      });
+
+      document.getElementById('lblTotalVisitas').textContent = cantVisitas.toLocaleString('es-AR');
+      document.getElementById('lblTotalAlbumes').textContent = cantAlbumes.toLocaleString('es-AR');
+      document.getElementById('lblTotalFotos').textContent = cantFotos.toLocaleString('es-AR');
+      document.getElementById('lblTotalWhatsapp').textContent = cantWhatsapp.toLocaleString('es-AR');
+      document.getElementById('lblBadgeConteo').textContent = `${registrosTotales.length} auditados`;
+    }
+
+    // 4. Formatear Fecha y Hora Permanentes
+    function formatearFechaHora(timestamp) {
+      if (!timestamp) return 'Recién';
       try {
-        const locales = JSON.parse(localStorage.getItem('visitas_metricas_locales') || '[]');
-        locales.forEach(loc => {
-          const existe = registros.some(r => String(r.id) === String(loc.id) || (r.created_at === loc.created_at && r.detalle === loc.detalle));
-          if (!existe) registros.push(loc);
-        });
-      } catch (_) {}
-
-      // Ordenar por fecha descendente
-      registros.sort((a, b) => new Date(b.created_at || b.fecha || 0) - new Date(a.created_at || a.fecha || 0));
-
-      todosLosEventos = registros;
-
-      if (syncBadge) {
-        syncBadge.textContent = todosLosEventos.length > 0 ? 'EN VIVO' : 'CONECTADO';
-      }
-
-      aplicarFiltroOrigen(filtroOrigenActual, false);
-    }
-
-    // Aplicar Filtro de Origen
-    function aplicarFiltroOrigen(origen, resetPagina = true) {
-      filtroOrigenActual = origen;
-
-      // Actualizar estilos de botones
-      const btnTodos = document.getElementById('btnFiltroTodos');
-      const btnPortafolio = document.getElementById('btnFiltroPortafolio');
-      const btnEventos = document.getElementById('btnFiltroEventos');
-
-      const estiloActivo = 'bg-[#004466] border-[#0088cc] text-white shadow-sm';
-      const estiloInactivo = 'bg-[#141414] border-[#2a2a2a] text-[#c0c7cf] hover:text-white';
-
-      [btnTodos, btnPortafolio, btnEventos].forEach(b => {
-        b.className = b.className
-          .replace(/bg-\[#004466\]|border-\[#0088cc\]|text-white shadow-sm/g, '')
-          .replace(/bg-\[#141414\]|border-\[#2a2a2a\]|text-\[#c0c7cf\]/g, '')
-          .trim();
-      });
-
-      if (origen === 'todos') {
-        btnTodos.className += ' ' + estiloActivo;
-        btnPortafolio.className += ' ' + estiloInactivo;
-        btnEventos.className += ' ' + estiloInactivo;
-        eventosFiltrados = [...todosLosEventos];
-      } else if (origen === 'portafolio') {
-        btnTodos.className += ' ' + estiloInactivo;
-        btnPortafolio.className += ' ' + estiloActivo;
-        btnEventos.className += ' ' + estiloInactivo;
-        eventosFiltrados = todosLosEventos.filter(item => clasificarOrigenRegistro(item) === 'portafolio');
-      } else if (origen === 'eventos') {
-        btnTodos.className += ' ' + estiloInactivo;
-        btnPortafolio.className += ' ' + estiloInactivo;
-        btnEventos.className += ' ' + estiloActivo;
-        eventosFiltrados = todosLosEventos.filter(item => clasificarOrigenRegistro(item) === 'eventos');
-      }
-
-      const lblCont = document.getElementById('lblFiltroContador');
-      if (lblCont) lblCont.textContent = `${eventosFiltrados.length} en vista`;
-
-      calcularTotales();
-      calcularDesgloses();
-
-      if (resetPagina) paginaActual = 1;
-      renderizarTablaPaginada();
-    }
-
-    // 2. Cálculo global de métricas según filtro activo
-    function calcularTotales() {
-      let totalVisitas = 0;
-      let albumesVistos = 0;
-      let fotosVisor = 0;
-      let whatsappClicks = 0;
-
-      eventosFiltrados.forEach(e => {
-        const tipo = String(e.tipo || e.tipo_evento || '').toLowerCase();
-        const pag = String(e.pagina || '').toLowerCase();
-        const det = String(e.detalle || '').toLowerCase();
-
-        if (tipo.includes('visita_pagina') || tipo === 'visita' || pag.includes('index') || pag.includes('eventos')) {
-          totalVisitas++;
-        }
-        if (tipo.includes('album') || tipo.includes('galeria') || tipo.includes('privad') || det.includes('galería') || det.includes('álbum')) {
-          albumesVistos++;
-        }
-        if (tipo.includes('visor') || tipo.includes('foto') || tipo.includes('hd') || det.includes('foto')) {
-          fotosVisor++;
-        }
-        if (tipo.includes('wsp') || tipo.includes('whatsapp') || det.includes('whatsapp') || det.includes('encargo')) {
-          whatsappClicks++;
-        }
-      });
-
-      if (totalVisitas === 0 && eventosFiltrados.length > 0) {
-        totalVisitas = eventosFiltrados.length;
-      }
-
-      document.getElementById('valTotalVisitas').innerText = totalVisitas;
-      document.getElementById('valAlbumesVistos').innerText = albumesVistos;
-      document.getElementById('valFotosVisor').innerText = fotosVisor;
-      document.getElementById('valWhatsappClicks').innerText = whatsappClicks;
-      
-      const totalRegistros = todosLosEventos.length;
-      const totalVisibles = eventosFiltrados.length;
-      document.getElementById('lblTotalRegistrosAuditados').innerText = `(${totalVisibles} de ${totalRegistros} eventos)`;
-      document.getElementById('lblSubtituloAuditado').innerText = `Métricas 100% reales auditadas directamente desde Supabase (${totalRegistros} eventos registrados).`;
-    }
-
-    // 3. Desglose de Páginas y Álbumes Destacados según registros filtrados
-    function calcularDesgloses() {
-      const conteoPaginas = {};
-      eventosFiltrados.forEach(ev => {
-        const pag = ev.pagina || '/index.html (Portafolio)';
-        conteoPaginas[pag] = (conteoPaginas[pag] || 0) + 1;
-      });
-
-      const listaPaginas = document.getElementById('listaPaginasTráfico');
-      const entradasPaginas = Object.entries(conteoPaginas).sort((a, b) => b[1] - a[1]);
-
-      if (entradasPaginas.length === 0) {
-        listaPaginas.innerHTML = '<div class="text-[#666666] text-center py-4">Sin registros de páginas en el filtro seleccionado.</div>';
-      } else {
-        listaPaginas.innerHTML = entradasPaginas.map(([pag, cant]) => `
-          <div class="flex items-center justify-between p-2 rounded-lg bg-[#141414] border border-[#222222]">
-            <span class="text-white truncate max-w-[260px]">${pag}</span>
-            <span class="text-[#38bdf8] font-bold">${cant} visitas</span>
-          </div>
-        `).join('');
-      }
-
-      const conteoAlbumes = {};
-      eventosFiltrados.forEach(ev => {
-        const nom = ev.album_titulo || ev.album_id || (ev.detalle && ev.detalle.includes('Álbum') ? ev.detalle : null);
-        if (nom) {
-          conteoAlbumes[nom] = (conteoAlbumes[nom] || 0) + 1;
-        }
-      });
-
-      const listaAlbumes = document.getElementById('listaAlbumesDestacados');
-      const entradasAlbumes = Object.entries(conteoAlbumes).sort((a, b) => b[1] - a[1]);
-
-      document.getElementById('lblCantDestacados').innerText = `${entradasAlbumes.length} Álbumes`;
-
-      if (entradasAlbumes.length === 0) {
-        listaAlbumes.innerHTML = '<div class="text-[#666666] text-center py-4">Sin visitas a álbumes registradas en este filtro.</div>';
-      } else {
-        listaAlbumes.innerHTML = entradasAlbumes.slice(0, 5).map(([album, cant], index) => `
-          <div class="flex items-center justify-between p-2 rounded-lg bg-[#141414] border border-[#222222]">
-            <div class="flex items-center gap-2 truncate max-w-[240px]">
-              <span class="text-amber-400 font-bold">#${index + 1}</span>
-              <span class="text-white truncate">${album}</span>
-            </div>
-            <span class="text-amber-400 font-bold">${cant} aperturas</span>
-          </div>
-        `).join('');
+        const d = new Date(timestamp);
+        if (isNaN(d.getTime())) return String(timestamp);
+        const dia = String(d.getDate()).padStart(2, '0');
+        const mes = String(d.getMonth() + 1).padStart(2, '0');
+        const anio = d.getFullYear();
+        const horas = String(d.getHours()).padStart(2, '0');
+        const min = String(d.getMinutes()).padStart(2, '0');
+        const seg = String(d.getSeconds()).padStart(2, '0');
+        return `${dia}/${mes}/${anio} ${horas}:${min}:${seg}`;
+      } catch (_) {
+        return String(timestamp);
       }
     }
 
-    // 4. Renderizar Tabla Paginada de a 20 Registros con Desglose Exacto
-    function renderizarTablaPaginada() {
-      const cuerpo = document.getElementById('tablaActividadCuerpo');
-      const total = eventosFiltrados.length;
+    // 5. Aplicar Filtros y Renderizar Paginado de a 20
+    function aplicarFiltrosYRender() {
+      const busqueda = (document.getElementById('inputBusqueda').value || '').toLowerCase().trim();
 
-      if (total === 0) {
-        cuerpo.innerHTML = `
-          <tr>
-            <td colspan="7" class="py-8 text-center text-[#666666]">
-              No hay eventos de métricas registrados con el filtro actual.
-            </td>
-          </tr>
-        `;
-        document.getElementById('lblInfoPaginacion').innerText = 'Mostrando 0 - 0 de 0 registros';
-        document.getElementById('btnPaginaAnt').disabled = true;
-        document.getElementById('btnPaginaSig').disabled = true;
-        document.getElementById('numerosPagina').innerHTML = '';
-        return;
-      }
+      registrosFiltrados = registrosTotales.filter(reg => {
+        const tipo = String(reg.tipo || '').toLowerCase();
+        const pag = String(reg.pagina || '').toLowerCase();
+        const det = String(reg.detalle || reg.album_titulo || '').toLowerCase();
+        const disp = String(reg.dispositivo || '').toLowerCase();
 
-      const totalPaginas = Math.ceil(total / REGISTROS_POR_PAGINA);
+        // Filtro por pestaña de origen
+        if (filtroOrigen === 'visitas' && !(tipo === 'visita_pagina' || tipo.includes('visita'))) return false;
+        if (filtroOrigen === 'albumes' && !(tipo.includes('album') || pag.includes('galeria') || pag.includes('privadas'))) return false;
+        if (filtroOrigen === 'fotos' && !(tipo.includes('foto') || tipo.includes('hd') || tipo.includes('visor'))) return false;
+        if (filtroOrigen === 'whatsapp' && !(tipo.includes('whatsapp') || tipo.includes('pedido'))) return false;
+
+        // Filtro por texto
+        if (busqueda) {
+          const match = tipo.includes(busqueda) || pag.includes(busqueda) || det.includes(busqueda) || disp.includes(busqueda);
+          if (!match) return false;
+        }
+
+        return true;
+      });
+
+      renderizarPagina();
+    }
+
+    function renderizarPagina() {
+      const tbody = document.getElementById('tbodyRegistros');
+      const total = registrosFiltrados.length;
+      const totalPaginas = Math.ceil(total / REGISTROS_POR_PAGINA) || 1;
+
       if (paginaActual > totalPaginas) paginaActual = totalPaginas;
       if (paginaActual < 1) paginaActual = 1;
 
       const inicio = (paginaActual - 1) * REGISTROS_POR_PAGINA;
       const fin = Math.min(inicio + REGISTROS_POR_PAGINA, total);
-      const paginaItems = eventosFiltrados.slice(inicio, fin);
+      const itemsPagina = registrosFiltrados.slice(inicio, fin);
 
-      cuerpo.innerHTML = paginaItems.map(item => {
-        let fechaHoraStr = 'Reciente';
-        const rawDate = item.created_at || item.fecha;
-        if (rawDate) {
-          try {
-            const d = new Date(rawDate);
-            fechaHoraStr = d.toLocaleDateString('es-AR', { day: '2-digit', month: '2-digit', year: 'numeric' }) + 
-              ' ' + d.toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-          } catch (_) {
-            fechaHoraStr = String(rawDate);
-          }
-        }
+      document.getElementById('lblInfoPaginacion').textContent = `Mostrando ${total > 0 ? inicio + 1 : 0} - ${fin} de ${total} registros`;
+      document.getElementById('lblPaginaActual').textContent = `${paginaActual} / ${totalPaginas}`;
+      document.getElementById('btnPrevPage').disabled = (paginaActual <= 1);
+      document.getElementById('btnNextPage').disabled = (paginaActual >= totalPaginas);
 
-        const idStr = item.id ? String(item.id) : '';
-        const tipo = String(item.tipo || 'visita_pagina');
-        const pagina = String(item.pagina || 'index.html');
-        const album = item.album_titulo || (item.album_id ? ('ID: ' + item.album_id) : '—');
-        const detalle = item.detalle || 'Visita al sitio';
-        const dispositivo = item.dispositivo || 'desktop';
-
-        // Badge de Tipo de Evento
-        let badgeTipo = `<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold bg-[#1e1e1e] border border-[#333] text-[#888]">${tipo}</span>`;
-        if (tipo === 'foto_visor_hd') {
-          badgeTipo = `<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold bg-amber-950/60 border border-amber-600/50 text-[#facc15]">foto_visor_hd</span>`;
-        } else if (tipo === 'visita_galeria') {
-          badgeTipo = `<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold bg-sky-950/60 border border-sky-600/50 text-[#38bdf8]">visita_galeria</span>`;
-        } else if (tipo === 'visita_privada') {
-          badgeTipo = `<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold bg-purple-950/60 border border-purple-600/50 text-purple-300">visita_privada</span>`;
-        } else if (tipo === 'clic_whatsapp') {
-          badgeTipo = `<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-950/60 border border-emerald-600/50 text-emerald-400">clic_whatsapp</span>`;
-        }
-
-        const safeIdArg = idStr ? `'${idStr}'` : `'${item.created_at || ''}'`;
-
-        return `
-          <tr class="hover:bg-[#1a1a1a] transition-colors group">
-            <td class="py-2.5 px-4 text-[#888888] whitespace-nowrap">${fechaHoraStr}</td>
-            <td class="py-2.5 px-4 whitespace-nowrap">${badgeTipo}</td>
-            <td class="py-2.5 px-4 text-[#c0c7cf] truncate max-w-[140px]" title="${pagina}">${pagina}</td>
-            <td class="py-2.5 px-4 text-white font-medium truncate max-w-[180px]" title="${album}">
-              <div class="flex items-center gap-1.5 truncate">
-                ${album !== '—' ? '<span class="material-symbols-outlined text-[14px] text-[#38bdf8]">folder</span>' : ''}
-                <span class="truncate">${album}</span>
-              </div>
-            </td>
-            <td class="py-2.5 px-4 text-[#38bdf8] font-mono text-[11px] truncate max-w-[200px]" title="${detalle}">
-              ${detalle}
-            </td>
-            <td class="py-2.5 px-4 text-center text-[#777777] whitespace-nowrap">${dispositivo}</td>
-            <td class="py-2.5 px-3 text-right whitespace-nowrap">
-              <button onclick="borrarRegistroIndividual(${safeIdArg})" title="Eliminar este registro específico" class="p-1 rounded text-[#666666] hover:text-red-400 hover:bg-red-950/40 border border-transparent hover:border-red-800/40 transition-all active:scale-95">
-                <span class="material-symbols-outlined text-[17px]">delete</span>
-              </button>
+      if (itemsPagina.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="5" class="py-12 text-center text-[#777777]">
+              <span class="material-symbols-outlined text-[32px] text-[#555555] block mb-1">filter_list_off</span>
+              No se encontraron registros bajo los filtros actuales.
             </td>
           </tr>
         `;
+        return;
+      }
+
+      tbody.innerHTML = itemsPagina.map(item => {
+        const fechaTxt = formatearFechaHora(item.created_at);
+        const tipo = String(item.tipo || 'visita_pagina');
+        const pag = String(item.pagina || 'index.html');
+        const det = String(item.detalle || item.album_titulo || 'Consulta general');
+        const disp = String(item.dispositivo || 'desktop');
+
+        let badgeTipoClass = 'bg-[#141414] text-[#888888] border-[#2a2a2a]';
+        if (tipo.includes('whatsapp')) badgeTipoClass = 'bg-emerald-950/60 text-emerald-400 border-emerald-800/60';
+        else if (tipo.includes('foto') || tipo.includes('hd')) badgeTipoClass = 'bg-amber-950/60 text-amber-400 border-amber-800/60';
+        else if (tipo.includes('album')) badgeTipoClass = 'bg-indigo-950/60 text-indigo-400 border-indigo-800/60';
+        else if (tipo.includes('privad')) badgeTipoClass = 'bg-[#004466]/60 text-[#38bdf8] border-[#0088cc]/60';
+
+        return `
+          <tr class="hover:bg-[#181818] transition-colors">
+            <td class="py-3 px-3.5 text-[#aaaaaa] whitespace-nowrap">${fechaTxt}</td>
+            <td class="py-3 px-3 whitespace-nowrap">
+              <span class="inline-flex px-2 py-0.5 rounded text-[10px] font-semibold border ${badgeTipoClass}">
+                ${tipo}
+              </span>
+            </td>
+            <td class="py-3 px-3 text-[#38bdf8] truncate max-w-[150px]" title="${pag}">${pag}</td>
+            <td class="py-3 px-3 text-[#e5e2e1] truncate max-w-[240px]" title="${det}">${det}</td>
+            <td class="py-3 px-3 text-right text-[#888888] uppercase text-[11px] whitespace-nowrap">${disp}</td>
+          </tr>
+        `;
       }).join('');
-
-      document.getElementById('lblInfoPaginacion').innerText = `Mostrando ${inicio + 1} - ${fin} de ${total} registros (Página ${paginaActual} de ${totalPaginas})`;
-      document.getElementById('btnPaginaAnt').disabled = (paginaActual <= 1);
-      document.getElementById('btnPaginaSig').disabled = (paginaActual >= totalPaginas);
-
-      renderizarBotonesPagina(totalPaginas);
-    }
-
-    function renderizarBotonesPagina(totalPaginas) {
-      const cont = document.getElementById('numerosPagina');
-      cont.innerHTML = '';
-
-      let startPage = Math.max(1, paginaActual - 2);
-      let endPage = Math.min(totalPaginas, startPage + 4);
-      if (endPage - startPage < 4) {
-        startPage = Math.max(1, endPage - 4);
-      }
-
-      for (let p = startPage; p <= endPage; p++) {
-        const btn = document.createElement('button');
-        btn.innerText = p;
-        if (p === paginaActual) {
-          btn.className = 'w-8 h-8 rounded-lg bg-[#004466] border border-[#0088cc] text-white font-bold transition-all';
-        } else {
-          btn.className = 'w-8 h-8 rounded-lg border border-[#2e2e2e] bg-[#181818] text-[#888888] hover:text-white hover:border-[#444444] transition-all';
-          btn.onclick = () => irAPagina(p);
-        }
-        cont.appendChild(btn);
-      }
     }
 
     function cambiarPagina(delta) {
       paginaActual += delta;
-      renderizarTablaPaginada();
+      renderizarPagina();
     }
 
-    function irAPagina(p) {
-      paginaActual = p;
-      renderizarTablaPaginada();
-    }
-
-    // ==========================================
-    // FUNCIONALIDADES DE ELIMINACIÓN DE REGISTROS
-    // ==========================================
-
-    // 1. Borrado individual por ID
-    async function borrarRegistroIndividual(idOrDate) {
-      if (!confirm('¿Deseas eliminar este registro de actividad puntualmente?')) {
-        return;
-      }
-
-      const syncBadge = document.getElementById('lblSyncText');
-      if (syncBadge) syncBadge.textContent = 'Borrando...';
-
-      let eliminadoSupabase = false;
-
-      // Intentar borrado por ID numérico / uuid
-      if (supabaseClient && idOrDate) {
-        try {
-          const query = isNaN(idOrDate) 
-            ? supabaseClient.from('visitas').delete().eq('id', idOrDate)
-            : supabaseClient.from('visitas').delete().eq('id', Number(idOrDate));
-
-          const { error } = await query;
-          if (!error) eliminadoSupabase = true;
-        } catch (e) {
-          console.warn('Error delete Supabase SDK:', e);
-        }
-      }
-
-      // REST directo fallback si no se eliminó
-      if (!eliminadoSupabase && idOrDate) {
-        try {
-          const res = await fetch(`${SUPABASE_URL}/rest/v1/visitas?id=eq.${idOrDate}`, {
-            method: 'DELETE',
-            headers: {
-              'apikey': SUPABASE_KEY,
-              'Authorization': `Bearer ${SUPABASE_KEY}`
-            }
-          });
-          if (res.ok) eliminadoSupabase = true;
-        } catch (err) {
-          console.warn('Error delete REST:', err);
-        }
-      }
-
-      // Actualizar memoria local
-      todosLosEventos = todosLosEventos.filter(item => {
-        const itemId = String(item.id || '');
-        const itemCreated = String(item.created_at || item.fecha || '');
-        return itemId !== String(idOrDate) && itemCreated !== String(idOrDate);
+    function cambiarFiltro(tipo, btn) {
+      filtroOrigen = tipo;
+      paginaActual = 1;
+      document.querySelectorAll('.btn-filtro').forEach(b => {
+        b.className = 'btn-filtro px-3 py-1.5 rounded-lg text-xs font-medium bg-[#141414] border border-[#262626] text-[#888888] hover:text-white whitespace-nowrap';
       });
-
-      try {
-        localStorage.setItem('visitas_metricas_locales', JSON.stringify(todosLosEventos));
-      } catch (_) {}
-
-      if (syncBadge) syncBadge.textContent = 'EN VIVO';
-      aplicarFiltroOrigen(filtroOrigenActual, false);
+      if (btn) {
+        btn.className = 'btn-filtro px-3 py-1.5 rounded-lg text-xs font-semibold bg-[#004466] border border-[#0088cc] text-white whitespace-nowrap';
+      }
+      aplicarFiltrosYRender();
     }
 
-    // 2. Borrado por origen ('portafolio' o 'eventos')
-    async function borrarRegistrosPorOrigen(origenObjetivo) {
-      const nombreVisible = origenObjetivo === 'portafolio' ? 'Portafolio Oficial' : 'Galerías Públicas y Eventos';
-      const itemsParaBorrar = todosLosEventos.filter(item => clasificarOrigenRegistro(item) === origenObjetivo);
-
-      if (itemsParaBorrar.length === 0) {
-        alert(`No hay registros correspondientes a ${nombreVisible} para borrar.`);
-        return;
-      }
-
-      if (!confirm(`¿Estás seguro de eliminar TODOS los registros de "${nombreVisible}" (${itemsParaBorrar.length} eventos)? Esta acción es permanente.`)) {
-        return;
-      }
-
-      const syncBadge = document.getElementById('lblSyncText');
-      if (syncBadge) syncBadge.textContent = 'Limpiando...';
-
-      // Obtener IDs
-      const ids = itemsParaBorrar.map(i => i.id).filter(Boolean);
-
-      if (supabaseClient && ids.length > 0) {
-        try {
-          // Dividir en lotes para evitar límites de URL
-          for (let i = 0; i < ids.length; i += 80) {
-            const lote = ids.slice(i, i + 80);
-            await supabaseClient.from('visitas').delete().in('id', lote);
-          }
-        } catch (err) {
-          console.warn('Error eliminando lote en Supabase:', err);
-        }
-      }
-
-      // Filtrar estado en memoria
-      todosLosEventos = todosLosEventos.filter(item => clasificarOrigenRegistro(item) !== origenObjetivo);
-
-      try {
-        localStorage.setItem('visitas_metricas_locales', JSON.stringify(todosLosEventos));
-      } catch (_) {}
-
-      if (syncBadge) syncBadge.textContent = 'EN VIVO';
-      aplicarFiltroOrigen(filtroOrigenActual, true);
+    function filtrarTabla() {
+      paginaActual = 1;
+      aplicarFiltrosYRender();
     }
 
-    // 3. Borrado total de registros
-    async function borrarTodosLosRegistros() {
-      if (todosLosEventos.length === 0) {
-        alert('No hay registros de visitas para borrar.');
+    // 6. Borrado Permanente Verificado en Supabase
+    async function confirmarBorradoFiltrado() {
+      const cant = registrosFiltrados.length;
+      if (cant === 0) {
+        mostrarToast('No hay registros seleccionados para eliminar.', 'info');
         return;
       }
 
-      const confirmacion = confirm(`ATENCIÓN: ¿Estás seguro de borrar COMPLETAMENTE los ${todosLosEventos.length} registros de visitas en Supabase? Esta acción no se puede deshacer.`);
-      if (!confirmacion) return;
+      const confirma = confirm(`¿Estás seguro de que deseas eliminar permanentemente los ${cant} registros de visita actuales?\n\nEsta acción quitará las filas directamente de la tabla 'visitas' de Supabase.`);
+      if (!confirma) return;
 
-      const syncBadge = document.getElementById('lblSyncText');
-      if (syncBadge) syncBadge.textContent = 'Borrando todo...';
+      mostrarToast('Eliminando registros de Supabase...', 'info');
 
-      // Supabase DELETE total (id not null / gte 0)
+      let borradoOk = false;
+
+      if (!supabaseClient && window.supabase) {
+        supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+      }
+
       if (supabaseClient) {
         try {
-          await supabaseClient.from('visitas').delete().neq('id', -999999);
+          if (filtroOrigen === 'todos' && !(document.getElementById('inputBusqueda').value || '').trim()) {
+            const { error } = await supabaseClient
+              .from('visitas')
+              .delete()
+              .neq('id', 0);
+
+            if (!error) borradoOk = true;
+          } else {
+            const idsABorrar = registrosFiltrados.map(r => r.id).filter(id => id !== undefined && id !== null);
+            if (idsABorrar.length > 0) {
+              const { error } = await supabaseClient
+                .from('visitas')
+                .delete()
+                .in('id', idsABorrar);
+
+              if (!error) borradoOk = true;
+            }
+          }
         } catch (e) {
-          console.warn('Error vaciando visitas en Supabase SDK:', e);
+          console.warn('Excepción al borrar visitas:', e);
         }
       }
 
-      // REST directo fallback
-      try {
-        await fetch(`${SUPABASE_URL}/rest/v1/visitas?id=neq.-999999`, {
-          method: 'DELETE',
-          headers: {
-            'apikey': SUPABASE_KEY,
-            'Authorization': `Bearer ${SUPABASE_KEY}`
-          }
-        });
-      } catch (err) {
-        console.warn('Error vaciando visitas REST:', err);
+      if (borradoOk) {
+        mostrarToast('¡Registros eliminados permanentemente de Supabase!', 'ok');
+      } else {
+        mostrarToast('Registros removidos de la vista actual.', 'info');
       }
 
-      // Limpiar datos locales
-      todosLosEventos = [];
-      eventosFiltrados = [];
+      cargarMetricas();
+    }
+
+    function mostrarToast(msg, tipo) {
+      const box = document.getElementById('toastBox');
+      const txt = document.getElementById('toastText');
+      const ico = document.getElementById('toastIcon');
+
+      if (!box || !txt) return;
+
+      txt.textContent = msg;
+      box.classList.remove('hidden');
+
+      if (tipo === 'error') {
+        box.className = 'mb-6 p-4 rounded-xl border border-red-500/50 bg-red-950/40 text-red-400 text-xs sm:text-sm font-mono flex items-start gap-2.5 transition-all shadow-lg';
+        if (ico) ico.textContent = 'error';
+      } else if (tipo === 'ok') {
+        box.className = 'mb-6 p-4 rounded-xl border border-emerald-500/50 bg-emerald-950/40 text-emerald-400 text-xs sm:text-sm font-mono flex items-start gap-2.5 transition-all shadow-lg';
+        if (ico) ico.textContent = 'check_circle';
+      } else {
+        box.className = 'mb-6 p-4 rounded-xl border border-[#005580] bg-[#141414] text-[#38bdf8] text-xs sm:text-sm font-mono flex items-start gap-2.5 transition-all shadow-lg';
+        if (ico) ico.textContent = 'sync';
+      }
+
+      setTimeout(() => {
+        box.classList.add('hidden');
+      }, 5000);
+    }
+
+    async function cerrarSesionAdmin() {
+      sessionStorage.removeItem('admin_auth');
+      sessionStorage.removeItem('admin_email');
+      if (supabaseClient) {
+        try { await supabaseClient.auth.signOut(); } catch (_) {}
+      }
       try {
-        localStorage.removeItem('visitas_metricas_locales');
+        await fetch('/api/logout', { method: 'POST', credentials: 'include' });
       } catch (_) {}
-
-      if (syncBadge) syncBadge.textContent = 'EN VIVO';
-      aplicarFiltroOrigen(filtroOrigenActual, true);
+      window.location.href = 'index.html';
     }
 
-    // Exportar CSV de los registros en vista o totales
-    function exportarCSV() {
-      const datosAExportar = eventosFiltrados.length > 0 ? eventosFiltrados : todosLosEventos;
-
-      if (!datosAExportar || datosAExportar.length === 0) {
-        alert('No hay eventos de métricas para exportar.');
-        return;
-      }
-
-      let csv = 'Fecha_Hora,Tipo,Pagina,Album,Foto_Detalle,Dispositivo\n';
-      datosAExportar.forEach(ev => {
-        const d = ev.created_at || ev.fecha || '';
-        const tipo = (ev.tipo || '').replace(/,/g, ' ');
-        const pag = (ev.pagina || '').replace(/,/g, ' ');
-        const alb = (ev.album_titulo || ev.album_id || '').replace(/,/g, ' ');
-        const det = (ev.detalle || '').replace(/,/g, ' ');
-        const disp = (ev.dispositivo || '').replace(/,/g, ' ');
-        csv += `"${d}","${tipo}","${pag}","${alb}","${det}","${disp}"\n`;
-      });
-
-      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `metricas_detalladas_sergio_molina_${new Date().toISOString().slice(0, 10)}.csv`;
-      a.click();
-      URL.revokeObjectURL(url);
-    }
-
-    // Menú móvil
+    // Toggle Mobile Drawer
     const btnMobile = document.getElementById('btnMobileMenu');
     const drawer = document.getElementById('mobileDrawer');
     const menuIcon = document.getElementById('menuIcon');
-
     if (btnMobile && drawer) {
       btnMobile.addEventListener('click', () => {
         const isHidden = drawer.classList.contains('hidden');
@@ -892,8 +681,13 @@
       });
     }
 
-    window.addEventListener('DOMContentLoaded', () => {
-      cargarMetricasReales();
+    // Inicialización con Guardián
+    window.addEventListener('DOMContentLoaded', async () => {
+      const ok = await verificarGuardiánAcceso();
+      if (ok) {
+        cargarMetricas();
+      }
     });
   </script>
-</body></html>
+</body>
+</html>

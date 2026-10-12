@@ -17,6 +17,7 @@
       color: #e5e2e1;
       font-family: 'Manrope', sans-serif;
       min-height: 100vh;
+      overflow-x: hidden;
     }
     .custom-scrollbar::-webkit-scrollbar {
       width: 6px;
@@ -31,35 +32,54 @@
     }
   </style>
 </head>
-<body class="bg-[#111111] text-[#e5e2e1] min-h-screen flex flex-col antialiased selection:bg-[#005580] selection:text-white">
+<body class="bg-[#111111] text-[#e5e2e1] min-h-screen flex flex-col antialiased selection:bg-[#005580] selection:text-white pb-16 md:pb-0">
 
-  <!-- Header Superior Global -->
+  <!-- Header Superior Global con Botón Portafolio sergiomolina-fotografia y Métricas -->
   <header class="w-full bg-[#141414] border-b border-[#242424] sticky top-0 z-50">
-    <div class="flex justify-between items-center w-full px-4 md:px-6 max-w-7xl mx-auto h-16">
-      
-      <!-- Brand & Mobile Toggle -->
-      <div class="flex items-center gap-3">
-        <button id="btnMobileMenu" type="button" class="md:hidden flex items-center justify-center w-10 h-10 rounded-lg bg-[#181818] border border-[#262626] text-[#e5e2e1] hover:text-[#38bdf8] transition-all">
-          <span class="material-symbols-outlined text-[24px]" id="menuIcon">menu</span>
+    <div class="flex justify-between items-center w-full px-3 sm:px-6 max-w-7xl mx-auto h-16 gap-2">
+      <!-- Marca & Botón Menú Móvil -->
+      <div class="flex items-center gap-2.5 sm:gap-3">
+        <button id="btnMobileMenu" type="button" aria-label="Abrir menú" class="md:hidden flex items-center justify-center w-9 h-9 rounded-lg bg-[#181818] border border-[#262626] text-[#e5e2e1] hover:text-[#38bdf8] transition-all active:scale-95">
+          <span class="material-symbols-outlined text-[22px]" id="menuIcon">menu</span>
         </button>
-        <div class="flex items-center gap-2.5">
-          <span class="material-symbols-outlined text-[#38bdf8] text-[26px]">photo_camera</span>
-          <span class="text-white font-headline font-bold text-base sm:text-lg tracking-tight">Panel de Control</span>
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-[#38bdf8] text-[24px] sm:text-[26px]">photo_camera</span>
+          <span class="text-white font-headline font-bold text-sm sm:text-lg tracking-tight">Panel de Control</span>
         </div>
       </div>
 
-      <!-- Sync Status & Acciones Rápidas -->
-      <div class="flex items-center gap-2 sm:gap-3">
-        <div class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-[#181818] border border-emerald-800/60 text-emerald-400 text-xs font-semibold rounded-full uppercase tracking-wider">
+      <!-- Accesos Superiores: Portafolio + Métricas + Estado + Salir -->
+      <div class="flex items-center gap-1.5 sm:gap-2.5">
+        <!-- 1. Enlace Portafolio Oficial de GitHub -->
+        <a href="https://sergiomolina-fotografia.github.io/Portafolio/index.html" 
+           class="inline-flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3.5 py-1.5 rounded-lg border border-[#005580] hover:border-[#38bdf8] bg-[#102433] hover:bg-[#143247] text-[11px] sm:text-xs font-semibold text-[#38bdf8] hover:text-white transition-all shadow-sm active:scale-95 whitespace-nowrap"
+           title="Ir a mi Portafolio Oficial">
+          <span class="material-symbols-outlined text-[16px]">visibility</span>
+          <span class="hidden xs:inline">Ver Portafolio</span>
+          <span class="xs:hidden">Portafolio</span>
+          <span class="material-symbols-outlined text-[12px] opacity-70 hidden sm:inline">open_in_new</span>
+        </a>
+
+        <!-- 2. Enlace a Métricas en la parte superior -->
+        <a href="metricas.html" 
+           class="inline-flex items-center gap-1 px-2.5 sm:px-3 py-1.5 rounded-lg border border-[#2e2e2e] hover:border-[#38bdf8] bg-[#181818] hover:bg-[#202020] text-[11px] sm:text-xs font-medium text-[#c0c7cf] hover:text-white transition-all active:scale-95 whitespace-nowrap"
+           title="Ver Analítica y Registro de Visitas">
+          <span class="material-symbols-outlined text-[16px] text-amber-400">insights</span>
+          <span class="hidden sm:inline">Métricas</span>
+        </a>
+
+        <!-- 3. Indicador de Conexión Supabase -->
+        <div class="hidden lg:inline-flex items-center gap-1.5 px-2.5 py-1 bg-[#181818] border border-emerald-800/60 text-emerald-400 text-xs font-semibold rounded-full uppercase tracking-wider">
           <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-          <span class="text-[11px] font-mono">Supabase Conectado</span>
+          <span class="text-[10px] font-mono">Supabase Conectado</span>
         </div>
-        <button onclick="cerrarSesionAdmin()" class="flex items-center gap-1 px-3 py-1.5 rounded-lg border border-[#333333] hover:border-red-500/60 bg-[#181818] hover:bg-red-950/30 text-xs font-medium text-[#c0c7cf] hover:text-red-400 transition-all cursor-pointer">
-          <span class="material-symbols-outlined text-[16px]">logout</span>
+
+        <!-- 4. Botón Salir / Logout -->
+        <button onclick="cerrarSesionAdmin()" class="flex items-center gap-1 px-2.5 sm:px-3 py-1.5 rounded-lg border border-[#333333] hover:border-red-500/60 bg-[#181818] hover:bg-red-950/30 text-[11px] sm:text-xs font-medium text-[#c0c7cf] hover:text-red-400 transition-all active:scale-95" title="Cerrar sesión">
+          <span class="material-symbols-outlined text-[15px]">logout</span>
           <span class="hidden sm:inline">Salir</span>
         </button>
       </div>
-
     </div>
 
     <!-- Menú Desplegable Móvil -->
@@ -82,18 +102,18 @@
           <span>Tarifas y Precios</span>
         </a>
         <a href="metricas.html" class="flex items-center gap-3 text-[#c0c7cf] px-3 py-2.5 text-sm font-medium rounded-lg hover:bg-[#1f1e1e] hover:text-white transition-all">
-          <span class="material-symbols-outlined text-[20px]">insights</span>
+          <span class="material-symbols-outlined text-[20px] text-amber-400">insights</span>
           <span>Métricas y Visitas</span>
         </a>
       </nav>
       <div class="pt-3 border-t border-[#222222] space-y-1">
         <p class="text-[10px] font-bold text-[#8b9199] uppercase tracking-wider px-3 mb-1">Accesos Directos</p>
-        <a href="https://sergiomolina-fotografia.netlify.app/" target="_blank" class="flex items-center justify-between text-[#c0c7cf] hover:text-[#38bdf8] px-3 py-2 text-sm rounded-lg hover:bg-[#1b1b1b] transition-all">
+        <a href="https://sergiomolina-fotografia.github.io/Portafolio/index.html" class="flex items-center justify-between text-[#38bdf8] hover:text-white px-3 py-2 text-sm rounded-lg hover:bg-[#1b1b1b] transition-all">
           <div class="flex items-center gap-2.5">
-            <span class="material-symbols-outlined text-[18px] text-[#8b9199]">visibility</span>
+            <span class="material-symbols-outlined text-[18px]">visibility</span>
             <span>Ver Portafolio</span>
           </div>
-          <span class="material-symbols-outlined text-[14px] text-[#8b9199]">open_in_new</span>
+          <span class="material-symbols-outlined text-[14px]">open_in_new</span>
         </a>
       </div>
     </div>
@@ -101,7 +121,6 @@
 
   <!-- Layout Principal -->
   <div class="flex-1 flex w-full max-w-7xl mx-auto overflow-hidden">
-    
     <!-- Sidebar Desktop -->
     <aside class="w-64 bg-[#141414] border-r border-[#242424] flex-col justify-between shrink-0 hidden md:flex">
       <div class="p-5">
@@ -123,7 +142,7 @@
             <span>Tarifas y Precios</span>
           </a>
           <a href="metricas.html" class="flex items-center gap-3 text-[#c0c7cf] px-3 py-2.5 text-sm font-medium rounded-lg hover:bg-[#1e1e1e] hover:text-white transition-all">
-            <span class="material-symbols-outlined text-[20px]">insights</span>
+            <span class="material-symbols-outlined text-[20px] text-amber-400">insights</span>
             <span>Métricas y Visitas</span>
           </a>
         </nav>
@@ -131,7 +150,7 @@
 
       <div class="p-4 border-t border-[#242424] bg-[#111111] space-y-1">
         <p class="text-[10px] font-bold text-[#8b9199] uppercase tracking-wider px-2 mb-2">Accesos Directos</p>
-        <a href="https://sergiomolina-fotografia.netlify.app/" target="_blank" class="flex items-center justify-between text-[#c0c7cf] hover:text-[#38bdf8] px-2 py-2 rounded-lg text-sm transition-all hover:bg-[#181818] group">
+        <a href="https://sergiomolina-fotografia.github.io/Portafolio/index.html" class="flex items-center justify-between text-[#c0c7cf] hover:text-[#38bdf8] px-2 py-2 rounded-lg text-sm transition-all hover:bg-[#181818] group">
           <div class="flex items-center gap-2">
             <span class="material-symbols-outlined text-[18px] text-[#8b9199] group-hover:text-[#38bdf8] transition-colors">visibility</span>
             <span>Ver Portafolio</span>
@@ -142,83 +161,101 @@
     </aside>
 
     <!-- Área de Contenido Principal -->
-    <main class="flex-1 overflow-y-auto custom-scrollbar p-4 sm:p-6 md:p-8">
-      
+    <main class="flex-1 overflow-y-auto custom-scrollbar p-3.5 sm:p-6 md:p-8">
       <!-- Título de Sección -->
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-[#242424] mb-6">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 pb-4 sm:pb-6 border-b border-[#242424] mb-4 sm:mb-6">
         <div>
-          <span class="px-2.5 py-0.5 bg-[#005580]/40 border border-[#005580] text-[#38bdf8] text-[11px] font-semibold rounded uppercase tracking-wider">Gestión de Álbumes</span>
-          <h1 class="text-2xl sm:text-3xl font-headline font-bold text-white tracking-tight mt-1.5">Galerías Publicadas y Registradas</h1>
-          <p class="text-xs sm:text-sm text-[#888888] mt-1">Álbumes escolares y coberturas conectadas en vivo con Supabase.</p>
+          <span class="px-2.5 py-0.5 bg-[#005580]/40 border border-[#005580] text-[#38bdf8] text-[10px] sm:text-[11px] font-semibold rounded uppercase tracking-wider">Gestión de Álbumes</span>
+          <h1 class="text-xl sm:text-3xl font-headline font-bold text-white tracking-tight mt-1 sm:mt-1.5">Galerías Publicadas y Registradas</h1>
+          <p class="text-[11px] sm:text-xs text-[#888888] mt-0.5 sm:mt-1">Álbumes escolares y coberturas conectadas en vivo con Supabase.</p>
         </div>
-        <a href="cargas.html" class="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-[#005580] hover:bg-[#0077b3] border border-[#0088cc] text-white text-xs sm:text-sm font-semibold transition-all shadow-lg active:scale-95">
+        <a href="cargas.html" class="inline-flex items-center justify-center gap-2 px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-xl bg-[#005580] hover:bg-[#0077b3] border border-[#0088cc] text-white text-xs sm:text-sm font-semibold transition-all shadow-lg active:scale-95 whitespace-nowrap self-start sm:self-auto">
           <span class="material-symbols-outlined text-[18px]">add_circle</span>
           <span>+ Cargar Nueva Galería</span>
         </a>
       </div>
 
-      <!-- Métricas Superiores -->
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
-        <div class="bg-[#181818] border border-[#242424] rounded-xl p-4 flex items-center justify-between shadow-sm">
+      <!-- Métricas Superiores: 3 Columnas compactas -->
+      <div class="grid grid-cols-3 gap-2 sm:gap-4 mb-4 sm:mb-6">
+        <div class="bg-[#181818] border border-[#242424] rounded-xl p-2.5 sm:p-4 flex items-center justify-between shadow-sm">
           <div>
-            <p class="text-[10px] font-mono text-[#888888] uppercase tracking-wider">Total Registradas</p>
-            <p class="text-2xl font-bold font-mono text-white mt-0.5" id="lblTotalGalerias">0</p>
-            <span class="text-[11px] text-[#666666]">Sincronizadas con Supabase</span>
+            <p class="text-[9px] sm:text-[10px] font-mono text-[#888888] uppercase tracking-wider">Total</p>
+            <p class="text-lg sm:text-2xl font-bold font-mono text-white mt-0.5" id="lblTotalGalerias">0</p>
+            <span class="text-[9px] sm:text-[11px] text-[#666666] hidden sm:inline">Sincronizadas</span>
           </div>
-          <div class="w-10 h-10 rounded-lg bg-[#141414] border border-[#2e2e2e] flex items-center justify-center text-[#38bdf8]">
-            <span class="material-symbols-outlined text-[22px]">collections_bookmark</span>
+          <div class="w-7 h-7 sm:w-10 sm:h-10 rounded-lg bg-[#141414] border border-[#2e2e2e] flex items-center justify-center text-[#38bdf8] shrink-0">
+            <span class="material-symbols-outlined text-[16px] sm:text-[22px]">collections_bookmark</span>
           </div>
         </div>
 
-        <div class="bg-[#181818] border border-[#242424] rounded-xl p-4 flex items-center justify-between shadow-sm">
+        <div class="bg-[#181818] border border-[#242424] rounded-xl p-2.5 sm:p-4 flex items-center justify-between shadow-sm">
           <div>
-            <p class="text-[10px] font-mono text-[#888888] uppercase tracking-wider">Álbumes Públicos</p>
-            <p class="text-2xl font-bold font-mono text-[#38bdf8] mt-0.5" id="lblPublicasCount">0</p>
-            <span class="text-[11px] text-[#666666]">Visibles en Directorio</span>
+            <p class="text-[9px] sm:text-[10px] font-mono text-[#888888] uppercase tracking-wider">Públicas</p>
+            <p class="text-lg sm:text-2xl font-bold font-mono text-[#38bdf8] mt-0.5" id="lblPublicasCount">0</p>
+            <span class="text-[9px] sm:text-[11px] text-[#666666] hidden sm:inline">En Directorio</span>
           </div>
-          <div class="w-10 h-10 rounded-lg bg-[#004466]/40 border border-[#0088cc]/60 flex items-center justify-center text-[#38bdf8]">
-            <span class="material-symbols-outlined text-[22px]">public</span>
+          <div class="w-7 h-7 sm:w-10 sm:h-10 rounded-lg bg-[#004466]/40 border border-[#0088cc]/60 flex items-center justify-center text-[#38bdf8] shrink-0">
+            <span class="material-symbols-outlined text-[16px] sm:text-[22px]">public</span>
           </div>
         </div>
 
-        <div class="bg-[#181818] border border-[#242424] rounded-xl p-4 flex items-center justify-between shadow-sm">
+        <div class="bg-[#181818] border border-[#242424] rounded-xl p-2.5 sm:p-4 flex items-center justify-between shadow-sm">
           <div>
-            <p class="text-[10px] font-mono text-[#888888] uppercase tracking-wider">Privadas con Clave</p>
-            <p class="text-2xl font-bold font-mono text-[#facc15] mt-0.5" id="lblPrivadasCount">0</p>
-            <span class="text-[11px] text-[#666666]">Acceso Exclusivo con PIN</span>
+            <p class="text-[9px] sm:text-[10px] font-mono text-[#888888] uppercase tracking-wider">Con Clave</p>
+            <p class="text-lg sm:text-2xl font-bold font-mono text-[#facc15] mt-0.5" id="lblPrivadasCount">0</p>
+            <span class="text-[9px] sm:text-[11px] text-[#666666] hidden sm:inline">Con PIN</span>
           </div>
-          <div class="w-10 h-10 rounded-lg bg-amber-950/30 border border-amber-500/40 flex items-center justify-center text-[#facc15]">
-            <span class="material-symbols-outlined text-[22px]">lock</span>
+          <div class="w-7 h-7 sm:w-10 sm:h-10 rounded-lg bg-amber-950/30 border border-amber-500/40 flex items-center justify-center text-[#facc15] shrink-0">
+            <span class="material-symbols-outlined text-[16px] sm:text-[22px]">lock</span>
           </div>
         </div>
       </div>
 
       <!-- Barra de Filtros y Búsqueda -->
-      <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 bg-[#181818] p-3 rounded-xl border border-[#242424] mb-6">
+      <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5 sm:gap-3 bg-[#181818] p-2.5 sm:p-3 rounded-xl border border-[#242424] mb-4 sm:mb-6">
         <div class="relative flex-1 max-w-md">
           <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-[#777777] text-[18px]">search</span>
-          <input type="text" id="inputBusqueda" onkeyup="filtrarLista()" placeholder="Buscar por colegio, evento o ID Drive..." class="w-full bg-[#111111] border border-[#2e2e2e] focus:border-[#38bdf8] rounded-lg pl-9 pr-3 py-2 text-xs sm:text-sm text-white outline-none transition-colors">
+          <input type="text" id="inputBusqueda" onkeyup="filtrarLista()" placeholder="Buscar por colegio, evento o ID Drive..." class="w-full bg-[#111111] border border-[#2e2e2e] focus:border-[#38bdf8] rounded-lg pl-9 pr-3 py-1.5 sm:py-2 text-xs sm:text-sm text-white outline-none transition-colors">
         </div>
-        <div class="flex items-center gap-1.5 self-start sm:self-auto">
-          <button onclick="cambiarFiltro('todas', this)" class="btn-filtro px-3 py-1.5 rounded-lg text-xs font-semibold bg-[#004466] border border-[#0088cc] text-white">Todas</button>
-          <button onclick="cambiarFiltro('publicas', this)" class="btn-filtro px-3 py-1.5 rounded-lg text-xs font-medium bg-[#141414] border border-[#262626] text-[#888888] hover:text-white">Públicas</button>
-          <button onclick="cambiarFiltro('privadas', this)" class="btn-filtro px-3 py-1.5 rounded-lg text-xs font-medium bg-[#141414] border border-[#262626] text-[#888888] hover:text-white">Privadas</button>
-          <button onclick="cargarColecciones()" title="Refrescar lista" class="p-2 rounded-lg bg-[#141414] border border-[#262626] text-[#888888] hover:text-[#38bdf8] transition-colors cursor-pointer">
+        <div class="flex items-center gap-1.5 self-start sm:self-auto overflow-x-auto w-full sm:w-auto">
+          <button onclick="cambiarFiltro('todas', this)" class="btn-filtro px-3 py-1.5 rounded-lg text-[11px] sm:text-xs font-semibold bg-[#004466] border border-[#0088cc] text-white whitespace-nowrap">Todas</button>
+          <button onclick="cambiarFiltro('publicas', this)" class="btn-filtro px-3 py-1.5 rounded-lg text-[11px] sm:text-xs font-medium bg-[#141414] border border-[#262626] text-[#888888] hover:text-white whitespace-nowrap">Públicas</button>
+          <button onclick="cambiarFiltro('privadas', this)" class="btn-filtro px-3 py-1.5 rounded-lg text-[11px] sm:text-xs font-medium bg-[#141414] border border-[#262626] text-[#888888] hover:text-white whitespace-nowrap">Privadas</button>
+          <button onclick="cargarColecciones()" title="Refrescar lista" class="p-1.5 sm:p-2 rounded-lg bg-[#141414] border border-[#262626] text-[#888888] hover:text-[#38bdf8] transition-colors shrink-0">
             <span class="material-symbols-outlined text-[16px]">refresh</span>
           </button>
         </div>
       </div>
 
-      <!-- Cuadrícula Dinámica de Álbumes (100% Reales de Supabase) -->
-      <div id="gridGalerias" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <!-- Cuadrícula Dinámica de Álbumes: 2 Columnas compactas en móvil (< 640px) y 3 en Desktop -->
+      <div id="gridGalerias" class="grid grid-cols-2 lg:grid-cols-3 gap-2.5 sm:gap-4">
         <div class="col-span-full py-16 text-center border border-dashed border-[#262626] rounded-xl bg-[#141414]/50">
           <div class="w-8 h-8 border-2 border-[#38bdf8] border-t-transparent rounded-full animate-spin mx-auto mb-3"></div>
-          <p class="text-sm text-white font-medium">Consultando galerías en Supabase...</p>
+          <p class="text-xs sm:text-sm text-white font-medium">Consultando galerías en Supabase...</p>
         </div>
       </div>
-
     </main>
   </div>
+
+  <!-- Barra Móvil Fija Inferior (< 768px) -->
+  <nav class="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#141414] border-t border-[#262626] px-2 py-1.5 flex justify-around items-center">
+    <a href="panel.html" class="flex flex-col items-center text-[#38bdf8] py-1 px-2">
+      <span class="material-symbols-outlined text-[20px]">photo_library</span>
+      <span class="text-[10px] font-semibold mt-0.5">Galerías</span>
+    </a>
+    <a href="cargas.html" class="flex flex-col items-center text-[#888888] hover:text-white py-1 px-2">
+      <span class="material-symbols-outlined text-[20px]">cloud_upload</span>
+      <span class="text-[10px] font-medium mt-0.5">Cargas</span>
+    </a>
+    <a href="precios.html" class="flex flex-col items-center text-[#888888] hover:text-white py-1 px-2">
+      <span class="material-symbols-outlined text-[20px]">payments</span>
+      <span class="text-[10px] font-medium mt-0.5">Tarifas</span>
+    </a>
+    <a href="metricas.html" class="flex flex-col items-center text-[#888888] hover:text-white py-1 px-2">
+      <span class="material-symbols-outlined text-[20px]">insights</span>
+      <span class="text-[10px] font-medium mt-0.5">Métricas</span>
+    </a>
+  </nav>
 
   <script>
     const CORREO_AUTORIZADO = 'molinaoksergio@gmail.com';
@@ -229,9 +266,9 @@
     let listaGlobal = [];
     let filtroActivo = 'todas';
 
-    // 1. Guardián Resiliente: Protege el acceso y valida estrictamente la cuenta autorizada
-    async function verificarGuardianAcceso() {
-      // A) Comprobar sesión de clave o sesión previa autorizada
+    // 1. Guardián Resiliente: NO expulsa a ciegas si el usuario ya está autenticado
+    async function verificarGuardiánAcceso() {
+      // A) Comprobar sesión de clave o sesión previa válida en sessionStorage
       const authLocal = sessionStorage.getItem('admin_auth') === 'true';
       const emailLocal = (sessionStorage.getItem('admin_email') || '').toLowerCase().trim();
       if (authLocal && emailLocal === CORREO_AUTORIZADO) {
@@ -251,7 +288,7 @@
         } catch (_) {}
       }
 
-      // C) Comprobar cookie HttpOnly de /api/session si existe endpoint
+      // C) Comprobar cookie HttpOnly de /api/session si el backend está en el mismo host
       try {
         const res = await fetch('/api/session', { method: 'GET', credentials: 'include' });
         if (res.ok) {
@@ -264,7 +301,7 @@
         }
       } catch (_) {}
 
-      // Si ninguna autenticación pasó, redirigir a index.html limpio
+      // Si ninguna autenticación pasó, redirigir a index.html
       window.location.href = 'index.html?unauthorized=1';
       return false;
     }
@@ -301,7 +338,7 @@
         }
       }
 
-      // Combinar con respaldo local si existe
+      // Combinar con respaldo local
       try {
         const locales = JSON.parse(localStorage.getItem('galerias_locales') || '[]');
         locales.forEach(loc => {
@@ -344,9 +381,9 @@
         grid.innerHTML = `
           <div class="col-span-full py-16 text-center border border-dashed border-[#262626] rounded-xl bg-[#141414]/50">
             <span class="material-symbols-outlined text-[36px] text-[#666666] mb-2">folder_open</span>
-            <h3 class="text-base text-white font-semibold">No se encontraron álbumes</h3>
-            <p class="text-xs text-[#888888] max-w-sm mx-auto mt-1 mb-4">No hay galerías registradas bajo los filtros actuales.</p>
-            <a href="cargas.html" class="inline-flex items-center gap-1.5 px-4 py-2 bg-[#005580] hover:bg-[#0077b3] text-white text-xs font-semibold rounded-lg transition-colors">
+            <h3 class="text-sm sm:text-base text-white font-semibold">No se encontraron álbumes</h3>
+            <p class="text-[11px] sm:text-xs text-[#888888] max-w-sm mx-auto mt-1 mb-4">No hay galerías registradas bajo los filtros actuales.</p>
+            <a href="cargas.html" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 sm:px-4 sm:py-2 bg-[#005580] hover:bg-[#0077b3] text-white text-xs font-semibold rounded-lg transition-colors">
               <span class="material-symbols-outlined text-[16px]">add</span>
               <span>Cargar Nueva Galería</span>
             </a>
@@ -360,42 +397,43 @@
         const driveUrl = item.drive_url || '';
         const folderId = extraerIdDrive(driveUrl);
         let portada = item.portada_url || item.portada || '';
+
         if (!portada && folderId) {
           portada = `https://lh3.googleusercontent.com/d/${folderId}=w600`;
         }
 
         return `
-          <div class="bg-[#181818] border border-[#242424] hover:border-[#005580] rounded-xl overflow-hidden flex flex-col justify-between transition-all shadow-md">
+          <div class="bg-[#181818] border border-[#242424] hover:border-[#005580] rounded-xl overflow-hidden flex flex-col justify-between transition-all shadow-md group">
             <div class="relative aspect-[16/10] bg-[#111111] overflow-hidden">
               ${portada ? `
-                <img src="${portada}" alt="${item.titulo}" loading="lazy" class="w-full h-full object-cover" onerror="this.parentElement.innerHTML='<div class=\\\'flex flex-col items-center justify-center h-full text-[#666] text-xs gap-1\\\'><span class=\\\'material-symbols-outlined text-[28px]\\\'>photo_camera</span><span>Sin Portada</span></div>'">
+                <img src="${portada}" alt="${item.titulo}" loading="lazy" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" onerror="this.parentElement.innerHTML='<div class=\\'flex flex-col items-center justify-center h-full text-[#666] text-xs gap-1\\'><span class=\\'material-symbols-outlined text-[24px]\\'>photo_camera</span><span class=\\'text-[10px]\\'>Sin Portada</span></div>'">
               ` : `
                 <div class="flex flex-col items-center justify-center h-full text-[#666] text-xs gap-1">
-                  <span class="material-symbols-outlined text-[28px]">photo_camera</span>
-                  <span>Sin Portada</span>
+                  <span class="material-symbols-outlined text-[24px]">photo_camera</span>
+                  <span class="text-[10px]">Sin Portada</span>
                 </div>
               `}
-              <div class="absolute top-2.5 left-2.5">
-                <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-mono font-semibold uppercase tracking-wider backdrop-blur-md ${esPriv ? 'bg-amber-950/80 border border-amber-500/50 text-[#facc15]' : 'bg-[#004466]/80 border border-[#0088cc]/60 text-[#38bdf8]'}">
-                  <span class="material-symbols-outlined text-[12px]">${esPriv ? 'lock' : 'public'}</span>
+              <div class="absolute top-2 left-2">
+                <span class="inline-flex items-center gap-0.5 sm:gap-1 px-1.5 sm:px-2 py-0.5 rounded text-[9px] sm:text-[10px] font-mono font-semibold uppercase tracking-wider backdrop-blur-md ${esPriv ? 'bg-amber-950/80 border border-amber-500/50 text-[#facc15]' : 'bg-[#004466]/80 border border-[#0088cc]/60 text-[#38bdf8]'}">
+                  <span class="material-symbols-outlined text-[10px] sm:text-[12px]">${esPriv ? 'lock' : 'public'}</span>
                   <span>${esPriv ? 'Privada' : 'Pública'}</span>
                 </span>
               </div>
             </div>
 
-            <div class="p-4 flex-1 flex flex-col justify-between space-y-3">
+            <div class="p-2.5 sm:p-4 flex-1 flex flex-col justify-between space-y-2 sm:space-y-3">
               <div>
-                <h3 class="text-sm font-semibold text-white leading-snug line-clamp-2">${item.titulo || 'Evento Escolar sin Título'}</h3>
-                <div class="mt-2 space-y-1 font-mono text-[11px] text-[#777777]">
+                <h3 class="text-xs sm:text-sm font-semibold text-white leading-snug line-clamp-2">${item.titulo || 'Evento Escolar sin Título'}</h3>
+                <div class="mt-1.5 space-y-0.5 font-mono text-[10px] sm:text-[11px] text-[#777777]">
                   <p class="truncate" title="${driveUrl}">Drive: ${folderId || 'Sin ID'}</p>
                   ${esPriv && item.password ? `<p class="text-[#facc15] font-semibold">PIN: ${item.password}</p>` : ''}
                 </div>
               </div>
 
-              <div class="pt-3 border-t border-[#222222] flex items-center justify-between gap-2">
-                <button onclick="eliminarGaleria('${item.id}', '${driveUrl}', '${(item.titulo || 'este evento').replace(/'/g, "\\\'")}', event)" class="w-full py-1.5 px-3 rounded-lg bg-red-950/20 hover:bg-red-950/50 border border-red-500/30 hover:border-red-500/70 text-red-400 text-xs font-semibold flex items-center justify-center gap-1 transition-all cursor-pointer">
-                  <span class="material-symbols-outlined text-[16px]">delete</span>
-                  <span>Eliminar Galería</span>
+              <div class="pt-2 sm:pt-3 border-t border-[#222222] flex items-center justify-between gap-2">
+                <button onclick="eliminarGaleria('${item.id}', '${driveUrl}', '${(item.titulo || 'este evento').replace(/'/g, "\\\'")}', event)" class="w-full py-1.5 px-2.5 rounded-lg bg-red-950/20 hover:bg-red-950/50 border border-red-500/30 hover:border-red-500/70 text-red-400 text-[11px] sm:text-xs font-semibold flex items-center justify-center gap-1 transition-all active:scale-95 cursor-pointer">
+                  <span class="material-symbols-outlined text-[14px] sm:text-[16px]">delete</span>
+                  <span>Eliminar Álbum</span>
                 </button>
               </div>
             </div>
@@ -436,10 +474,10 @@
     function cambiarFiltro(tipo, btn) {
       filtroActivo = tipo;
       document.querySelectorAll('.btn-filtro').forEach(b => {
-        b.className = 'btn-filtro px-3 py-1.5 rounded-lg text-xs font-medium bg-[#141414] border border-[#262626] text-[#888888] hover:text-white';
+        b.className = 'btn-filtro px-3 py-1.5 rounded-lg text-[11px] sm:text-xs font-medium bg-[#141414] border border-[#262626] text-[#888888] hover:text-white whitespace-nowrap';
       });
       if (btn) {
-        btn.className = 'btn-filtro px-3 py-1.5 rounded-lg text-xs font-semibold bg-[#004466] border border-[#0088cc] text-white';
+        btn.className = 'btn-filtro px-3 py-1.5 rounded-lg text-[11px] sm:text-xs font-semibold bg-[#004466] border border-[#0088cc] text-white whitespace-nowrap';
       }
       renderizarTarjetas();
     }
@@ -489,9 +527,9 @@
       });
     }
 
-    // Inicialización segura
+    // Inicialización con Guardián
     window.addEventListener('DOMContentLoaded', async () => {
-      const ok = await verificarGuardianAcceso();
+      const ok = await verificarGuardiánAcceso();
       if (ok) {
         cargarColecciones();
       }

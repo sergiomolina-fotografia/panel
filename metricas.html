@@ -48,7 +48,7 @@
 <span class="text-white font-headline font-bold text-sm sm:text-lg tracking-tight">Métricas y Visitas</span>
 </div>
 </div>
-<!-- Accesos Superiores: Portafolio Oficial + Estado + Salir -->
+<!-- Accesos Superiores: Portafolio Oficial + Eventos + Estado + Salir -->
 <div class="flex items-center gap-1.5 sm:gap-2.5">
 <!-- 1. Enlace Oficial Portafolio GitHub sergiomolina-fotografia -->
 <a class="inline-flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3.5 py-1.5 rounded-lg border border-[#005580] hover:border-[#38bdf8] bg-[#102433] hover:bg-[#143247] text-[11px] sm:text-xs font-semibold text-[#38bdf8] hover:text-white transition-all shadow-sm active:scale-95 whitespace-nowrap" href="https://sergiomolina-fotografia.github.io/Portafolio/index.html" title="Ir a mi Portafolio Oficial">
@@ -57,12 +57,17 @@
 <span class="xs:hidden">Portafolio</span>
 <span class="material-symbols-outlined text-[12px] opacity-70 hidden sm:inline">open_in_new</span>
 </a>
-<!-- 2. Indicador Supabase Conectado -->
+<!-- 2. Enlace Accesos Rápidos a Eventos/Galerías -->
+<a class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#2e2e2e] hover:border-[#38bdf8]/60 bg-[#181818] hover:bg-[#202020] text-xs font-medium text-[#c0c7cf] hover:text-white transition-all active:scale-95 whitespace-nowrap" href="https://sergiomolina-fotografia.github.io/Portafolio/galerias.html" title="Ver Eventos y Galerías">
+<span class="material-symbols-outlined text-[16px] text-amber-400">photo_library</span>
+<span>Eventos</span>
+</a>
+<!-- 3. Indicador Supabase Conectado -->
 <div class="hidden lg:inline-flex items-center gap-1.5 px-2.5 py-1 bg-[#181818] border border-emerald-800/60 text-emerald-400 text-xs font-semibold rounded-full uppercase tracking-wider">
 <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
 <span class="text-[10px] font-mono">Supabase Conectado</span>
 </div>
-<!-- 3. Botón Salir / Logout -->
+<!-- 4. Botón Salir / Logout -->
 <button class="flex items-center gap-1 px-2.5 sm:px-3 py-1.5 rounded-lg border border-[#333333] hover:border-red-500/60 bg-[#181818] hover:bg-red-950/30 text-[11px] sm:text-xs font-medium text-[#c0c7cf] hover:text-red-400 transition-all active:scale-95" onclick="cerrarSesionAdmin()" title="Cerrar sesión">
 <span class="material-symbols-outlined text-[15px]">logout</span>
 <span class="hidden sm:inline">Salir</span>
@@ -99,6 +104,13 @@
 <div class="flex items-center gap-2.5">
 <span class="material-symbols-outlined text-[18px]">visibility</span>
 <span>Ver Portafolio</span>
+</div>
+<span class="material-symbols-outlined text-[14px]">open_in_new</span>
+</a>
+<a class="flex items-center justify-between text-[#c0c7cf] hover:text-amber-400 px-3 py-2 text-sm rounded-lg hover:bg-[#1b1b1b] transition-all" href="https://sergiomolina-fotografia.github.io/Portafolio/galerias.html">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-[18px] text-amber-400">photo_library</span>
+<span>Eventos y Álbumes</span>
 </div>
 <span class="material-symbols-outlined text-[14px]">open_in_new</span>
 </a>
@@ -142,6 +154,13 @@
 </div>
 <span class="material-symbols-outlined text-[14px] text-[#8b9199]">open_in_new</span>
 </a>
+<a class="flex items-center justify-between text-[#c0c7cf] hover:text-amber-400 px-2 py-2 rounded-lg text-sm transition-all hover:bg-[#181818] group" href="https://sergiomolina-fotografia.github.io/Portafolio/galerias.html">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-[#8b9199] group-hover:text-amber-400 transition-colors">photo_library</span>
+<span>Ver Eventos</span>
+</div>
+<span class="material-symbols-outlined text-[14px] text-[#8b9199]">open_in_new</span>
+</a>
 </div>
 </aside>
 <!-- Área de Contenido Principal -->
@@ -167,44 +186,62 @@
 </button>
 </div>
 </div>
-<!-- Panel de Control: Filtro de Dispositivo Propio / Exclusión de Visitas (1 solo clic) -->
-<div class="mb-6 p-4 rounded-2xl bg-[#161616] border border-[#262626] shadow-md flex flex-col md:flex-row items-start md:items-center justify-between gap-4 transition-all" id="panelExclusionDispositivo">
-<div class="flex items-start gap-3">
-<div class="w-10 h-10 rounded-xl bg-emerald-950/60 border border-emerald-500/50 flex items-center justify-center text-emerald-400 shrink-0 mt-0.5" id="boxStatusIcon">
-<span class="material-symbols-outlined text-[22px]" id="iconDispositivoStatus">phonelink_lock</span>
+<!-- ========================================================================= -->
+<!-- Piloto de Advertencia e Indicador Visual de Exclusión de Dispositivo Maestro -->
+<!-- (Ubicado justo debajo del título/accesos rápidos y arriba de los contadores) -->
+<!-- ========================================================================= -->
+<section class="mb-6 p-4 sm:p-5 rounded-2xl bg-[#161616] border transition-all duration-300 shadow-lg relative overflow-hidden" id="panelMasterDeviceBanner">
+<div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+<div class="flex items-start sm:items-center gap-3.5">
+<!-- Piloto Indicador LED -->
+<div class="relative shrink-0 mt-0.5 sm:mt-0">
+<div class="w-11 h-11 rounded-xl flex items-center justify-center transition-all duration-300" id="pilotBoxContainer">
+<span class="material-symbols-outlined text-[24px]" id="pilotIcon">shield</span>
+</div>
+<!-- Luz piloto / Ping animado -->
+<span class="absolute -top-1 -right-1 flex h-3.5 w-3.5">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75" id="pilotPing"></span>
+<span class="relative inline-flex rounded-full h-3.5 w-3.5" id="pilotDot"></span>
+</span>
 </div>
 <div>
 <div class="flex flex-wrap items-center gap-2">
-<h2 class="text-sm font-headline font-bold text-white tracking-tight">Filtro de Dispositivo Propio</h2>
-<span class="px-2 py-0.5 text-[10px] font-mono font-bold rounded-full border bg-emerald-950/70 border-emerald-500/60 text-emerald-400" id="badgeEstadoDispositivo">
-                EXCLUIDO (PROPIO)
+<span class="text-xs font-mono tracking-wider uppercase font-bold text-[#888888]" id="pilotPretitle">CONTROL DE DISPOSITIVO</span>
+<span class="px-2.5 py-0.5 text-[10px] sm:text-[11px] font-mono font-bold rounded-full border transition-all" id="badgeEstadoDispositivo">
+                VERIFICANDO ESTADO...
               </span>
 </div>
-<p class="text-xs text-[#a0a6b0] mt-1 leading-relaxed">
-              Configura este navegador como dispositivo personal (<code class="text-[#38bdf8] font-mono text-[11px]">ignorar_visita: true</code>) para que tus visitas, pruebas y clics en el portafolio no alteren las estadísticas públicas ni contadores.
+<h2 class="text-sm sm:text-base font-headline font-bold text-white tracking-tight mt-0.5" id="pilotTitle">
+              Verificando Dispositivo Maestro...
+            </h2>
+<p class="text-xs text-[#a0a6b0] mt-0.5 leading-relaxed" id="pilotDescription">
+              Analizando token <code class="text-[#38bdf8] font-mono text-[11px]">sergio_molina_master_device</code> y estado en almacenamiento local...
             </p>
-<div class="flex items-center gap-2 mt-1.5 text-[11px] font-mono text-[#777777]">
-<span>Consola:</span>
-<button class="hover:text-[#38bdf8] underline decoration-dotted transition-colors flex items-center gap-1" onclick="copiarComandoConsola()" title="Copiar comando">
-<span>localStorage.setItem('ignorar_visita', 'true')</span>
-<span class="material-symbols-outlined text-[13px]">content_copy</span>
+</div>
+</div>
+<!-- Acciones en 1 Clic -->
+<div class="flex items-center gap-2.5 w-full md:w-auto justify-end pt-2 md:pt-0 border-t md:border-t-0 border-[#242424]">
+<button class="w-full md:w-auto inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl font-mono text-xs font-bold shadow-md transition-all active:scale-95 cursor-pointer" id="btnToggleIgnorar" onclick="toggleExcluirMiDispositivo()" type="button">
+<span class="material-symbols-outlined text-[17px]" id="btnActionIcon">sync</span>
+<span id="lblBtnToggle">Alternar Estado</span>
+<span class="px-1.5 py-0.5 rounded bg-black/40 text-[9px] font-mono uppercase tracking-wider" id="btnBadgeShortcut">1-CLIC</span>
 </button>
 </div>
 </div>
-</div>
-<div class="flex items-center gap-3 w-full md:w-auto justify-end pt-2 md:pt-0 border-t md:border-t-0 border-[#222222]">
-<!-- Switch Conmutador Visual 1 Clic -->
-<button class="group w-full md:w-auto inline-flex items-center justify-between md:justify-center gap-3 px-4 py-2.5 rounded-xl border border-emerald-500/50 bg-emerald-950/40 hover:bg-emerald-900/50 text-white font-mono text-xs font-semibold shadow-sm transition-all active:scale-95 cursor-pointer" id="btnToggleIgnorar" onclick="toggleExcluirMiDispositivo()" type="button">
-<span class="flex items-center gap-2 text-left">
-<span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" id="dotToggleIndicator"></span>
-<span id="lblBtnToggle">Dispositivo propio: Excluido</span>
-</span>
-<span class="px-2 py-0.5 rounded bg-black/40 text-[10px] text-emerald-300 font-bold border border-emerald-500/30 group-hover:border-emerald-400/60">
-              1-CLIC
-            </span>
+<div class="mt-3 pt-3 border-t border-[#222222] flex flex-wrap items-center justify-between gap-2 text-[11px] font-mono text-[#777777]">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[14px] text-[#8b9199]">terminal</span>
+<span>Token maestro:</span>
+<button class="hover:text-[#38bdf8] underline decoration-dotted transition-colors flex items-center gap-1 text-left" onclick="copiarComandoConsola()" title="Copiar comando">
+<span class="truncate max-w-[280px] sm:max-w-none">localStorage.setItem('sergio_molina_master_device', 'true')</span>
+<span class="material-symbols-outlined text-[13px] shrink-0">content_copy</span>
 </button>
 </div>
+<div class="text-[10px] text-[#666666] hidden sm:block">
+            Protección de analítica activa contra visitas accidentales
+          </div>
 </div>
+</section>
 <!-- Feedback Dinámico -->
 <div class="hidden mb-6 p-4 rounded-xl border text-xs sm:text-sm font-mono flex items-start justify-between gap-2.5 transition-all shadow-lg" id="toastBox">
 <div class="flex items-start gap-2.5">
@@ -360,67 +397,93 @@
     let paginaActual = 1;
     const REGISTROS_POR_PAGINA = 20;
 
-    // Métodos para el Conmutador de Exclusión de Visitas Propias
+    // Métodos para el Piloto y Conmutador de Exclusión de Dispositivo Maestro
     function estaDispositivoExcluido() {
-      return localStorage.getItem('ignorar_visita') === 'true';
+      const tokenMaster = localStorage.getItem('sergio_molina_master_device');
+      const ignorar = localStorage.getItem('ignorar_visita');
+      return tokenMaster === 'true' || ignorar === 'true';
     }
 
     function actualizarInterfazExclusion() {
       const excluido = estaDispositivoExcluido();
+      const banner = document.getElementById('panelMasterDeviceBanner');
       const badge = document.getElementById('badgeEstadoDispositivo');
+      const pilotBox = document.getElementById('pilotBoxContainer');
+      const pilotIcon = document.getElementById('pilotIcon');
+      const pilotPing = document.getElementById('pilotPing');
+      const pilotDot = document.getElementById('pilotDot');
+      const pilotTitle = document.getElementById('pilotTitle');
+      const pilotDesc = document.getElementById('pilotDescription');
       const btnToggle = document.getElementById('btnToggleIgnorar');
       const lblToggle = document.getElementById('lblBtnToggle');
-      const dot = document.getElementById('dotToggleIndicator');
-      const icon = document.getElementById('iconDispositivoStatus');
-      const boxIcon = document.getElementById('boxStatusIcon');
+      const btnIcon = document.getElementById('btnActionIcon');
 
-      if (!badge || !btnToggle || !lblToggle) return;
+      if (!banner || !badge || !btnToggle || !lblToggle) return;
 
       if (excluido) {
-        // Estado: Dispositivo Propio Marcado (Excluido de mediciones)
-        badge.className = 'px-2 py-0.5 text-[10px] font-mono font-bold rounded-full border bg-emerald-950/70 border-emerald-500/60 text-emerald-400';
-        badge.textContent = 'EXCLUIDO (PROPIO)';
+        // LUZ VERDE FIJA: Dispositivo Maestro Excluido (No suma visitas al navegar)
+        banner.className = 'mb-6 p-4 sm:p-5 rounded-2xl bg-[#0f1f17] border border-emerald-500/40 transition-all duration-300 shadow-lg relative overflow-hidden';
+        
+        badge.className = 'px-2.5 py-0.5 text-[10px] sm:text-[11px] font-mono font-bold rounded-full border bg-emerald-950/80 border-emerald-500/60 text-emerald-300';
+        badge.textContent = 'DISPOSITIVO MAESTRO EXCLUIDO';
 
-        btnToggle.className = 'group w-full md:w-auto inline-flex items-center justify-between md:justify-center gap-3 px-4 py-2.5 rounded-xl border border-emerald-500/50 bg-emerald-950/40 hover:bg-emerald-900/50 text-white font-mono text-xs font-semibold shadow-sm transition-all active:scale-95 cursor-pointer';
-        lblToggle.textContent = 'Dispositivo propio: Excluido';
-        if (dot) dot.className = 'w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse';
-        if (icon) icon.textContent = 'phonelink_lock';
-        if (boxIcon) boxIcon.className = 'w-10 h-10 rounded-xl bg-emerald-950/60 border border-emerald-500/50 flex items-center justify-center text-emerald-400 shrink-0 mt-0.5';
+        if (pilotBox) pilotBox.className = 'w-11 h-11 rounded-xl bg-emerald-950/80 border border-emerald-500/60 flex items-center justify-center text-emerald-400 transition-all shadow-sm';
+        if (pilotIcon) pilotIcon.textContent = 'verified_user';
+        if (pilotPing) pilotPing.className = 'animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75';
+        if (pilotDot) pilotDot.className = 'relative inline-flex rounded-full h-3.5 w-3.5 bg-emerald-400 shadow-[0_0_12px_#34d399]';
+
+        if (pilotTitle) pilotTitle.textContent = 'Dispositivo Maestro Excluido (No suma visitas)';
+        if (pilotDesc) pilotDesc.innerHTML = 'Este navegador está verificado como tu equipo de trabajo principal. Tus aperturas, recorridos y clics <strong class="text-emerald-300 font-semibold">no alteran las estadísticas reales</strong>.';
+
+        btnToggle.className = 'w-full md:w-auto inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border border-emerald-500/50 bg-emerald-900/40 hover:bg-emerald-900/60 text-white font-mono text-xs font-bold shadow-md transition-all active:scale-95 cursor-pointer';
+        lblToggle.textContent = 'Exclusión Activa (Modo Maestro)';
+        if (btnIcon) btnIcon.textContent = 'check_circle';
       } else {
-        // Estado: Dispositivo Normal (Incluido)
-        badge.className = 'px-2 py-0.5 text-[10px] font-mono font-bold rounded-full border bg-amber-950/60 border-amber-500/60 text-amber-400';
-        badge.textContent = 'INCLUIDO EN VISITAS';
+        // PILOTO ÁMBAR/ROJO DE ADVERTENCIA: Dispositivo Sin Exclusión con reactivación en 1 clic
+        banner.className = 'mb-6 p-4 sm:p-5 rounded-2xl bg-[#23120f] border border-amber-500/50 transition-all duration-300 shadow-lg relative overflow-hidden';
 
-        btnToggle.className = 'group w-full md:w-auto inline-flex items-center justify-between md:justify-center gap-3 px-4 py-2.5 rounded-xl border border-amber-500/50 bg-amber-950/40 hover:bg-amber-900/50 text-white font-mono text-xs font-semibold shadow-sm transition-all active:scale-95 cursor-pointer';
-        lblToggle.textContent = 'Dispositivo propio: Incluido';
-        if (dot) dot.className = 'w-2.5 h-2.5 rounded-full bg-amber-400';
-        if (icon) icon.textContent = 'phonelink_setup';
-        if (boxIcon) boxIcon.className = 'w-10 h-10 rounded-xl bg-amber-950/60 border border-amber-500/50 flex items-center justify-center text-amber-400 shrink-0 mt-0.5';
+        badge.className = 'px-2.5 py-0.5 text-[10px] sm:text-[11px] font-mono font-bold rounded-full border bg-amber-950/80 border-amber-500/70 text-amber-300 animate-pulse';
+        badge.textContent = 'ADVERTENCIA: DISPOSITIVO SIN EXCLUSIÓN';
+
+        if (pilotBox) pilotBox.className = 'w-11 h-11 rounded-xl bg-amber-950/90 border border-amber-500/70 flex items-center justify-center text-amber-400 transition-all shadow-sm';
+        if (pilotIcon) pilotIcon.textContent = 'warning';
+        if (pilotPing) pilotPing.className = 'animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-80';
+        if (pilotDot) pilotDot.className = 'relative inline-flex rounded-full h-3.5 w-3.5 bg-amber-400 shadow-[0_0_12px_#f59e0b]';
+
+        if (pilotTitle) pilotTitle.textContent = '¡Atención! Este navegador computará visitas como público';
+        if (pilotDesc) pilotDesc.innerHTML = 'No se detectó el token maestro. Cualquier visita o clic que realices se registrará en las métricas de Supabase como un cliente normal.';
+
+        btnToggle.className = 'w-full md:w-auto inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border border-amber-400/80 bg-amber-500 hover:bg-amber-400 text-black font-mono text-xs font-bold shadow-lg transition-all active:scale-95 cursor-pointer';
+        lblToggle.textContent = 'Activar Exclusión en 1-Clic';
+        if (btnIcon) btnIcon.textContent = 'verified';
       }
     }
 
     function toggleExcluirMiDispositivo() {
       const actual = estaDispositivoExcluido();
       if (actual) {
+        // Desactivar exclusión
+        localStorage.removeItem('sergio_molina_master_device');
         localStorage.removeItem('ignorar_visita');
         localStorage.setItem('ignorar_visita', 'false');
         actualizarInterfazExclusion();
-        mostrarToast('Este dispositivo ahora computa visitas públicas (Incluido).', 'info');
+        mostrarToast('Exclusión desactivada: Este dispositivo computará visitas públicas normalmente.', 'info');
       } else {
+        // Activar exclusión con token maestro de 1 clic
+        localStorage.setItem('sergio_molina_master_device', 'true');
         localStorage.setItem('ignorar_visita', 'true');
         actualizarInterfazExclusion();
-        mostrarToast('¡Dispositivo marcado como propio! Tus visitas quedan excluidas en este navegador.', 'ok');
+        mostrarToast('¡Luz verde activada! Dispositivo Maestro Excluido con éxito (No suma visitas).', 'ok');
       }
-      // Re-cargar métricas para reflejar consistencia
       cargarMetricas();
     }
 
     function copiarComandoConsola() {
-      const comando = "localStorage.setItem('ignorar_visita', 'true');";
+      const comando = "localStorage.setItem('sergio_molina_master_device', 'true'); localStorage.setItem('ignorar_visita', 'true');";
       navigator.clipboard.writeText(comando).then(() => {
-        mostrarToast('Comando de consola copiado al portapapeles.', 'ok');
+        mostrarToast('Comando de token maestro copiado al portapapeles.', 'ok');
       }).catch(() => {
-        mostrarToast(`Ejecutar: ${comando}`, 'info');
+        mostrarToast(`Ejecutar en consola: ${comando}`, 'info');
       });
     }
 
@@ -769,8 +832,9 @@
 
     // Inicialización con Guardián y configuración de exclusión
     window.addEventListener('DOMContentLoaded', async () => {
-      // Si aún no está definido ignorar_visita, por defecto en el panel de admin marcar como true para no contaminar
-      if (localStorage.getItem('ignorar_visita') === null) {
+      // Si aún no está definido token o ignorar_visita, por defecto en el panel de admin marcar como maestro
+      if (localStorage.getItem('sergio_molina_master_device') === null && localStorage.getItem('ignorar_visita') === null) {
+        localStorage.setItem('sergio_molina_master_device', 'true');
         localStorage.setItem('ignorar_visita', 'true');
       }
       actualizarInterfazExclusion();

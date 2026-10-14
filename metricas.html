@@ -233,15 +233,27 @@
 <span class="font-mono font-semibold text-white" id="row-visitas-index">0</span>
 </div>
 <div class="flex items-center justify-between text-xs text-[#aaaaaa] py-2 border-b border-[#222222]">
-<span>/eventos.html (Galerías)</span>
+<span>/eventos.html (Eventos Escolares)</span>
 <span class="font-mono font-semibold text-white" id="row-visitas-eventos">0</span>
 </div>
 <div class="flex items-center justify-between text-xs text-[#aaaaaa] py-2 border-b border-[#222222]">
-<span>/cargas.html (Subida)</span>
-<span class="font-mono font-semibold text-white" id="row-visitas-cargas">0</span>
+<span>/sesiones.html (Sesiones)</span>
+<span class="font-mono font-semibold text-white" id="row-visitas-sesiones">0</span>
+</div>
+<div class="flex items-center justify-between text-xs text-[#aaaaaa] py-2 border-b border-[#222222]">
+<span>/postales.html (Postales)</span>
+<span class="font-mono font-semibold text-white" id="row-visitas-postales">0</span>
+</div>
+<div class="flex items-center justify-between text-xs text-[#aaaaaa] py-2 border-b border-[#222222]">
+<span>/ensayos.html (Ensayos)</span>
+<span class="font-mono font-semibold text-white" id="row-visitas-ensayos">0</span>
+</div>
+<div class="flex items-center justify-between text-xs text-[#aaaaaa] py-2 border-b border-[#222222]">
+<span>/miscelaneas.html (Misceláneas)</span>
+<span class="font-mono font-semibold text-white" id="row-visitas-miscelaneas">0</span>
 </div>
 <div class="flex items-center justify-between text-xs text-[#aaaaaa] py-2">
-<span>Otras Páginas</span>
+<span>Otras Páginas (/sobre-mi.html, etc.)</span>
 <span class="font-mono font-semibold text-white" id="row-visitas-otras">0</span>
 </div>
 </div>
@@ -696,6 +708,72 @@
       });
     }
 
+    function actualizarDesglose(visitas) {
+      let visIndex = 0;
+      let visEventos = 0;
+      let visSesiones = 0;
+      let visPostales = 0;
+      let visEnsayos = 0;
+      let visMiscelaneas = 0;
+      let visOtras = 0;
+
+      visitas.forEach(row => {
+        const pag = String(row.pagina || row.page || row.recurso || row.url || '').toLowerCase().trim();
+        const det = String(row.detalle || row.album || row.nombre || row.titulo || '').toLowerCase().trim();
+
+        // Excluir de forma estricta cualquier registro administrativo
+        if (
+          pag.includes('cargas') ||
+          pag.includes('panel') ||
+          pag.includes('precios') ||
+          pag.includes('metricas') ||
+          det.includes('cargas') ||
+          det.includes('panel') ||
+          det.includes('precios') ||
+          det.includes('métricas') ||
+          det.includes('metricas')
+        ) {
+          return;
+        }
+
+        // Clasificación exclusiva para el portafolio público
+        if (pag.includes('index.html') || pag === '/' || pag === '' || det.includes('inicio portafolio') || det.includes('portafolio principal')) {
+          visIndex++;
+        } else if (pag.includes('eventos.html') || det.includes('eventos') || det.includes('escolares')) {
+          visEventos++;
+        } else if (pag.includes('sesiones.html') || det.includes('sesiones')) {
+          visSesiones++;
+        } else if (pag.includes('postales.html') || det.includes('postales')) {
+          visPostales++;
+        } else if (pag.includes('ensayos.html') || det.includes('ensayos')) {
+          visEnsayos++;
+        } else if (pag.includes('miscelaneas.html') || det.includes('misceláneas') || det.includes('miscelaneas')) {
+          visMiscelaneas++;
+        } else if (pag.includes('sobre-mi.html') || pag.includes('privadas.html') || pag.includes('galeria.html') || det.includes('sobre mí') || det.includes('sobre mi') || det.includes('privadas')) {
+          visOtras++;
+        } else {
+          // Si es cualquier otra página pública externa
+          visOtras++;
+        }
+      });
+
+      const rowIdx = document.getElementById('row-visitas-index');
+      const rowEvt = document.getElementById('row-visitas-eventos');
+      const rowSes = document.getElementById('row-visitas-sesiones');
+      const rowPos = document.getElementById('row-visitas-postales');
+      const rowEns = document.getElementById('row-visitas-ensayos');
+      const rowMis = document.getElementById('row-visitas-miscelaneas');
+      const rowOtr = document.getElementById('row-visitas-otras');
+
+      if (rowIdx) rowIdx.innerText = visIndex;
+      if (rowEvt) rowEvt.innerText = visEventos;
+      if (rowSes) rowSes.innerText = visSesiones;
+      if (rowPos) rowPos.innerText = visPostales;
+      if (rowEns) rowEns.innerText = visEnsayos;
+      if (rowMis) rowMis.innerText = visMiscelaneas;
+      if (rowOtr) rowOtr.innerText = visOtras;
+    }
+
     function renderDashboard(data) {
       const filtered = filterDataByPeriod(data, selectedPeriod);
 
@@ -703,11 +781,6 @@
       let albumesExplorados = 0;
       let fotosHD = 0;
       let whatsappClicks = 0;
-
-      let pIndex = 0;
-      let pEventos = 0;
-      let pCargas = 0;
-      let pOtras = 0;
       const albumCounters = {};
 
       filtered.forEach(row => {
@@ -728,11 +801,6 @@
           whatsappClicks++;
         }
 
-        if (pagina.includes('index') || pagina === '/' || pagina === '') pIndex++;
-        else if (pagina.includes('eventos')) pEventos++;
-        else if (pagina.includes('cargas')) pCargas++;
-        else pOtras++;
-
         if (detalle && (tipo.includes('album') || tipo.includes('galeria') || pagina.includes('eventos'))) {
           const key = detalle.trim();
           albumCounters[key] = (albumCounters[key] || 0) + 1;
@@ -750,15 +818,8 @@
       if (elFotos) elFotos.innerText = fotosHD;
       if (elWsp) elWsp.innerText = whatsappClicks;
 
-      // Desglose
-      const rowIdx = document.getElementById('row-visitas-index');
-      const rowEvt = document.getElementById('row-visitas-eventos');
-      const rowCrg = document.getElementById('row-visitas-cargas');
-      const rowOtr = document.getElementById('row-visitas-otras');
-      if (rowIdx) rowIdx.innerText = pIndex;
-      if (rowEvt) rowEvt.innerText = pEventos;
-      if (rowCrg) rowCrg.innerText = pCargas;
-      if (rowOtr) rowOtr.innerText = pOtras;
+      // Desglose de visitas por página del portafolio
+      actualizarDesglose(filtered);
 
       // Ranking Álbumes
       const rankingBox = document.getElementById('ranking-albumes');
@@ -886,12 +947,13 @@
       });
       const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
       const url = URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.href = url;
-      link.download = `Metricas_SergioMolina_${new Date().toISOString().slice(0, 10)}.csv`;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
+      const link = document.createElement('link');
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `Metricas_SergioMolina_${new Date().toISOString().slice(0, 10)}.csv`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
       URL.revokeObjectURL(url);
     }
 

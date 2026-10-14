@@ -155,12 +155,12 @@
 <div class="flex items-center gap-2 text-xs font-semibold text-[#8b9199] uppercase tracking-wider">
 <a class="flex items-center gap-1.5 text-[#c0c7cf] hover:text-[#38bdf8] transition-colors" href="eventos.html">
 <span class="material-symbols-outlined text-[16px]">arrow_back</span>
-<span class="">Volver a Eventos</span>
+<span class="font-bold">VOLVER A EVENTOS</span>
 </a>
 <span class="text-[#333]">•</span>
 <a class="flex items-center gap-1.5 text-[#c0c7cf] hover:text-[#38bdf8] transition-colors" href="index.html">
 <span class="material-symbols-outlined text-[16px]">open_in_new</span>
-<span class="">Ver Portafolio</span>
+<span class="font-bold">VER PORTAFOLIO</span>
 </a>
 </div>
 <div class="flex items-center gap-2">
@@ -188,7 +188,7 @@
 <span class="">Total Visitas Web</span>
 <span class="material-symbols-outlined text-[#38bdf8] text-[20px]">visibility</span>
 </div>
-<div class="text-2xl sm:text-3xl font-headline font-bold text-white font-mono" id="val-visitas-web">15</div>
+<div class="text-2xl sm:text-3xl font-headline font-bold text-white font-mono" id="val-visitas-web">0</div>
 <p class="text-[11px] text-[#8b9199] mt-2">Cargas de página de clientes</p>
 </div>
 <div class="bg-[#181818] border border-[#262626] rounded-xl p-4 flex flex-col justify-between">
@@ -196,7 +196,7 @@
 <span class="">Álbumes Explorados</span>
 <span class="material-symbols-outlined text-[#38bdf8] text-[20px]">folder_open</span>
 </div>
-<div class="text-2xl sm:text-3xl font-headline font-bold text-white font-mono" id="val-albumes-abiertos">13</div>
+<div class="text-2xl sm:text-3xl font-headline font-bold text-white font-mono" id="val-albumes-abiertos">0</div>
 <p class="text-[11px] text-[#8b9199] mt-2">Galerías y eventos abiertos</p>
 </div>
 <div class="bg-[#181818] border border-[#262626] rounded-xl p-4 flex flex-col justify-between">
@@ -217,7 +217,90 @@
 </div>
 </div>
 <!-- DESGLOSE Y RANKING REAL -->
-<div class="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 mb-8"><div class="bg-[#181818] border border-[#222222] rounded-xl p-5 shadow-sm"><div class="flex items-center justify-between pb-3 border-b border-[#242424] mb-4"><h3 class="text-base font-headline font-bold text-white flex items-center gap-2"><span class="material-symbols-outlined text-[#38bdf8] text-[20px]">layers</span><span class="">Visitas por Página y Sección</span></h3><span class="text-xs text-[#8b9199] uppercase font-semibold">Desglose Tráfico</span></div><div class="space-y-3" id="page-breakdown-list"><div class="flex items-center justify-between text-xs text-[#aaaaaa] py-2 border-b border-[#222222]"><span class="">/index.html (Portafolio)</span><span class="font-mono font-semibold text-white" id="row-visitas-index">2</span></div><div class="flex items-center justify-between text-xs text-[#aaaaaa] py-2 border-b border-[#222222]"><span class="">/eventos.html (Galerías)</span><span class="font-mono font-semibold text-white" id="row-visitas-eventos">12</span></div><div class="flex items-center justify-between text-xs text-[#aaaaaa] py-2 border-b border-[#222222]"><span class="">/cargas.html (Subida)</span><span class="font-mono font-semibold text-white" id="row-visitas-cargas">0</span></div><div class="flex items-center justify-between text-xs text-[#aaaaaa] py-2"><span class="">Otras Páginas</span><span class="font-mono font-semibold text-white" id="row-visitas-otras">1</span></div></div><div class="mt-4 pt-3 border-t border-[#222222] flex items-center justify-between text-xs text-[#8b9199]"><span class="">Filtro Admin: Activo (Excluido)</span><span class="text-emerald-400 font-semibold flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>Supabase en vivo</span></div></div><div class="bg-[#181818] border border-[#222222] rounded-xl p-5 shadow-sm"><div class="flex items-center justify-between pb-3 border-b border-[#242424] mb-4"><h3 class="text-base font-headline font-bold text-white flex items-center gap-2"><span class="material-symbols-outlined text-[#facc15] text-[20px]">military_tech</span><span class="">Álbumes y Colecciones Destacadas</span></h3><span class="text-xs text-[#8b9199] uppercase font-semibold" id="ranking-total-label">2 álbumes destacados</span></div><div class="space-y-3" id="ranking-albumes"><div class="flex items-center justify-between p-2.5 rounded bg-[#202020] border border-[#282828] text-xs"><div class="flex items-center gap-2 truncate pr-2"><span class="text-[#ffd700] font-bold">#1</span><span class="text-white truncate font-medium">Visita a Cartelera de Eventos Escolares</span></div><span class="font-mono font-semibold text-[#38bdf8] shrink-0">12 visitas</span></div><div class="flex items-center justify-between p-2.5 rounded bg-[#202020] border border-[#282828] text-xs"><div class="flex items-center gap-2 truncate pr-2"><span class="text-[#ffd700] font-bold">#2</span><span class="text-white truncate font-medium">Apertura de galería pública</span></div><span class="font-mono font-semibold text-[#38bdf8] shrink-0">1 visitas</span></div></div></div><div class="bg-[#181818] border border-[#222222] rounded-xl p-5 shadow-sm flex flex-col justify-between" id="ranking-likes-container"><div class="pb-3 border-b border-[#242424] mb-4 flex items-center justify-between"><h3 class="text-base font-headline font-bold text-white flex items-center gap-2"><span class="material-symbols-outlined text-[#f43f5e] text-[20px]">favorite</span><span>Ranking de Corazones</span></h3><span class="text-xs text-[#8b9199] uppercase font-semibold" id="ranking-likes-status">Top Fotos</span></div><div class="mb-3 p-2.5 rounded-lg bg-[#202020] border border-[#282828] flex items-center justify-between"><div class="flex items-center gap-2 truncate"><span class="material-symbols-outlined text-[#ffd700] text-[20px]">emoji_events</span><div class="truncate"><p class="text-[10px] text-[#8b9199] uppercase font-bold tracking-wider">Galería Más Votada</p><p class="text-xs font-semibold text-white truncate" id="top-galeria-nombre">Sin votos aún</p></div></div><span class="font-mono font-bold text-xs text-[#f43f5e] shrink-0" id="top-galeria-likes">0 ❤️</span></div><div class="space-y-2 flex-1" id="ranking-likes-list"><div class="text-center text-[#888888] text-xs py-6">Aún no hay votos registrados</div></div><div class="mt-4 pt-3 border-t border-[#222222] flex items-center justify-between text-[11px] text-[#8b9199]"><span>Tabla: likes_fotos</span><span class="text-white font-mono font-semibold" id="total-likes-badge">0 corazones</span></div></div></div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 mb-8">
+<div class="bg-[#181818] border border-[#222222] rounded-xl p-5 shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between pb-3 border-b border-[#242424] mb-4">
+<h3 class="text-base font-headline font-bold text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-[#38bdf8] text-[20px]">layers</span>
+<span>Visitas por Página y Sección</span>
+</h3>
+<span class="text-xs text-[#8b9199] uppercase font-semibold">Desglose Tráfico</span>
+</div>
+<div class="space-y-3" id="page-breakdown-list">
+<div class="flex items-center justify-between text-xs text-[#aaaaaa] py-2 border-b border-[#222222]">
+<span>/index.html (Portafolio)</span>
+<span class="font-mono font-semibold text-white" id="row-visitas-index">0</span>
+</div>
+<div class="flex items-center justify-between text-xs text-[#aaaaaa] py-2 border-b border-[#222222]">
+<span>/eventos.html (Galerías)</span>
+<span class="font-mono font-semibold text-white" id="row-visitas-eventos">0</span>
+</div>
+<div class="flex items-center justify-between text-xs text-[#aaaaaa] py-2 border-b border-[#222222]">
+<span>/cargas.html (Subida)</span>
+<span class="font-mono font-semibold text-white" id="row-visitas-cargas">0</span>
+</div>
+<div class="flex items-center justify-between text-xs text-[#aaaaaa] py-2">
+<span>Otras Páginas</span>
+<span class="font-mono font-semibold text-white" id="row-visitas-otras">0</span>
+</div>
+</div>
+</div>
+<div class="mt-4 pt-3 border-t border-[#222222] flex items-center justify-between text-xs text-[#8b9199]">
+<span>Filtro Admin: Activo (Excluido)</span>
+<span class="text-emerald-400 font-semibold flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>Supabase en vivo
+      </span>
+</div>
+</div>
+<div class="bg-[#181818] border border-[#222222] rounded-xl p-5 shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between pb-3 border-b border-[#242424] mb-4">
+<h3 class="text-base font-headline font-bold text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-[#facc15] text-[20px]">military_tech</span>
+<span>Álbumes y Colecciones Destacadas</span>
+</h3>
+<span class="text-xs text-[#8b9199] uppercase font-semibold" id="ranking-total-label">Sin aperturas</span>
+</div>
+<div class="space-y-3" id="ranking-albumes">
+<div class="text-[#666666] text-xs py-8 text-center">Aún no hay aperturas de álbumes en este período</div>
+</div>
+</div>
+<div class="mt-4 pt-3 border-t border-[#222222] flex items-center justify-between text-[11px] text-[#8b9199]">
+<span>Origen: Eventos Supabase</span>
+<span class="text-white font-mono font-semibold" id="total-albumes-metric">0 registrados</span>
+</div>
+</div>
+<!-- Ranking de Corazones -->
+<div class="bg-[#181818] border border-[#222222] rounded-xl p-5 shadow-sm flex flex-col justify-between" id="ranking-likes-container">
+<div>
+<div class="pb-3 border-b border-[#242424] mb-4 flex items-center justify-between">
+<h3 class="text-base font-headline font-bold text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-[#f43f5e] text-[20px]">favorite</span>
+<span>Ranking de Corazones</span>
+</h3>
+<span class="text-xs text-[#8b9199] uppercase font-semibold" id="ranking-likes-status">Top Fotos</span>
+</div>
+<div class="mb-3 p-2.5 rounded-lg bg-[#202020] border border-[#282828] flex items-center justify-between">
+<div class="flex items-center gap-2 truncate">
+<span class="material-symbols-outlined text-[#ffd700] text-[20px]">emoji_events</span>
+<div class="truncate">
+<p class="text-[10px] text-[#8b9199] uppercase font-bold tracking-wider">Galería Más Votada</p>
+<p class="text-xs font-semibold text-white truncate" id="top-galeria-nombre">Sin votos aún</p>
+</div>
+</div>
+<span class="font-mono font-bold text-xs text-[#f43f5e] shrink-0" id="top-galeria-likes">0 ❤️</span>
+</div>
+<div class="space-y-2 flex-1 min-h-[140px]" id="ranking-likes-list">
+<div class="text-center text-[#888888] text-xs py-6">Sin votos aún</div>
+</div>
+</div>
+<div class="mt-4 pt-3 border-t border-[#222222] flex items-center justify-between text-[11px] text-[#8b9199]">
+<span>Tabla: likes_fotos</span>
+<span class="text-white font-mono font-semibold" id="total-likes-badge">0 corazones</span>
+</div>
+</div>
+</div>
 <!-- TABLA DE LOGS EN VIVO -->
 <div class="bg-[#181818] border border-[#222222] rounded-xl p-4 sm:p-6 shadow-sm mb-8">
 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-[#222222] mb-4">
@@ -244,10 +327,20 @@
 <th class="py-2.5 px-3 text-right">Estado</th>
 </tr>
 </thead>
-<tbody class="text-xs divide-y divide-[#222222]" id="activity-log-body"><tr class="hover:bg-[#1f1f1f] transition-colors"><td class="py-2.5 px-3 text-xs text-[#aaaaaa] font-mono whitespace-nowrap">24/10/2023, 19:24</td><td class="py-2.5 px-3 text-xs text-white font-medium whitespace-nowrap">visita_pagina</td><td class="py-2.5 px-3 text-xs text-[#cccccc] truncate max-w-[240px]">Visita a Portafolio Principal</td><td class="py-2.5 px-3 text-xs text-[#888888] truncate max-w-[160px]">móvil</td><td class="py-2.5 px-3 text-right"><span class="inline-block text-[10px] uppercase font-mono px-2 py-0.5 rounded border text-[#9bccf4] bg-[#9bccf4]/10 border-[#9bccf4]/30">OK</span></td></tr><tr class="hover:bg-[#1f1f1f] transition-colors"><td class="py-2.5 px-3 text-xs text-[#aaaaaa] font-mono whitespace-nowrap">24/10/2023, 20:58</td><td class="py-2.5 px-3 text-xs text-white font-medium whitespace-nowrap">visita_pagina</td><td class="py-2.5 px-3 text-xs text-[#cccccc] truncate max-w-[240px]">Visita a Portafolio Principal</td><td class="py-2.5 px-3 text-xs text-[#888888] truncate max-w-[160px]">móvil</td><td class="py-2.5 px-3 text-right"><span class="inline-block text-[10px] uppercase font-mono px-2 py-0.5 rounded border text-[#9bccf4] bg-[#9bccf4]/10 border-[#9bccf4]/30">OK</span></td></tr><tr class="hover:bg-[#1f1f1f] transition-colors"><td class="py-2.5 px-3 text-xs text-[#aaaaaa] font-mono whitespace-nowrap">24/10/2023, 19:36</td><td class="py-2.5 px-3 text-xs text-white font-medium whitespace-nowrap">visita_pagina</td><td class="py-2.5 px-3 text-xs text-[#cccccc] truncate max-w-[240px]">Visita a Portafolio Principal</td><td class="py-2.5 px-3 text-xs text-[#888888] truncate max-w-[160px]">móvil</td><td class="py-2.5 px-3 text-right"><span class="inline-block text-[10px] uppercase font-mono px-2 py-0.5 rounded border text-[#9bccf4] bg-[#9bccf4]/10 border-[#9bccf4]/30">OK</span></td></tr><tr class="hover:bg-[#1f1f1f] transition-colors"><td class="py-2.5 px-3 text-xs text-[#aaaaaa] font-mono whitespace-nowrap">24/10/2023, 17:48</td><td class="py-2.5 px-3 text-xs text-white font-medium whitespace-nowrap">visita_pagina</td><td class="py-2.5 px-3 text-xs text-[#cccccc] truncate max-w-[240px]">Visita a Portafolio Principal</td><td class="py-2.5 px-3 text-xs text-[#888888] truncate max-w-[160px]">móvil</td><td class="py-2.5 px-3 text-right"><span class="inline-block text-[10px] uppercase font-mono px-2 py-0.5 rounded border text-[#9bccf4] bg-[#9bccf4]/10 border-[#9bccf4]/30">OK</span></td></tr><tr class="hover:bg-[#1f1f1f] transition-colors"><td class="py-2.5 px-3 text-xs text-[#aaaaaa] font-mono whitespace-nowrap">24/10/2023, 12:42</td><td class="py-2.5 px-3 text-xs text-white font-medium whitespace-nowrap">visita_pagina</td><td class="py-2.5 px-3 text-xs text-[#cccccc] truncate max-w-[240px]">Visita a Portafolio Principal</td><td class="py-2.5 px-3 text-xs text-[#888888] truncate max-w-[160px]">móvil</td><td class="py-2.5 px-3 text-right"><span class="inline-block text-[10px] uppercase font-mono px-2 py-0.5 rounded border text-[#9bccf4] bg-[#9bccf4]/10 border-[#9bccf4]/30">OK</span></td></tr></tbody>
+<tbody class="text-xs divide-y divide-[#222222]" id="activity-log-body">
+<tr><td class="py-8 text-center text-[#666666]" colspan="5">Sincronizando registros...</td></tr>
+</tbody>
 </table>
 </div>
-<div class="flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-[#222222] mt-4 text-xs"><div class="text-[#8b9199]" id="pagination-info">Mostrando 1 - 20 de 186 registros</div><div class="flex items-center gap-1.5" id="pagination-controls"><button class="px-2.5 py-1 rounded bg-[#202020] hover:bg-[#262626] border border-[#282828] text-[#c0c7cf] disabled:opacity-40 disabled:cursor-not-allowed" id="btn-prev-page" onclick="changePage(-1)">Anterior</button><span class="px-2 py-1 font-mono text-white" id="page-current-indicator">Pág. 1</span><button class="px-2.5 py-1 rounded bg-[#202020] hover:bg-[#262626] border border-[#282828] text-[#c0c7cf] disabled:opacity-40 disabled:cursor-not-allowed" id="btn-next-page" onclick="changePage(1)">Siguiente</button></div></div></div>
+<div class="flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-[#222222] mt-4 text-xs">
+<div class="text-[#8b9199]" id="pagination-info">Mostrando 0 - 0 de 0 registros</div>
+<div class="flex items-center gap-1.5" id="pagination-controls">
+<button class="px-2.5 py-1 rounded bg-[#202020] hover:bg-[#262626] border border-[#282828] text-[#c0c7cf] disabled:opacity-40 disabled:cursor-not-allowed" id="btn-prev-page" onclick="changePage(-1)">Anterior</button>
+<span class="px-2 py-1 font-mono text-white" id="page-current-indicator">Pág. 1</span>
+<button class="px-2.5 py-1 rounded bg-[#202020] hover:bg-[#262626] border border-[#282828] text-[#c0c7cf] disabled:opacity-40 disabled:cursor-not-allowed" id="btn-next-page" onclick="changePage(1)">Siguiente</button>
+</div>
+</div>
+</div>
 </main>
 </div>
 <!-- NAVEGACIÓN MÓVIL INFERIOR -->
@@ -276,6 +369,17 @@
 
     let rawVisitasData = [];
     let selectedPeriod = 'Histórico';
+    let currentPage = 1;
+    const PAGE_SIZE = 20;
+
+    let supabaseClient = null;
+    try {
+      if (window.supabase && typeof window.supabase.createClient === 'function') {
+        supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+      }
+    } catch (e) {
+      console.warn("Supabase client init error:", e);
+    }
 
     // Menú desplegable móvil
     const btnMobileMenu = document.getElementById('btnMobileMenu');
@@ -294,6 +398,19 @@
       });
     }
 
+    // Formateador estándar es-AR: DD/MM/AAAA, HH:MM
+    function formatearFechaEsAR(val) {
+      if (!val) return 'Reciente';
+      const d = new Date(val);
+      if (isNaN(d.getTime())) return String(val);
+      const dia = String(d.getDate()).padStart(2, '0');
+      const mes = String(d.getMonth() + 1).padStart(2, '0');
+      const anio = d.getFullYear();
+      const horas = String(d.getHours()).padStart(2, '0');
+      const minutos = String(d.getMinutes()).padStart(2, '0');
+      return `${dia}/${mes}/${anio}, ${horas}:${minutos}`;
+    }
+
     async function fetchVisitasSupabase() {
       const syncText = document.getElementById('syncText');
       const statusLabel = document.getElementById('rebote-label');
@@ -301,38 +418,49 @@
 
       let records = [];
 
-      // Vía 1: SDK Oficial Supabase
+      // Vía 1: REST directo (máxima compatibilidad)
       try {
-        if (window.supabase && typeof window.supabase.createClient === 'function') {
-          const client = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-          const { data, error } = await client.from('visitas').select('*').order('created_at', { ascending: false }).limit(1000);
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/visitas?select=*&order=created_at.desc&limit=1000`, {
+          headers: {
+            'apikey': SUPABASE_ANON_KEY,
+            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+          }
+        });
+        if (res.ok) {
+          const arr = await res.json();
+          if (Array.isArray(arr) && arr.length > 0) {
+            records = arr;
+          }
+        }
+      } catch (fetchErr) {
+        console.warn("[REST visitas error]:", fetchErr);
+      }
+
+      // Vía 2: Cliente Supabase SDK como fallback
+      if (records.length === 0 && supabaseClient) {
+        try {
+          const { data, error } = await supabaseClient.from('visitas').select('*').order('created_at', { ascending: false }).limit(1000);
           if (!error && data && data.length > 0) {
             records = data;
           }
+        } catch (sdkErr) {
+          console.warn("[SDK visitas error]:", sdkErr);
         }
-      } catch (err) {
-        console.warn("[SDK Error]:", err);
       }
 
-      // Vía 2: Fetch REST directo (inmune a bloqueadores o caídas de SDK)
-      if (records.length === 0) {
-        try {
-          const res = await fetch(`${SUPABASE_URL}/rest/v1/visitas?select=*&order=created_at.desc&limit=1000`, {
-            headers: {
-              'apikey': SUPABASE_ANON_KEY,
-              'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+      // Combinar también con posibles visitas en LocalStorage
+      try {
+        const localLogs = JSON.parse(localStorage.getItem('sergio_visitas_logs') || '[]');
+        if (Array.isArray(localLogs) && localLogs.length > 0) {
+          const ids = new Set(records.map(r => r.id || `${r.created_at}_${r.tipo}`));
+          localLogs.forEach(l => {
+            const key = l.id || `${l.created_at}_${l.tipo}`;
+            if (!ids.has(key)) {
+              records.push(l);
             }
           });
-          if (res.ok) {
-            const arr = await res.json();
-            if (Array.isArray(arr) && arr.length > 0) {
-              records = arr;
-            }
-          }
-        } catch (fetchErr) {
-          console.warn("[REST Error]:", fetchErr);
         }
-      }
+      } catch (e) {}
 
       if (records && records.length > 0) {
         rawVisitasData = records;
@@ -343,7 +471,211 @@
         if (statusLabel) statusLabel.textContent = "Base de datos conectada. Esperando primeras visitas reales de clientes.";
       }
 
+      currentPage = 1;
       renderDashboard(rawVisitasData);
+      cargarRankingCorazones(rawVisitasData);
+    }
+
+    // Ranking de Corazones (likes_fotos, votos_corazones y fallback visitas)
+    async function cargarRankingCorazones(visitas) {
+      const topGaleriaEl = document.getElementById('top-galeria-nombre');
+      const topGaleriaLikesEl = document.getElementById('top-galeria-likes');
+      const listEl = document.getElementById('ranking-likes-list');
+      const totalLikesBadge = document.getElementById('total-likes-badge');
+      const rankingStatus = document.getElementById('ranking-likes-status');
+
+      let likesRows = [];
+
+      // 1. Fetch REST directo de likes_fotos
+      try {
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/likes_fotos?select=*&order=conteo.desc&limit=100`, {
+          headers: {
+            'apikey': SUPABASE_ANON_KEY,
+            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+          }
+        });
+        if (res.ok) {
+          const data = await res.json();
+          if (Array.isArray(data) && data.length > 0) {
+            likesRows = data;
+          }
+        }
+      } catch (e) {
+        console.warn("[REST likes_fotos error]:", e);
+      }
+
+      // 2. Fallback SDK Supabase likes_fotos
+      if (likesRows.length === 0 && supabaseClient) {
+        try {
+          const { data, error } = await supabaseClient.from('likes_fotos').select('*').order('conteo', { ascending: false }).limit(100);
+          if (!error && Array.isArray(data) && data.length > 0) {
+            likesRows = data;
+          }
+        } catch (e) {
+          console.warn("[SDK likes_fotos error]:", e);
+        }
+      }
+
+      // 3. Consultar también votos_corazones si existe
+      if (likesRows.length === 0) {
+        try {
+          const resVotos = await fetch(`${SUPABASE_URL}/rest/v1/votos_corazones?select=*&limit=500`, {
+            headers: {
+              'apikey': SUPABASE_ANON_KEY,
+              'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+            }
+          });
+          if (resVotos.ok) {
+            const arrV = await resVotos.json();
+            if (Array.isArray(arrV) && arrV.length > 0) {
+              const mapaVotos = {};
+              arrV.forEach(v => {
+                const foto = v.foto_id || v.foto_nombre || v.nombre_archivo || v.archivo || 'Fotografía';
+                const galeria = v.galeria || v.album || 'Galería';
+                const key = `${galeria}___${foto}`;
+                if (!mapaVotos[key]) {
+                  mapaVotos[key] = { foto_nombre: foto, galeria: galeria, conteo: 0 };
+                }
+                mapaVotos[key].conteo += (Number(v.conteo || v.votos || 1));
+              });
+              likesRows = Object.values(mapaVotos);
+            }
+          }
+        } catch (e) {}
+      }
+
+      // 4. Si aún no hay registros, consultar en visitas por eventos de tipo like_foto o corazon
+      if (likesRows.length === 0 && Array.isArray(visitas)) {
+        const likeEvents = visitas.filter(v => {
+          const t = String(v.tipo || v.tipo_evento || '').toLowerCase();
+          const d = String(v.detalle || '').toLowerCase();
+          return t.includes('like') || t.includes('corazon') || t.includes('favorito') || d.includes('corazón') || d.includes('like');
+        });
+
+        if (likeEvents.length > 0) {
+          const agrupados = {};
+          likeEvents.forEach(evt => {
+            const foto = evt.foto_nombre || evt.nombre_archivo || evt.detalle || 'Foto';
+            const galeria = evt.galeria || evt.album_titulo || evt.pagina || 'Sesiones';
+            const key = `${galeria}___${foto}`;
+            if (!agrupados[key]) {
+              agrupados[key] = { foto_nombre: foto, galeria: galeria, conteo: 0 };
+            }
+            agrupados[key].conteo += 1;
+          });
+          likesRows = Object.values(agrupados);
+        }
+      }
+
+      // 5. También comprobar localStorage por votos recientes locales
+      try {
+        const localVotes = JSON.parse(localStorage.getItem('darkroom_likes_fotos') || '{}');
+        const keys = Object.keys(localVotes);
+        if (keys.length > 0 && likesRows.length === 0) {
+          keys.forEach(k => {
+            const item = localVotes[k];
+            likesRows.push({
+              foto_nombre: item.foto_nombre || item.archivo || k,
+              galeria: item.galeria || 'Galería',
+              conteo: Number(item.conteo || item.likes || 1)
+            });
+          });
+        }
+      } catch (e) {}
+
+      // Procesamiento de datos y renderizado
+      if (!likesRows || likesRows.length === 0) {
+        if (topGaleriaEl) topGaleriaEl.textContent = 'Sin votos aún';
+        if (topGaleriaLikesEl) topGaleriaLikesEl.textContent = '0 ❤️';
+        if (totalLikesBadge) totalLikesBadge.textContent = '0 corazones';
+        if (rankingStatus) rankingStatus.textContent = 'Top Fotos';
+        if (listEl) {
+          listEl.innerHTML = `
+            <div class="flex flex-col items-center justify-center py-6 text-center">
+              <span class="material-symbols-outlined text-[28px] text-[#444] mb-1">favorite_border</span>
+              <p class="text-xs text-[#888888] font-medium">Sin votos aún</p>
+              <p class="text-[10px] text-[#555] mt-0.5">Los corazones dados por clientes aparecerán aquí</p>
+            </div>
+          `;
+        }
+        return;
+      }
+
+      // Consolidar galerías y fotografías
+      const galeriaTotales = {
+        'Sesiones': 0,
+        'Misceláneas': 0,
+        'Postales': 0,
+        'Ensayos': 0
+      };
+
+      let granTotal = 0;
+
+      likesRows.forEach(row => {
+        const conteo = Number(row.conteo || row.likes || row.votos || 1);
+        granTotal += conteo;
+
+        const rawGaleria = String(row.galeria || row.album || row.album_titulo || '').toLowerCase();
+        let cat = 'Sesiones';
+        if (rawGaleria.includes('miscel')) cat = 'Misceláneas';
+        else if (rawGaleria.includes('postal')) cat = 'Postales';
+        else if (rawGaleria.includes('ensayo')) cat = 'Ensayos';
+        else if (rawGaleria.includes('sesion') || rawGaleria.includes('sesión')) cat = 'Sesiones';
+        else {
+          // Nombre textual normalizado
+          const nombreCap = (row.galeria || 'Sesiones').toString();
+          if (!galeriaTotales[nombreCap]) galeriaTotales[nombreCap] = 0;
+          cat = nombreCap;
+        }
+
+        galeriaTotales[cat] = (galeriaTotales[cat] || 0) + conteo;
+      });
+
+      // Galería Más Votada
+      let mejorGaleria = 'Sin votos aún';
+      let maxGaleriaLikes = 0;
+      Object.entries(galeriaTotales).forEach(([g, total]) => {
+        if (total > maxGaleriaLikes) {
+          maxGaleriaLikes = total;
+          mejorGaleria = g;
+        }
+      });
+
+      if (topGaleriaEl) topGaleriaEl.textContent = maxGaleriaLikes > 0 ? mejorGaleria : 'Sin votos aún';
+      if (topGaleriaLikesEl) topGaleriaLikesEl.textContent = `${maxGaleriaLikes} ❤️`;
+      if (totalLikesBadge) totalLikesBadge.textContent = `${granTotal} corazones`;
+      if (rankingStatus) rankingStatus.textContent = `Top 5 de ${likesRows.length}`;
+
+      // Top 5 Fotografías
+      const top5Fotos = [...likesRows]
+        .sort((a, b) => Number(b.conteo || b.likes || 0) - Number(a.conteo || a.likes || 0))
+        .slice(0, 5);
+
+      if (listEl) {
+        listEl.innerHTML = top5Fotos.map((item, idx) => {
+          const count = Number(item.conteo || item.likes || 1);
+          const rawName = item.foto_nombre || item.nombre_archivo || item.archivo || item.foto_id || `Foto #${idx + 1}`;
+          const cleanName = String(rawName).replace(/^.*[\\\/]/, '');
+          const galeriaName = item.galeria || item.album || 'Colección';
+          const medalColors = ['#ffd700', '#c0c0c0', '#cd7f32', '#91cdfe', '#91cdfe'];
+          const medalColor = medalColors[idx] || '#91cdfe';
+
+          return `
+            <div class="flex items-center justify-between p-2 rounded bg-[#202020] border border-[#282828] text-xs transition-colors hover:bg-[#252525]">
+              <div class="flex items-center gap-2 truncate pr-2">
+                <span class="font-bold text-xs" style="color: ${medalColor}">#${idx + 1}</span>
+                <div class="truncate">
+                  <p class="text-white truncate font-medium text-xs leading-tight">${cleanName}</p>
+                  <p class="text-[10px] text-[#8b9199] truncate leading-tight">${galeriaName}</p>
+                </div>
+              </div>
+              <span class="font-mono font-bold text-xs text-[#f43f5e] shrink-0 flex items-center gap-1">
+                ${count} <span class="text-[10px]">❤️</span>
+              </span>
+            </div>
+          `;
+        }).join('');
+      }
     }
 
     function filterDataByPeriod(data, period) {
@@ -431,6 +763,7 @@
       // Ranking Álbumes
       const rankingBox = document.getElementById('ranking-albumes');
       const rankingLabel = document.getElementById('ranking-total-label');
+      const totalAlbumesMetric = document.getElementById('total-albumes-metric');
       if (rankingBox) {
         const entries = Object.entries(albumCounters).sort((a,b) => b[1] - a[1]).slice(0, 5);
         if (entries.length > 0) {
@@ -444,38 +777,80 @@
             </div>
           `).join('');
           if (rankingLabel) rankingLabel.innerText = `${entries.length} álbumes destacados`;
+          if (totalAlbumesMetric) totalAlbumesMetric.innerText = `${albumesExplorados} aperturas`;
         } else {
           rankingBox.innerHTML = '<div class="text-[#666666] text-xs py-8 text-center">Aún no hay aperturas de álbumes en este período</div>';
           if (rankingLabel) rankingLabel.innerText = 'Sin aperturas registradas';
+          if (totalAlbumesMetric) totalAlbumesMetric.innerText = '0 registrados';
         }
       }
 
-      // Tabla de Logs
-      const tbody = document.getElementById('activity-log-body');
-      if (tbody) {
-        if (filtered.length === 0) {
-          tbody.innerHTML = '<tr><td colspan="5" class="py-8 text-center text-[#666666]">Sin actividad reciente registrada</td></tr>';
-        } else {
-          tbody.innerHTML = filtered.slice(0, 15).map(item => {
-            const timeVal = item.created_at ? new Date(item.created_at).toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit' }) : (item.time || 'Reciente');
-            const tipoVal = item.tipo || item.tipo_evento || 'Visita';
-            const detVal = item.detalle || item.recurso || item.pagina || 'Acceso general';
-            const dispVal = item.dispositivo || item.device || item.ref || 'Móvil / Web';
-            const estadoVal = item.estado || (String(tipoVal).toLowerCase().includes('wsp') ? 'LEAD' : 'OK');
-            const badgeColor = estadoVal === 'LEAD' ? 'text-[#4ade80] bg-[#4ade80]/10 border-[#4ade80]/30' : 'text-[#9bccf4] bg-[#9bccf4]/10 border-[#9bccf4]/30';
-            return `
-              <tr class="hover:bg-[#1f1f1f] transition-colors">
-                <td class="py-2.5 px-3 text-xs text-[#aaaaaa] font-mono whitespace-nowrap">${timeVal}</td>
-                <td class="py-2.5 px-3 text-xs text-white font-medium whitespace-nowrap">${tipoVal}</td>
-                <td class="py-2.5 px-3 text-xs text-[#cccccc] truncate max-w-[240px]">${detVal}</td>
-                <td class="py-2.5 px-3 text-xs text-[#888888] truncate max-w-[160px]">${dispVal}</td>
-                <td class="py-2.5 px-3 text-right"><span class="inline-block text-[10px] uppercase font-mono px-2 py-0.5 rounded border ${badgeColor}">${estadoVal}</span></td>
-              </tr>
-            `;
-          }).join('');
-        }
-      }
+      // Render de la tabla con paginación estricta de 20 en 20
+      renderTablePage(filtered);
     }
+
+    function renderTablePage(items) {
+      const tbody = document.getElementById('activity-log-body');
+      const paginationInfo = document.getElementById('pagination-info');
+      const pageIndicator = document.getElementById('page-current-indicator');
+      const btnPrev = document.getElementById('btn-prev-page');
+      const btnNext = document.getElementById('btn-next-page');
+
+      if (!tbody) return;
+
+      const totalItems = items.length;
+      if (totalItems === 0) {
+        tbody.innerHTML = '<tr><td colspan="5" class="py-8 text-center text-[#666666]">Sin actividad reciente registrada</td></tr>';
+        if (paginationInfo) paginationInfo.textContent = 'Mostrando 0 - 0 de 0 registros';
+        if (pageIndicator) pageIndicator.textContent = 'Pág. 1';
+        if (btnPrev) btnPrev.disabled = true;
+        if (btnNext) btnNext.disabled = true;
+        return;
+      }
+
+      const totalPages = Math.ceil(totalItems / PAGE_SIZE) || 1;
+      if (currentPage > totalPages) currentPage = totalPages;
+      if (currentPage < 1) currentPage = 1;
+
+      const startIdx = (currentPage - 1) * PAGE_SIZE;
+      const endIdx = Math.min(startIdx + PAGE_SIZE, totalItems);
+      const pageSlice = items.slice(startIdx, endIdx);
+
+      tbody.innerHTML = pageSlice.map(item => {
+        const rawTime = item.created_at || item.fecha || item.timestamp;
+        const timeVal = formatearFechaEsAR(rawTime);
+        const tipoVal = item.tipo || item.tipo_evento || 'visita_pagina';
+        const detVal = item.detalle || item.recurso || item.pagina || 'Visita a Portafolio Principal';
+        const dispVal = item.dispositivo || item.device || item.ref || 'móvil';
+        const estadoVal = item.estado || (String(tipoVal).toLowerCase().includes('wsp') ? 'LEAD' : 'OK');
+        const badgeColor = estadoVal === 'LEAD' ? 'text-[#4ade80] bg-[#4ade80]/10 border-[#4ade80]/30' : 'text-[#9bccf4] bg-[#9bccf4]/10 border-[#9bccf4]/30';
+
+        return `
+          <tr class="hover:bg-[#1f1f1f] transition-colors">
+            <td class="py-2.5 px-3 text-xs text-[#aaaaaa] font-mono whitespace-nowrap">${timeVal}</td>
+            <td class="py-2.5 px-3 text-xs text-white font-medium whitespace-nowrap">${tipoVal}</td>
+            <td class="py-2.5 px-3 text-xs text-[#cccccc] truncate max-w-[240px]">${detVal}</td>
+            <td class="py-2.5 px-3 text-xs text-[#888888] truncate max-w-[160px]">${dispVal}</td>
+            <td class="py-2.5 px-3 text-right"><span class="inline-block text-[10px] uppercase font-mono px-2 py-0.5 rounded border ${badgeColor}">${estadoVal}</span></td>
+          </tr>
+        `;
+      }).join('');
+
+      if (paginationInfo) paginationInfo.textContent = `Mostrando ${startIdx + 1} - ${endIdx} de ${totalItems} registros`;
+      if (pageIndicator) pageIndicator.textContent = `Pág. ${currentPage} / ${totalPages}`;
+      if (btnPrev) btnPrev.disabled = currentPage <= 1;
+      if (btnNext) btnNext.disabled = currentPage >= totalPages;
+    }
+
+    window.changePage = function(delta) {
+      const filtered = filterDataByPeriod(rawVisitasData, selectedPeriod);
+      const totalPages = Math.ceil(filtered.length / PAGE_SIZE) || 1;
+      const target = currentPage + delta;
+      if (target >= 1 && target <= totalPages) {
+        currentPage = target;
+        renderTablePage(filtered);
+      }
+    };
 
     window.setPeriod = function(periodName, btnElement) {
       selectedPeriod = periodName;
@@ -485,6 +860,7 @@
       if (btnElement) {
         btnElement.className = "period-btn px-2.5 py-1 rounded bg-[#005580] text-white font-semibold border border-[#0088cc] shadow-sm";
       }
+      currentPage = 1;
       renderDashboard(rawVisitasData);
     };
 
@@ -503,9 +879,10 @@
         alert("No hay métricas disponibles para exportar.");
         return;
       }
-      let csv = "ID,Fecha,Tipo,Pagina,Album_ID,Album_Titulo,Detalle,Dispositivo,Origen\n";
+      let csv = "ID,Fecha_es_AR,Tipo,Pagina,Album_ID,Album_Titulo,Detalle,Dispositivo,Origen\n";
       rawVisitasData.forEach(r => {
-        csv += `"${r.id || ''}","${r.created_at || ''}","${r.tipo || ''}","${r.pagina || ''}","${r.album_id || ''}","${(r.album_titulo || '').replace(/"/g, '""')}","${(r.detalle || '').replace(/"/g, '""')}","${r.dispositivo || ''}","${r.origen || ''}"\n`;
+        const fechaFormat = formatearFechaEsAR(r.created_at || r.fecha);
+        csv += `"${r.id || ''}","${fechaFormat}","${r.tipo || ''}","${r.pagina || ''}","${r.album_id || ''}","${(r.album_titulo || '').replace(/"/g, '""')}","${(r.detalle || '').replace(/"/g, '""')}","${r.dispositivo || ''}","${r.origen || ''}"\n`;
       });
       const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
       const url = URL.createObjectURL(blob);
